@@ -23,7 +23,6 @@ public class DeathPredictionController {
 
     @Autowired
     DeathPredictionRepository deathPredictionRepository;
-
     /**
      * 새로운 사망 예측 요청을 처리하고, Kafka로 DeathPredictionEvent를 발행합니다.
      * 이 이벤트는 Python AI 서비스가 구독하여 예측을 수행하게 됩니다.
