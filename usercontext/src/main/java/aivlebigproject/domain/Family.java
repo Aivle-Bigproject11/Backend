@@ -33,7 +33,7 @@ public class Family {
 
     private String status;
 
-    private String memorialId;
+    private UUID memorialId;
 
     private Date createdAt;
 

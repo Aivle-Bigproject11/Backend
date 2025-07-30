@@ -7,5 +7,5 @@ import lombok.Data;
 @Data
 public class ApproveFamilyCommand {
 
-    private String memorialId;
+    private UUID memorialId;
 }

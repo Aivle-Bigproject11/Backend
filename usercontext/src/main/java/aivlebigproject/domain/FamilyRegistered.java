@@ -18,7 +18,7 @@ public class FamilyRegistered extends AbstractEvent {
     private String email;
     private String phone;
     private String status;
-    private String memorialId;
+    private UUID memorialId;
     private Date createdAt;
     private Date updatedAt;
 

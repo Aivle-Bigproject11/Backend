@@ -2,10 +2,8 @@ package aivlebigproject.infra;
 
 import aivlebigproject.config.kafka.KafkaProcessor;
 import aivlebigproject.domain.*;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import javax.naming.NameParser;
-import javax.naming.NameParser;
+import aivlebigproject.domain.repository.*;
+
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
@@ -67,6 +65,22 @@ public class PolicyHandler {
 
         // Sample Logic //
         Memorial.addFamily(event);
+    }
+
+    @StreamListener(
+            value = KafkaProcessor.INPUT,
+            condition = "headers['type']=='VideoCreated'"
+    )
+    public void wheneverVideoCreated_SaveVideo(
+            @Payload VideoCreated videoCreated
+    ) {
+        VideoCreated event = videoCreated;
+        System.out.println(
+                "\n\n##### listener SaveMemorial : " + videoCreated + "\n\n"
+        );
+
+        // Sample Logic //
+        Video.saveVideo(event);
     }
 }
 //>>> Clean Arch / Inbound Adaptor

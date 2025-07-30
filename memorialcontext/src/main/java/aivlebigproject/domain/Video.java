@@ -1,13 +1,11 @@
 package aivlebigproject.domain;
 
 import aivlebigproject.MemorialcontextApplication;
-import aivlebigproject.domain.RequestedVideo;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.time.LocalDate;
-import java.util.Collections;
+import aivlebigproject.domain.repository.VideoRepository;
+
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -19,9 +17,9 @@ public class Video {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long videoId;
+    private Long id;
 
-    private String memorialId;
+    private UUID memorialId;
 
     private String videoTitle;
 
@@ -31,9 +29,9 @@ public class Video {
 
     private String status;
 
-    private Date createdAt;
+    private LocalDateTime createdAt=LocalDateTime.now();
 
-    private Date completedAt;
+    private LocalDateTime completedAt;
 
     @PostPersist
     public void onPostPersist() {
@@ -46,6 +44,15 @@ public class Video {
             VideoRepository.class
         );
         return videoRepository;
+    }
+
+    public static void saveVideo(VideoCreated videoCreated) {
+        repository().findById(videoCreated.getId()).ifPresent(video -> {
+            video.setVideoUrl(videoCreated.getVideoUrl());
+            video.setStatus("COMPLETED");
+            video.setCompletedAt(LocalDateTime.now());
+            repository().save(video);
+        });
     }
 }
 //>>> DDD / Aggregate Root

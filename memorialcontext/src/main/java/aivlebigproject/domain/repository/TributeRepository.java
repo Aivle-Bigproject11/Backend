@@ -1,4 +1,4 @@
-package aivlebigproject.domain;
+package aivlebigproject.domain.repository;
 
 import aivlebigproject.domain.*;
 import org.springframework.data.repository.PagingAndSortingRepository;

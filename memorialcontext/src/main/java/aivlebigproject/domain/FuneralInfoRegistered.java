@@ -2,6 +2,8 @@ package aivlebigproject.domain;
 
 import aivlebigproject.domain.*;
 import aivlebigproject.infra.AbstractEvent;
+
+import java.time.LocalDate;
 import java.util.*;
 import lombok.*;
 
@@ -14,7 +16,7 @@ public class FuneralInfoRegistered extends AbstractEvent {
     private String customerName;
     private String deceasedName;
     private Integer deceasedAge;
-    private Date deceasedDate;
-    private Date deceasedBirthOfDate;
+    private LocalDate deceasedDate;
+    private LocalDate deceasedBirthOfDate;
     private String deceasedGender;
 }
