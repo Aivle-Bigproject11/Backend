@@ -38,7 +38,7 @@ public class CustomerInfoViewHandler {
             customerInfo.setIsMarriage(
                 Boolean.valueOf(customerRegistered.getIsMarried())
             );
-            customerInfo.setId(Long.valueOf(customerRegistered.getUserId()));
+            customerInfo.setId(customerRegistered.getCustomerId());
             // view 레파지 토리에 save
             customerInfoRepository.save(customerInfo);
         } catch (Exception e) {
