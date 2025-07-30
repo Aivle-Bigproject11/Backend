@@ -1,12 +1,10 @@
 package aivlebigproject.domain;
 
 import aivlebigproject.MemorialcontextApplication;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.time.LocalDate;
-import java.util.Collections;
+import aivlebigproject.domain.repository.CommentRepository;
+
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -20,7 +18,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long commentId;
 
-    private String memorialId;
+    private UUID memorialId;
 
     private String name;
 

@@ -1,10 +1,10 @@
-package aivlebigprojectminseo.service;
+package aivlebigproject.infra.service;
 
-import aivlebigprojectminseo.domain.Memorial;
-import aivlebigprojectminseo.domain.Video;
-import aivlebigprojectminseo.domain.repository.MemorialRepository;
-import aivlebigprojectminseo.domain.repository.VideoRepository;
-import aivlebigprojectminseo.domain.RequestedVideo;
+import aivlebigproject.domain.Memorial;
+import aivlebigproject.domain.RequestedVideo;
+import aivlebigproject.domain.Video;
+import aivlebigproject.domain.repository.MemorialRepository;
+import aivlebigproject.domain.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,12 +26,12 @@ public class VideoService {
 //    private final AzureBlobService azureBlobService;
 
     @Transactional
-    public Long createVideoRequest(UUID memorialId, String keyword, List<MultipartFile> images) {
+    public Long createVideoRequest(UUID memorialId, String keywords, List<MultipartFile> images) {
         // 1. Video 엔티티 생성 (이미지 URL 제외)
         Memorial memorial = memorialRepository.findById(memorialId).orElse(null);
         Video video = new Video();
         video.setMemorialId(memorialId);
-        video.setKeyword(keyword);
+        video.setKeywords(keywords);
         video.setStatus("REQUESTED");
         video.setVideoTitle(memorial.getName()+"님의 추모영상");
         video.setCreatedAt(LocalDateTime.now());

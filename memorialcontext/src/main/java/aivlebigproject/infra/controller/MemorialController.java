@@ -1,4 +1,4 @@
-package aivlebigproject.infra;
+package aivlebigproject.infra.controller;
 
 import javax.transaction.Transactional;
 

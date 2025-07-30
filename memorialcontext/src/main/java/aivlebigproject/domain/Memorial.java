@@ -1,14 +1,16 @@
 package aivlebigproject.domain;
 
 import aivlebigproject.MemorialcontextApplication;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import aivlebigproject.domain.repository.MemorialRepository;
+
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 import javax.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "Memorial_table")
@@ -17,8 +19,11 @@ import lombok.Data;
 public class Memorial {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String memorialId;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name="UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @ColumnDefault("random_uuid()")
+    @Column(name = "id", updatable = false, nullable = false)
+    private UUID memorialId;
 
     private Long customerId;
 
@@ -28,11 +33,13 @@ public class Memorial {
 
     private Integer age;
 
-    private Date birthOfDate;
+    private LocalDate birthOfDate;
 
-    private Date deceasedDate;
+    private LocalDate deceasedDate;
 
     private String gender;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @ElementCollection
     private List<Long> familyList;
@@ -44,57 +51,26 @@ public class Memorial {
         return memorialRepository;
     }
 
-    //<<< Clean Arch / Port Method
+
     public static void saveMemorial(
         FuneralInfoRegistered funeralInfoRegistered
     ) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
         Memorial memorial = new Memorial();
+        memorial.setCustomerId(funeralInfoRegistered.getCustomerId());
+        memorial.setName(funeralInfoRegistered.getDeceasedName());
+        memorial.setAge(funeralInfoRegistered.getDeceasedAge());
+        memorial.setBirthOfDate(funeralInfoRegistered.getDeceasedBirthOfDate());
+        memorial.setDeceasedDate(funeralInfoRegistered.getDeceasedDate());
+        memorial.setGender(funeralInfoRegistered.getDeceasedGender());
         repository().save(memorial);
-
-        */
-
-        /** Example 2:  finding and process
-        
-
-        repository().findById(funeralInfoRegistered.get???()).ifPresent(memorial->{
-            
-            memorial // do something
-            repository().save(memorial);
-
-
-         });
-        */
 
     }
 
-    //>>> Clean Arch / Port Method
-    //<<< Clean Arch / Port Method
+
     public static void addFamily(FamilyApproved familyApproved) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Memorial memorial = new Memorial();
-        repository().save(memorial);
-
-        */
-
-        /** Example 2:  finding and process
-        
-
-        repository().findById(familyApproved.get???()).ifPresent(memorial->{
-            
-            memorial // do something
-            repository().save(memorial);
-
-
-         });
-        */
 
     }
-    //>>> Clean Arch / Port Method
+
 
 }
-//>>> DDD / Aggregate Root
+

@@ -1,4 +1,4 @@
-package aivlebigprojectminseo.domain;
+package aivlebigproject.domain;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @Builder
 public class VideoResponse {
-    private Long videoId;
+    private Long id;
     private String status;
     private String message;
 }

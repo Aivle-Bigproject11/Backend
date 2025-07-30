@@ -1,4 +1,4 @@
-package aivlebigprojectminseo.dto;
+package aivlebigproject.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

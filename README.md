@@ -56,7 +56,7 @@ mvn spring-boot:run
 - memorialcontext
 ```
  http :8088/memorials memorialId="memorialId"customerId="customerId"imageUrl="imageUrl"name="name"age="age"birthOfDate="birthOfDate"deceasedDate="deceasedDate"gender="gender"
- http :8088/videos videoId="videoId"memorialId="memorialId"videoTitle="videoTitle"videoUrl="videoUrl"keywords="keywords"status="status"createdAt="createdAt"completedAt="completedAt"
+ http :8088/videos id="id"memorialId="memorialId"videoTitle="videoTitle"videoUrl="videoUrl"keywords="keywords"status="status"createdAt="createdAt"completedAt="completedAt"
  http :8088/photos photoId="photoId"memorialId="memorialId"title="title"imageUrl="imageUrl"uploadedAt="uploadedAt"
  http :8088/comments commentId="commentId"memorialId="memorialId"name="name"relationship="relationship"content="content"createdAt="createdAt"
  http :8088/tributes tributeId="tributeId"memorialId="memorialId"content="content"keywords="keywords"createdAt="createdAt"updatedAt="updatedAt"

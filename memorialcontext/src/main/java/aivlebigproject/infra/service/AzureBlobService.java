@@ -1,4 +1,4 @@
-//package aivlebigprojectminseo.service;
+package aivlebigproject.infra.service;//package aivlebigprojectminseo.service;
 //
 //import com.azure.storage.blob.BlobClient;
 //import com.azure.storage.blob.BlobContainerClient;
@@ -61,12 +61,12 @@
 //    /**
 //     * 여러 이미지를 임시 폴더에 업로드
 //     */
-//    public List<String> uploadTempImages(Long videoId, List<MultipartFile> images) {
+//    public List<String> uploadTempImages(Long id, List<MultipartFile> images) {
 //        List<String> imageUrls = new ArrayList<>();
 //
 //        for (MultipartFile image : images) {
 //            try {
-//                String imageUrl = uploadTempImage(videoId, image);
+//                String imageUrl = uploadTempImage(id, image);
 //                imageUrls.add(imageUrl);
 //                log.debug("이미지 업로드 성공: {}", imageUrl);
 //            } catch (Exception e) {
@@ -75,14 +75,14 @@
 //            }
 //        }
 //
-//        log.info("총 {}개 이미지 업로드 완료 (videoId: {})", imageUrls.size(), videoId);
+//        log.info("총 {}개 이미지 업로드 완료 (id: {})", imageUrls.size(), id);
 //        return imageUrls;
 //    }
 //
 //    /**
 //     * 단일 이미지를 임시 폴더에 업로드
 //     */
-//    public String uploadTempImage(Long videoId, MultipartFile image) throws IOException {
+//    public String uploadTempImage(Long id, MultipartFile image) throws IOException {
 //        // 파일명 검증
 //        if (image.isEmpty()) {
 //            throw new IllegalArgumentException("빈 파일입니다");
@@ -97,10 +97,10 @@
 //        // 고유한 파일명 생성
 //        String originalFilename = image.getOriginalFilename();
 //        String fileExtension = getFileExtension(originalFilename);
-//        String uniqueFilename = generateUniqueFilename(videoId, fileExtension);
+//        String uniqueFilename = generateUniqueFilename(id, fileExtension);
 //
 //        // 임시 폴더 경로
-//        String blobName = "temp/" + videoId + "/" + uniqueFilename;
+//        String blobName = "temp/" + id + "/" + uniqueFilename;
 //
 //        try {
 //            // Blob 클라이언트 생성
@@ -130,12 +130,12 @@
 //    /**
 //     * 임시 이미지들을 정식 폴더로 이동
 //     */
-//    public List<String> moveImagesToFinal(Long videoId, List<String> tempImageUrls) {
+//    public List<String> moveImagesToFinal(Long id, List<String> tempImageUrls) {
 //        List<String> finalImageUrls = new ArrayList<>();
 //
 //        for (String tempUrl : tempImageUrls) {
 //            try {
-//                String finalUrl = moveImageToFinal(videoId, tempUrl);
+//                String finalUrl = moveImageToFinal(id, tempUrl);
 //                finalImageUrls.add(finalUrl);
 //            } catch (Exception e) {
 //                log.error("이미지 이동 실패: {}", tempUrl, e);
@@ -149,7 +149,7 @@
 //    /**
 //     * 단일 임시 이미지를 정식 폴더로 이동
 //     */
-//    private String moveImageToFinal(Long videoId, String tempUrl) {
+//    private String moveImageToFinal(Long id, String tempUrl) {
 //        try {
 //            // 임시 URL에서 blob 이름 추출
 //            String tempBlobName = extractBlobNameFromUrl(tempUrl);
@@ -157,7 +157,7 @@
 //
 //            // 새로운 blob 이름 생성
 //            String filename = tempBlobName.substring(tempBlobName.lastIndexOf("/") + 1);
-//            String finalBlobName = "videos/" + videoId + "/images/" + filename;
+//            String finalBlobName = "videos/" + id + "/images/" + filename;
 //
 //            // 복사
 //            BlobClient finalBlob = containerClient.getBlobClient(finalBlobName);
@@ -178,9 +178,9 @@
 //    /**
 //     * 임시 이미지들 정리
 //     */
-//    public void cleanupTempImages(Long videoId) {
+//    public void cleanupTempImages(Long id) {
 //        try {
-//            String prefix = "temp/" + videoId + "/";
+//            String prefix = "temp/" + id + "/";
 //            containerClient.listBlobsByHierarchy(prefix)
 //                    .forEach(blobItem -> {
 //                        try {
@@ -190,9 +190,9 @@
 //                            log.warn("임시 파일 삭제 실패: {}", blobItem.getName(), e);
 //                        }
 //                    });
-//            log.info("임시 이미지 정리 완료 (videoId: {})", videoId);
+//            log.info("임시 이미지 정리 완료 (id: {})", id);
 //        } catch (Exception e) {
-//            log.error("임시 이미지 정리 실패 (videoId: {})", videoId, e);
+//            log.error("임시 이미지 정리 실패 (id: {})", id, e);
 //        }
 //    }
 //
@@ -204,10 +204,10 @@
 //        return filename.substring(filename.lastIndexOf("."));
 //    }
 //
-//    private String generateUniqueFilename(Long videoId, String extension) {
+//    private String generateUniqueFilename(Long id, String extension) {
 //        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
 //        String uuid = UUID.randomUUID().toString().substring(0, 8);
-//        return String.format("video_%d_%s_%s%s", videoId, timestamp, uuid, extension);
+//        return String.format("video_%d_%s_%s%s", id, timestamp, uuid, extension);
 //    }
 //
 //    private String extractBlobNameFromUrl(String url) {

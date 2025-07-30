@@ -1,7 +1,6 @@
-package aivlebigprojectminseo.service;
+package aivlebigproject.infra.service;
 
-import aivlebigprojectminseo.domain.Tribute;
-import aivlebigprojectminseo.domain.repository.TributeRepository;
+import aivlebigproject.domain.repository.TributeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

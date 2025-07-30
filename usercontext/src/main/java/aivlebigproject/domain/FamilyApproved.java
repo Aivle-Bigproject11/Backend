@@ -12,7 +12,7 @@ import lombok.*;
 public class FamilyApproved extends AbstractEvent {
 
     private Long id;
-    private String memorialId;
+    private UUID memorialId;
 
     public FamilyApproved(Family aggregate) {
         super(aggregate);

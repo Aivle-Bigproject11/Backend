@@ -1,6 +1,5 @@
 package aivlebigproject.domain;
 
-import aivlebigproject.domain.*;
 import aivlebigproject.infra.AbstractEvent;
 import java.util.*;
 import lombok.*;
@@ -10,5 +9,5 @@ import lombok.*;
 public class FamilyApproved extends AbstractEvent {
 
     private Long id;
-    private String memorialId;
+    private UUID memorialId;
 }

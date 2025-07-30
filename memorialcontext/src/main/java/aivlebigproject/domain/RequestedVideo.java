@@ -1,9 +1,9 @@
 package aivlebigproject.domain;
 
-import aivlebigproject.domain.*;
-import aivlebigproject.infra.AbstractEvent;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
+
+import aivlebigproject.infra.AbstractEvent;
 import lombok.*;
 
 //<<< DDD / Domain Event
@@ -13,7 +13,8 @@ public class RequestedVideo extends AbstractEvent {
 
     private Long id;
     private String videoPath;
-    private Date createdAt;
+    private LocalDateTime createdAt;
+    private List<String> imageUrls;
 
     public RequestedVideo(Video aggregate) {
         super(aggregate);

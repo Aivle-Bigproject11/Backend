@@ -1,10 +1,8 @@
-package aivlebigprojectminseo.infra.controller;
+package aivlebigproject.infra.controller;
 
-import aivlebigprojectminseo.domain.ResistedFuneralInfo;
+import aivlebigproject.domain.FuneralInfoRegistered;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,10 +16,10 @@ public class KafkaTestController {
 
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    @GetMapping("/resistedFuneralInfo")
+    @GetMapping("/funeral-regist")
     public String sendEvent() {
 
-        ResistedFuneralInfo event = new ResistedFuneralInfo();
+        FuneralInfoRegistered event = new FuneralInfoRegistered();
         event.setCustomerId(1L);
         event.setDeceasedName("고민서");
         event.setDeceasedAge(75);
