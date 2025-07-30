@@ -1,41 +1,28 @@
 package aivlebigproject.domain;
 
-import aivlebigproject.DataanalysisApplication;
-import aivlebigproject.domain.DeathPredictedEvent;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import javax.persistence.*;
 import lombok.Data;
 
 @Entity
 @Table(name = "DeathPrediction_table")
 @Data
-//<<< DDD / Aggregate Root
+@IdClass(DeathPredictionId.class)
 public class DeathPrediction {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long date;
-
+    private LocalDate date;
+    @Id
     private String region;
 
-    private Long predictedDeath;
+    private Long Deaths; // <-- 필드 이름을 "Deaths"로 통일
 
-    @PostPersist
-    public void onPostPersist() {
-        DeathPredictedEvent deathPredictedEvent = new DeathPredictedEvent(this);
-        deathPredictedEvent.publishAfterCommit();
+    public DeathPrediction() {}
+
+    public DeathPrediction(LocalDate date, String region, Long Deaths) { // <-- 생성자 인자 변경
+        this.date = date;
+        this.region = region;
+        this.Deaths = Deaths; // <-- Deaths 필드 초기화
     }
 
-    public static DeathPredictionRepository repository() {
-        DeathPredictionRepository deathPredictionRepository = DataanalysisApplication.applicationContext.getBean(
-            DeathPredictionRepository.class
-        );
-        return deathPredictionRepository;
-    }
 }
-//>>> DDD / Aggregate Root
