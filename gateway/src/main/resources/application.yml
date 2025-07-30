@@ -1,0 +1,100 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+#<<< API Gateway / Routes
+      routes:
+        - id: servicecontext
+          uri: http://localhost:8082
+          predicates:
+            - Path=/conversionServices/**, /recommendMessages/**, /customerInfos/**
+        - id: funeralcontext
+          uri: http://localhost:8083
+          predicates:
+            - Path=/funeralInfos/**, /obituaries/**, /deathReports/**, /schedules/**, /customerReadmodels/**
+        - id: usercontext
+          uri: http://localhost:8084
+          predicates:
+            - Path=/managers/**, /customerProfiles/**, /families/**, 
+        - id: memorialcontext
+          uri: http://localhost:8085
+          predicates:
+            - Path=/memorials/**, /videos/**, /photos/**, /comments/**, /tributes/**, 
+        - id: dataanalysis
+          uri: http://localhost:8086
+          predicates:
+            - Path=/deathPredictions/**, 
+        - id: funeralcontextai
+          uri: http://localhost:8087
+          predicates:
+            - Path=/funeralPythons/**, 
+        - id: frontend
+          uri: http://localhost:8080
+          predicates:
+            - Path=/**
+#>>> API Gateway / Routes
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: servicecontext
+          uri: http://servicecontext:8080
+          predicates:
+            - Path=/conversionServices/**, /recommendMessages/**, 
+        - id: funeralcontext
+          uri: http://funeralcontext:8080
+          predicates:
+            - Path=/funeralInfos/**, /obituaries/**, /deathReports/**, /schedules/**, 
+        - id: usercontext
+          uri: http://usercontext:8080
+          predicates:
+            - Path=/managers/**, /customerProfiles/**, /families/**, 
+        - id: memorialcontext
+          uri: http://memorialcontext:8080
+          predicates:
+            - Path=/memorials/**, /videos/**, /photos/**, /comments/**, /tributes/**, 
+        - id: dataanalysis
+          uri: http://dataanalysis:8080
+          predicates:
+            - Path=/deathPredictions/**, 
+        - id: funeralcontextai
+          uri: http://funeralcontextai:8080
+          predicates:
+            - Path=/funeralPythons/**, 
+        - id: frontend
+          uri: http://frontend:8080
+          predicates:
+            - Path=/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080
