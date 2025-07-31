@@ -1,0 +1,97 @@
+# ========================================
+# FILENAME: aivlebigproject/docker-compose.yml
+# 역할 : 
+# ========================================
+
+version: '3.8' # 최신 버전 명시
+services:
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    ports:
+      - "9092:9092"   # 클라이언트 통신용
+    environment:
+      # KRaft 모드 필수 설정
+      CLUSTER_ID: "kraft-cluster-01"
+      KAFKA_KRAFT_MODE: "true"
+      KAFKA_PROCESS_ROLES: "broker,controller"
+      KAFKA_NODE_ID: "1"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:9093"
+
+      # 리스너 설정
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      # 컨테이너 간 통신 시에는 서비스 이름(kafka)을, 외부에서는 localhost를 사용합니다.
+      # Java/Python 서비스가 Docker 내부에서 통신하므로 kafka:9092로 설정하는 것이 좋습니다.
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092 
+      # KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+
+      # 기타 필수 설정
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_LOG_RETENTION_HOURS: 168
+      KAFKA_LOG_DIRS: "/var/lib/kafka/data"
+    volumes:
+      - kafka-data:/var/lib/kafka/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-topics --list --bootstrap-server localhost:9092 || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # Gateway 서비스 추가
+  gateway:
+    image: adoptopenjdk/maven-openjdk11:latest
+    command: mvn spring-boot:run
+    working_dir: /usr/src
+    depends_on:
+      - funeralcontext # 서비스가 실행된 후에 gateway가 실행되도록 설정
+      - funeralcontext-ai
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8088:8088" # 외부 8088 포트를 컨테이너 8088 포트로 연결
+    volumes:
+      - ./gateway:/usr/src # 로컬 gateway 폴더를 컨테이너와 연결
+      - ./maven-repo:/root/.m2
+
+  funeralcontext:
+    # build: ... 를 삭제하고 아래 내용으로 변경
+    image: adoptopenjdk/maven-openjdk11:latest
+    command: mvn spring-boot:run
+    working_dir: /usr/src
+    depends_on:
+      kafka:
+        condition: service_healthy # kafka 서비스가 healthy 상태가 될 때까지 기다림
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    ports:
+      - "8082:8080"
+    volumes:
+      - ./funeralcontext:/usr/src
+      - ./maven-repo:/root/.m2
+      - shared-storage:/app/storage
+
+  funeralcontext-ai:
+    # build: ... 를 삭제하고 아래 내용으로 변경
+    image: python:3.9-slim # 1. Python 공식 이미지를 직접 사용
+    command: sh -c "pip install -r requirements.txt && uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload" # 2. 컨테이너 안에서 라이브러리 설치 및 서버 실행
+    working_dir: /app
+    depends_on:
+      kafka:
+        condition: service_healthy # kafka 서비스가 healthy 상태가 될 때까지 기다림
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./funeralcontext-ai:/app # 3. 로컬의 funeralcontext-ai 폴더를 컨테이너의 /app 폴더와 연결
+      - shared-storage:/app/storage
+
+volumes:
+  kafka-data:
+  shared-storage:
+  maven-repo: # Maven 라이브러리 캐시를 위한 볼륨 추가

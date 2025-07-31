@@ -14,16 +14,16 @@ public class FuneralInfoHateoasProcessor
     public EntityModel<FuneralInfo> process(EntityModel<FuneralInfo> model) {
         model.add(
             Link
-                .of(model.getRequiredLink("self").getHref() + "/createobituary")
-                .withRel("createobituary")
+                .of(
+                    model.getRequiredLink("self").getHref() +
+                    "/updatefuneralinfo"
+                )
+                .withRel("updatefuneralinfo")
         );
         model.add(
             Link
-                .of(
-                    model.getRequiredLink("self").getHref() +
-                    "/createdeathreport"
-                )
-                .withRel("createdeathreport")
+                .of(model.getRequiredLink("self").getHref() + "/createobituary")
+                .withRel("createobituary")
         );
         model.add(
             Link
@@ -42,9 +42,9 @@ public class FuneralInfoHateoasProcessor
             Link
                 .of(
                     model.getRequiredLink("self").getHref() +
-                    "/updatefuneralinfo"
+                    "/createdeathreport"
                 )
-                .withRel("updatefuneralinfo")
+                .withRel("createdeathreport")
         );
 
         return model;

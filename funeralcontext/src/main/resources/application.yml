@@ -47,7 +47,7 @@ logging:
 
 
 server:
-  port: 8083
+  port: 8082
 
 ---
 
@@ -63,7 +63,7 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: my-kafka:9092
+          brokers: kafka:9092 # 'my-kafka'에서 'kafka'로 수정
         streams:
           binder:
             configuration:
