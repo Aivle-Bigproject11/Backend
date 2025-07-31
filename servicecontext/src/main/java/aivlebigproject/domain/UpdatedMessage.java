@@ -8,7 +8,7 @@ import lombok.*;
 //<<< DDD / Domain Event
 @Data
 @ToString
-public class GeneratedMessage extends AbstractEvent {
+public class UpdatedMessage extends AbstractEvent {
 
     private Long messageId;
     private String comment;
@@ -17,11 +17,11 @@ public class GeneratedMessage extends AbstractEvent {
     private Long customerId;
     private Date createMessageDate;
 
-    public GeneratedMessage(RecommendMessage aggregate) {
+    public UpdatedMessage(RecommendMessage aggregate) {
         super(aggregate);
     }
 
-    public GeneratedMessage() {
+    public UpdatedMessage() {
         super();
     }
 }

@@ -1,47 +1,39 @@
 package aivlebigproject.domain;
 
-import aivlebigproject.ServicecontextApplication;
-import aivlebigproject.domain.GeneratedMessage;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+
+import aivlebigproject.domain.dto.FilterCriteria;
 import javax.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.util.Date;
 
 @Entity
-@Table(name = "RecommendMessage_table")
 @Data
-//<<< DDD / Aggregate Root
+@NoArgsConstructor
 public class RecommendMessage {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long messageId;
-
-    private String comment;
-
-    private Long serviceId1;
-
-    private Long serviceId2;
+    @Id @GeneratedValue
+    private Long id;
 
     private Long customerId;
-
+    private Long serviceId1;
+    private Long serviceId2;
     private Date createMessageDate;
 
-    @PostPersist
-    public void onPostPersist() {
-        GeneratedMessage generatedMessage = new GeneratedMessage(this);
-        generatedMessage.publishAfterCommit();
-    }
+    private String message;
 
-    public static RecommendMessageRepository repository() {
-        RecommendMessageRepository recommendMessageRepository = ServicecontextApplication.applicationContext.getBean(
-            RecommendMessageRepository.class
-        );
-        return recommendMessageRepository;
+    private String ageGroup;
+    private String gender;
+    private String disease;
+    private String family;
+
+    public RecommendMessage(String msg, FilterCriteria criteria) {
+        this.message = msg;
+        this.ageGroup = criteria.getAgeGroup();
+        this.gender = criteria.getGender();
+        this.disease = criteria.getDisease();
+        this.family = criteria.getFamily();
     }
 }
+
 //>>> DDD / Aggregate Root

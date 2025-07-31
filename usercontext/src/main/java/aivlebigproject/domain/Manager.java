@@ -27,8 +27,8 @@ public class Manager {
 
     private String name;
 
-    @Embedded
-    private Email email;
+//    @Embedded
+//    private Email email;
 
     private String phone;
 
