@@ -23,8 +23,8 @@ public class CustomerUpdated extends AbstractEvent {
     private List<String> diseaseList;
     private Date birthOfDate;
     private String rrn;
-    private Date birthOfDate;
-    private String rrn;
+//    private Date birthOfDate;
+//    private String rrn;
 
     public CustomerUpdated(CustomerProfile aggregate) {
         super(aggregate);

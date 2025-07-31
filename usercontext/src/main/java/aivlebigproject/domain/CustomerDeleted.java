@@ -23,7 +23,6 @@ public class CustomerDeleted extends AbstractEvent {
     private Boolean hasChildren;
     private Boolean isMarried;
     private List<String> diseaseList;
-    private List<String> diseaseList;
 
     public CustomerDeleted(CustomerProfile aggregate) {
         super(aggregate);
