@@ -50,14 +50,18 @@ public class GroupMessageGenerator {
                 try {
                     RecommendMessage msg = new RecommendMessage();
                     msg.setCustomerId(customer.getId());
-                    msg.setMessage(parsed.getMessage());
-//                    msg.setServiceId1(s1.getServiceId());
-//                    msg.setServiceId2(s2.getServiceId());
+                    msg.setMessage(formatFinalMessage(customer, criteria, parsed));
+                    msg.setServiceId1(s1.getServiceId());
+                    msg.setServiceId2(s2.getServiceId());
                     msg.setCreateMessageDate(new Date());
                     msg.setAgeGroup(criteria.getAgeGroup());
                     msg.setGender(criteria.getGender());
                     msg.setDisease(criteria.getDisease());
                     msg.setFamily(criteria.getFamily());
+                    msg.setImageUrl1(s1.getImageUrl());
+                    msg.setImageUrl2(s2.getImageUrl());
+                    msg.setDetailedUrl1(s1.getDetailedUrl());
+                    msg.setDetailedUrl2(s2.getDetailedUrl());
 
                     repository.save(msg);
                 } catch (Exception ex) {
@@ -77,5 +81,23 @@ public class GroupMessageGenerator {
             log.error("전환 서비스 추천 또는 저장 중 오류 발생", e);
             throw new RuntimeException("전환 메시지 생성 실패", e);
         }
+    }
+    private String formatFinalMessage(CustomerInfo customer, FilterCriteria criteria, ParsedResult result) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("[나중에 관련 이미지 첨부될 예정]\n\n");
+
+        sb.append(criteria.getAgeGroup())
+                .append(" ")
+                .append(criteria.getGender())
+                .append(" 고객님께 가장 어울리는 전환 서비스를 추천드립니다.\n");
+
+        sb.append(result.getMessage()).append("\n\n");
+
+        sb.append("[서비스 자세히 보기]\n");
+        sb.append("- ").append(result.getService1()).append(": ").append(result.getService1DetailedUrl()).append("\n");
+        sb.append("- ").append(result.getService2()).append(": ").append(result.getService2DetailedUrl());
+
+        return sb.toString();
     }
 }

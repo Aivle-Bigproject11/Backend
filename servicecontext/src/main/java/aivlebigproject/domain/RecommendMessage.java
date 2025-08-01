@@ -22,10 +22,22 @@ public class RecommendMessage {
     private Long customerId;
     private Long serviceId1;
     private Long serviceId2;
+
+    @Column(columnDefinition = "TEXT")
+    private String imageUrl1;
+
+    @Column(columnDefinition = "TEXT")
+    private String imageUrl2;
+
+    @Column(columnDefinition = "TEXT")
     private String detailedUrl1;
+
+    @Column(columnDefinition = "TEXT")
     private String detailedUrl2;
+
     private Date createMessageDate;
 
+    @Column(columnDefinition = "TEXT")
     private String message;
     private String ageGroup;
     private String gender;
