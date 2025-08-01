@@ -3,6 +3,9 @@ package aivlebigproject.domain;
 
 import aivlebigproject.domain.dto.FilterCriteria;
 import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.Date;
@@ -10,18 +13,20 @@ import java.util.Date;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class RecommendMessage {
-
     @Id @GeneratedValue
     private Long id;
 
     private Long customerId;
     private Long serviceId1;
     private Long serviceId2;
+    private String detailedUrl1;
+    private String detailedUrl2;
     private Date createMessageDate;
 
     private String message;
-
     private String ageGroup;
     private String gender;
     private String disease;
