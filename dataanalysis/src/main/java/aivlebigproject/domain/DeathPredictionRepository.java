@@ -12,8 +12,6 @@ import java.util.Optional; // Optional 임포트 추가
 public interface DeathPredictionRepository
     extends PagingAndSortingRepository<DeathPrediction, DeathPredictionId> {
 
-    // --- 이 메서드를 추가해야 합니다 ---
-    // 특정 날짜와 지역으로 DeathPrediction을 조회하는 메서드
     Optional<DeathPrediction> findByDateAndRegion(LocalDate date, String region);
     // ------------------------------------
 }
