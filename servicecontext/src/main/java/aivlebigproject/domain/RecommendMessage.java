@@ -8,7 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.util.Date;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -35,7 +37,7 @@ public class RecommendMessage {
     @Column(columnDefinition = "TEXT")
     private String detailedUrl2;
 
-    private Date createMessageDate;
+    private LocalDateTime createMessageDate;
 
     @Column(columnDefinition = "TEXT")
     private String message;

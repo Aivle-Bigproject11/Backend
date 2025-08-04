@@ -1,5 +1,6 @@
 package aivlebigproject.llm;
 
+import aivlebigproject.domain.dto.ParsedResult;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class GptClient {
 
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
-    private static final String API_KEY = "..";  // 보안 주의
+    private static final String API_KEY = "...";  // 보안 주의
     private static final HttpClient httpClient = HttpClient.newHttpClient();
     private static final ObjectMapper mapper = new ObjectMapper();
 

@@ -1,4 +1,4 @@
-package aivlebigproject.llm;
+package aivlebigproject.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
