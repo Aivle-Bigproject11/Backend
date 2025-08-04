@@ -1,27 +1,19 @@
 package aivlebigproject.domain;
 
-import aivlebigproject.domain.*;
 import aivlebigproject.infra.AbstractEvent;
-import java.time.LocalDate;
-import java.util.*;
-import lombok.*;
+import java.time.YearMonth; // LocalDate -> YearMonth로 변경
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class DeathPredictionEvent extends AbstractEvent {
 
-    private LocalDate date;
+    private YearMonth date; // <-- YearMonth 타입으로 변경
     private String region;
-    private Long previousYearDeaths; 
-
-    public DeathPredictionEvent() {
-        super();
-    }
-
-    public DeathPredictionEvent(LocalDate date, String region, Long previousYearDeaths) {
-        super();
-        this.date = date;
-        this.region = region;
-        this.previousYearDeaths = previousYearDeaths;
-    }
+    private Long predictedDeaths;
 }

@@ -1,6 +1,6 @@
 package aivlebigproject.domain;
 
-import java.time.LocalDate;
+import java.time.YearMonth; // LocalDate -> YearMonth로 변경
 import javax.persistence.*;
 import lombok.Data;
 
@@ -11,18 +11,17 @@ import lombok.Data;
 public class DeathPrediction {
 
     @Id
-    private LocalDate date;
+    private YearMonth date; // <-- YearMonth 타입으로 변경
     @Id
     private String region;
 
-    private Long Deaths; // <-- 필드 이름을 "Deaths"로 통일
+    private Long Deaths;
 
     public DeathPrediction() {}
 
-    public DeathPrediction(LocalDate date, String region, Long Deaths) { // <-- 생성자 인자 변경
+    public DeathPrediction(YearMonth date, String region, Long Deaths) { // <-- YearMonth로 변경
         this.date = date;
         this.region = region;
-        this.Deaths = Deaths; // <-- Deaths 필드 초기화
+        this.Deaths = Deaths;
     }
-
 }

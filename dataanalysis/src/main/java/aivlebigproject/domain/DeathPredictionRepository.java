@@ -2,8 +2,8 @@ package aivlebigproject.domain;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import java.time.LocalDate; // LocalDate 임포트 추가
-import java.util.Optional; // Optional 임포트 추가
+import java.time.YearMonth; // LocalDate -> YearMonth로 변경
+import java.util.Optional;
 
 @RepositoryRestResource(
     collectionResourceRel = "deathPredictions",
@@ -12,6 +12,5 @@ import java.util.Optional; // Optional 임포트 추가
 public interface DeathPredictionRepository
     extends PagingAndSortingRepository<DeathPrediction, DeathPredictionId> {
 
-    Optional<DeathPrediction> findByDateAndRegion(LocalDate date, String region);
-    // ------------------------------------
+    Optional<DeathPrediction> findByDateAndRegion(YearMonth date, String region); // <-- YearMonth로 변경
 }

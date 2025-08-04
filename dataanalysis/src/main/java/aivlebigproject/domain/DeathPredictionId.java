@@ -1,7 +1,7 @@
 package aivlebigproject.domain;
 
 import java.io.Serializable;
-import java.time.LocalDate; 
+import java.time.YearMonth;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,8 +12,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DeathPredictionId implements Serializable {
 
-    private LocalDate date;
+    private YearMonth date;
     private String region;
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
