@@ -1,10 +1,16 @@
 package aivlebigproject.dto;
-import java.time.YearMonth;
-import lombok.Data; // lombok.Data 임포트
 
-@Data // Getter, Setter, toString, equals, hashCode 등을 자동으로 생성
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 public class AiRequestDto {
-    private YearMonth date;
+    private String date; // YearMonth -> String으로 변경
     private String region;
-    private Long previousYearDeaths; // 전년도 사망자 수 필드
+    private Long previousYearDeaths;
 }

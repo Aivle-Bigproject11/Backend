@@ -4,10 +4,12 @@ from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import PolynomialFeatures
 import warnings
-import joblib # 모델 저장을 위해 joblib 임포트
-import datetime # 날짜 처리를 위해 임포트
+import joblib 
+import datetime 
 
 warnings.filterwarnings('ignore')
+
+
 
 # 1. 데이터 로드 및 전처리
 def load_and_preprocess_data(file_path):
@@ -79,10 +81,6 @@ def load_and_preprocess_data(file_path):
             region_df['month_cos'] = np.cos(2 * np.pi * region_df['month'] / 12)
             region_df['year_normalized'] = (region_df['year'] - region_df['year'].min()) / (region_df['year'].max() - region_df['year'].min())
             
-            # 이전 연도 사망자수 특성 추가 (사용자 요청에 맞춰)
-            region_df['previous_year_deaths'] = region_df['death_count'].shift(12)
-            region_df.dropna(inplace=True)
-            
             regional_data[region_name] = region_df
     
     print(f"총 {len(regional_data)}개 지역 데이터 전처리 완료")
@@ -90,14 +88,15 @@ def load_and_preprocess_data(file_path):
 
 # 2. 모델링 클래스
 class RegionalMonthlyDeathModels:
-    def __init__(self):
+    def __init__(self, regional_data):
         self.models = {}
         self.poly_features = {}
-        self.year_min = 2004
-        self.year_max = 2023
+        self.regional_data = regional_data 
+        self.year_min = regional_data['서울']['year'].min() if '서울' in regional_data else 2004
+        self.year_max = regional_data['서울']['year'].max() if '서울' in regional_data else 2023
     
     def fit_linear_seasonal_model(self, data, region_name):
-        X = data[['year_normalized', 'month_sin', 'month_cos', 'covid_period', 'previous_year_deaths']].values
+        X = data[['year_normalized', 'month_sin', 'month_cos', 'covid_period']].values
         y = data['death_count'].values
         model = LinearRegression()
         model.fit(X, y)
@@ -106,11 +105,20 @@ class RegionalMonthlyDeathModels:
             'score': model.score(X, y),
             'method': 'Linear + Seasonal'
         }
+    def predict_all_regions(self, start_date, num_months=12):
+        all_results = []
+        for region in self.models.keys():
+            try:
+                preds = self.predict_next_months(region, start_date, num_months)
+                all_results.extend(preds)
+            except Exception as e:
+                print(f"[{region}] 예측 실패: {e}")
+        return all_results
         
     def fit_polynomial_seasonal_model(self, data, region_name, degree=2):
         year_poly = PolynomialFeatures(degree=degree, include_bias=False)
         year_features = year_poly.fit_transform(data[['year_normalized']])
-        seasonal_features = data[['month_sin', 'month_cos', 'covid_period', 'previous_year_deaths']].values
+        seasonal_features = data[['month_sin', 'month_cos', 'covid_period']].values
         X = np.hstack([year_features, seasonal_features])
         y = data['death_count'].values
         model = LinearRegression()
@@ -124,20 +132,15 @@ class RegionalMonthlyDeathModels:
         self.poly_features[region_name] = year_poly
         
     def fit_random_forest_model(self, data, region_name):
-        features = []
-        targets = []
-        
-        # 'previous_year_deaths' 필드를 특성으로 추가
-        rf_features = ['year_normalized', 'month', 'quarter', 'season', 'month_sin', 'month_cos', 'covid_period', 'previous_year_deaths']
-        X = data[rf_features].values
+        features = data[['year_normalized', 'month', 'quarter', 'season', 'month_sin', 'month_cos', 'covid_period']].values
         y = data['death_count'].values
         
         model = RandomForestRegressor(n_estimators=100, max_depth=8, random_state=42, min_samples_split=5)
-        model.fit(X, y)
+        model.fit(features, y)
         
         self.models[region_name]['random_forest'] = {
             'model': model,
-            'score': model.score(X, y),
+            'score': model.score(features, y),
             'method': 'Random Forest'
         }
 
@@ -145,7 +148,6 @@ class RegionalMonthlyDeathModels:
         """한 지역에 대해 모든 모델을 학습시킵니다."""
         self.models[region_name] = {}
         
-        # 이전 데이터와 비교하여 특성 컬럼을 확인하고, 필요한 경우 전처리 로직 수정 필요
         try:
             self.fit_linear_seasonal_model(data, region_name)
             print(f"[{region_name}] 선형+계절성 모델 학습 완료. R²: {self.models[region_name]['linear_seasonal']['score']:.3f}")
@@ -163,36 +165,47 @@ class RegionalMonthlyDeathModels:
             print(f"[{region_name}] 랜덤포레스트 모델 학습 완료. R²: {self.models[region_name]['random_forest']['score']:.3f}")
         except Exception as e:
             print(f"[{region_name}] 랜덤포레스트 모델 학습 실패: {e}")
-            
-    def predict_next_12_months(self, region, start_date, previous_year_deaths):
-        """특정 지역의 향후 12개월 사망자 수를 예측합니다."""
+
+    def get_last_year_death_count(self, region, target_date):
+        """과거 데이터에서 이전 연도의 사망자수를 찾아 반환합니다."""
+        if region not in self.regional_data:
+            return 0 
+        
+        data = self.regional_data[region]
+        
+        prev_year = target_date.year - 1
+        prev_month = target_date.month
+        
+        death_count = data[(data['year'] == prev_year) & (data['month'] == prev_month)]['death_count'].values
+        return death_count[0] if len(death_count) > 0 else 0
+
+    def predict_next_months(self, region, start_date, num_months=12):
+        """특정 지역의 특정 시작일로부터 num_months만큼의 사망자 수를 예측합니다."""
         if region not in self.models:
             raise ValueError(f"'{region}' 지역에 대한 학습된 모델이 없습니다.")
             
-        predictions_by_model = {}
+        all_monthly_preds_by_model = []
         
-        # 예측 결과를 담을 리스트
-        all_monthly_preds = []
-
-        # 각 모델별 예측을 수행
         for model_name, model_info in self.models[region].items():
             model = model_info['model']
             monthly_preds_for_model = []
             
-            for i in range(12):
+            for i in range(num_months):
                 target_date = start_date + pd.DateOffset(months=i)
                 target_year_norm = (target_date.year - self.year_min) / (self.year_max - self.year_min) if self.year_max > self.year_min else 0.5
                 target_month = target_date.month
                 
+                previous_year_deaths = self.get_last_year_death_count(region, target_date)
+
                 if model_name == 'linear_seasonal':
-                    features = [target_year_norm, np.sin(2 * np.pi * target_month / 12), np.cos(2 * np.pi * target_month / 12), 1 if target_date.year >= 2020 else 0, previous_year_deaths]
+                    features = [target_year_norm, np.sin(2 * np.pi * target_month / 12), np.cos(2 * np.pi * target_month / 12), 1 if target_date.year >= 2020 else 0]
                     X_future = np.array([features])
                     pred = model.predict(X_future)[0]
                 
                 elif model_name == 'polynomial_seasonal':
                     poly_features = self.poly_features[region]
                     year_poly = poly_features.transform([[target_year_norm]])
-                    features = np.hstack([year_poly, [[np.sin(2 * np.pi * target_month / 12), np.cos(2 * np.pi * target_month / 12), 1 if target_date.year >= 2020 else 0, previous_year_deaths]]])
+                    features = np.hstack([year_poly, [[np.sin(2 * np.pi * target_month / 12), np.cos(2 * np.pi * target_month / 12), 1 if target_date.year >= 2020 else 0]]])
                     pred = model.predict(features)[0]
 
                 elif model_name == 'random_forest':
@@ -200,21 +213,18 @@ class RegionalMonthlyDeathModels:
                         target_year_norm, target_month, (target_month - 1) // 3 + 1,
                         0 if target_month in [12,1,2] else 1 if target_month in [3,4,5] else 2 if target_month in [6,7,8] else 3,
                         np.sin(2 * np.pi * target_month / 12), np.cos(2 * np.pi * target_month / 12),
-                        1 if target_date.year >= 2020 else 0, 0, previous_year_deaths # t-1, t-12 시차변수는 요청 데이터로 대체
+                        1 if target_date.year >= 2020 else 0
                     ]
                     X_future = np.array([features])
                     pred = model.predict(X_future)[0]
 
                 monthly_preds_for_model.append(max(0, pred))
             
-            all_monthly_preds.append(monthly_preds_for_model)
+            all_monthly_preds_by_model.append(monthly_preds_for_model)
 
-        # 앙상블 (평균)
-        ensemble_predictions = np.mean(all_monthly_preds, axis=0)
-
-        # 최종 JSON 포맷으로 변환
+        ensemble_predictions = np.mean(all_monthly_preds_by_model, axis=0)
         final_results = []
-        for i in range(12):
+        for i in range(num_months):
             target_date = start_date + pd.DateOffset(months=i)
             final_results.append({
                 "date": f"{target_date.year}-{target_date.month:02d}",
@@ -229,7 +239,7 @@ def train_and_save_models(file_path, model_filename='regional_models.joblib'):
     print("AI 모델 학습을 시작합니다...")
     regional_data = load_and_preprocess_data(file_path)
     
-    models_manager = RegionalMonthlyDeathModels()
+    models_manager = RegionalMonthlyDeathModels(regional_data)
     for region, data in regional_data.items():
         if not data.empty:
             models_manager.train_all_models_for_region(data, region)

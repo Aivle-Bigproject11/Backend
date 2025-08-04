@@ -11,7 +11,7 @@ import lombok.Data;
 public class DeathPrediction {
 
     @Id
-    private YearMonth date; // <-- YearMonth 타입으로 변경
+    private String date;; 
     @Id
     private String region;
 
@@ -19,7 +19,7 @@ public class DeathPrediction {
 
     public DeathPrediction() {}
 
-    public DeathPrediction(YearMonth date, String region, Long Deaths) { // <-- YearMonth로 변경
+    public DeathPrediction(String date, String region, Long Deaths) { 
         this.date = date;
         this.region = region;
         this.Deaths = Deaths;

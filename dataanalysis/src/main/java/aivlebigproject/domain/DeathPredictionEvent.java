@@ -1,7 +1,7 @@
 package aivlebigproject.domain;
 
 import aivlebigproject.infra.AbstractEvent;
-import java.time.YearMonth; // LocalDate -> YearMonth로 변경
+// import java.time.YearMonth; // 이 라인은 삭제합니다.
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import lombok.ToString;
 @AllArgsConstructor
 public class DeathPredictionEvent extends AbstractEvent {
 
-    private YearMonth date; // <-- YearMonth 타입으로 변경
+    private String date; // YearMonth -> String으로 변경
     private String region;
     private Long predictedDeaths;
 }

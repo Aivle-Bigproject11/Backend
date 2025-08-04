@@ -39,6 +39,7 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
       <!-- lombok -->
 		<dependency>
 				<groupId>org.projectlombok</groupId>
@@ -85,6 +86,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+    		<groupId>com.fasterxml.jackson.datatype</groupId>
+    		<artifactId>jackson-datatype-jsr310</artifactId>
+    		<version>2.11.0</version> 
+		</dependency>
+		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-spring</artifactId>
 			<version>${cucumber.version}</version>
@@ -116,6 +122,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+    			<groupId>org.springframework.boot</groupId>
+    			<artifactId>spring-boot-maven-plugin</artifactId>
+    			<configuration>
+        			<jvmArguments>--add-opens java.base/java.time=ALL-UNNAMED</jvmArguments>
+    			</configuration>
 			</plugin>
 		</plugins>
 	</build>

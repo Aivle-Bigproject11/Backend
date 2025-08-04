@@ -12,18 +12,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
-import lombok.extern.slf4j.Slf4j; // Slf4j 로거 임포트
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Transactional
-@Slf4j // Slf4j 로거 사용을 위한 어노테이션 추가
+@Slf4j
 public class PolicyHandler {
 
     @Autowired
     DeathPredictionRepository deathPredictionRepository;
 
-
-    @StreamListener(KafkaProcessor.INPUT)
+    @StreamListener(value = KafkaProcessor.INPUT , condition = "headers['eventType']=='AiRequestEvent'")
     public void handlePredictedDeathReceived(@Payload String message) {
         log.info("##### Kafka 메시지 수신: {}", message);
 
@@ -35,7 +34,7 @@ public class PolicyHandler {
                 message,
                 DeathPredictionEvent.class
             );
-            // Fast API가 보낸 예측 결과를 로그에 출력
+
             log.info(
                 "##### DeathPredictionEvent 수신: eventType={}, date={}, region={}, predictedDeaths={}",
                 deathPredictionEvent.getEventType(),
@@ -44,19 +43,17 @@ public class PolicyHandler {
                 deathPredictionEvent.getPredictedDeaths()
             );
 
-            // 예측 결과가 유효한지 확인
             if (deathPredictionEvent.getPredictedDeaths() == null) {
                 log.warn("##### 수신된 예측 결과에 predictedDeaths 값이 없습니다. 처리를 건너뜁니다.");
                 return;
             }
 
-            // 복합키를 사용하여 엔티티 생성 또는 조회
+            // String 타입의 date를 그대로 사용
             DeathPredictionId id = new DeathPredictionId(
                 deathPredictionEvent.getDate(),
                 deathPredictionEvent.getRegion()
             );
 
-            // DB에서 기존 예측 결과가 있는지 확인
             DeathPrediction deathPrediction = deathPredictionRepository.findById(id).orElseGet(() -> {
                 log.info("새로운 예측 결과 엔티티 생성 예정: date={}, region={}", id.getDate(), id.getRegion());
                 DeathPrediction newPrediction = new DeathPrediction();
@@ -65,10 +62,7 @@ public class PolicyHandler {
                 return newPrediction;
             });
 
-            // 예측된 사망자 수 필드를 업데이트 (새로운 필드명 사용)
             deathPrediction.setDeaths(deathPredictionEvent.getPredictedDeaths());
-
-            // DB에 저장
             deathPredictionRepository.save(deathPrediction);
             log.info("##### 예측 결과 DB 저장/업데이트 완료: {}", deathPrediction.toString());
 
