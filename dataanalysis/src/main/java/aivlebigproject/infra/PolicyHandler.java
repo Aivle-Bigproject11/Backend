@@ -22,7 +22,7 @@ public class PolicyHandler {
     @Autowired
     DeathPredictionRepository deathPredictionRepository;
 
-    @StreamListener(value = KafkaProcessor.INPUT , condition = "headers['eventType']=='AiRequestEvent'")
+    @StreamListener(value = KafkaProcessor.INPUT , condition = "headers['eventType']=='DeathPredictionEvent'")
     public void handlePredictedDeathReceived(@Payload String message) {
         log.info("##### Kafka 메시지 수신: {}", message);
 
