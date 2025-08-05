@@ -1,7 +1,6 @@
 package aivlebigproject.domain;
 
 import java.io.Serializable;
-import java.time.YearMonth; // import 추가
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Data;

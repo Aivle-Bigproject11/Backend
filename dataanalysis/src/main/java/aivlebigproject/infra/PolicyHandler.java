@@ -7,7 +7,9 @@ import aivlebigproject.domain.DeathPredictionRepository;
 import aivlebigproject.domain.DeathPredictionEvent;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -24,50 +26,41 @@ public class PolicyHandler {
 
     @StreamListener(value = KafkaProcessor.INPUT , condition = "headers['eventType']=='DeathPredictionEvent'")
     public void handlePredictedDeathReceived(@Payload String message) {
-        log.info("##### Kafka 메시지 수신: {}", message);
+        log.info("📥 Kafka 메시지 수신: {}", message);
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-            DeathPredictionEvent deathPredictionEvent = objectMapper.readValue(
-                message,
-                DeathPredictionEvent.class
-            );
+            DeathPredictionEvent event = objectMapper.readValue(message, DeathPredictionEvent.class);
 
-            log.info(
-                "##### DeathPredictionEvent 수신: eventType={}, date={}, region={}, predictedDeaths={}",
-                deathPredictionEvent.getEventType(),
-                deathPredictionEvent.getDate(),
-                deathPredictionEvent.getRegion(),
-                deathPredictionEvent.getPredictedDeaths()
-            );
+            log.info("📦 이벤트 파싱 완료: eventType={}, date={}, region={}, predictedDeaths={}",
+                event.getEventType(), event.getDate(), event.getRegion(), event.getPredictedDeaths());
 
-            if (deathPredictionEvent.getPredictedDeaths() == null) {
-                log.warn("##### 수신된 예측 결과에 predictedDeaths 값이 없습니다. 처리를 건너뜁니다.");
+            // 🔒 방어 로직 추가
+            if (event.getDate() == null || event.getRegion() == null || event.getPredictedDeaths() == null) {
+                log.warn("⚠️ 누락된 필드 존재. 처리 중단: date={}, region={}, predictedDeaths={}",
+                    event.getDate(), event.getRegion(), event.getPredictedDeaths());
                 return;
             }
 
-            // String 타입의 date를 그대로 사용
-            DeathPredictionId id = new DeathPredictionId(
-                deathPredictionEvent.getDate(),
-                deathPredictionEvent.getRegion()
-            );
+            DeathPredictionId id = new DeathPredictionId(event.getDate(), event.getRegion());
 
             DeathPrediction deathPrediction = deathPredictionRepository.findById(id).orElseGet(() -> {
-                log.info("새로운 예측 결과 엔티티 생성 예정: date={}, region={}", id.getDate(), id.getRegion());
+                log.info("➕ 새로운 예측 결과 생성: date={}, region={}", id.getDate(), id.getRegion());
                 DeathPrediction newPrediction = new DeathPrediction();
-                newPrediction.setDate(deathPredictionEvent.getDate());
-                newPrediction.setRegion(deathPredictionEvent.getRegion());
+                newPrediction.setDate(id.getDate());
+                newPrediction.setRegion(id.getRegion());
                 return newPrediction;
             });
 
-            deathPrediction.setDeaths(deathPredictionEvent.getPredictedDeaths());
+            deathPrediction.setDeaths(event.getPredictedDeaths());
             deathPredictionRepository.save(deathPrediction);
-            log.info("##### 예측 결과 DB 저장/업데이트 완료: {}", deathPrediction.toString());
+
+            log.info("✅ 예측 결과 저장/업데이트 완료: {}", deathPrediction);
 
         } catch (Exception e) {
-            log.error("##### Kafka 메시지 처리 중 오류 발생: {}", e.getMessage(), e);
+            log.error("❌ Kafka 메시지 처리 중 오류 발생: {}", e.getMessage(), e);
         }
     }
 }
