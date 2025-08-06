@@ -1,27 +1,30 @@
 package aivlebigproject.domain;
 
-import java.time.YearMonth; // LocalDate -> YearMonth로 변경
 import javax.persistence.*;
 import lombok.Data;
 
 @Entity
 @Table(name = "DeathPrediction_table")
 @Data
-@IdClass(DeathPredictionId.class)
 public class DeathPrediction {
 
-    @Id
-    private String date;; 
-    @Id
-    private String region;
+    @EmbeddedId
+    private DeathPredictionId id;
 
-    private Long Deaths;
+    private Long deaths;
 
     public DeathPrediction() {}
 
-    public DeathPrediction(String date, String region, Long Deaths) { 
-        this.date = date;
-        this.region = region;
-        this.Deaths = Deaths;
+    public DeathPrediction(String date, String region, Long deaths) {
+        this.id = new DeathPredictionId(date, region);
+        this.deaths = deaths;
+    }
+
+    public String getDate() {
+        return id != null ? id.getDate() : null;
+    }
+
+    public String getRegion() {
+        return id != null ? id.getRegion() : null;
     }
 }

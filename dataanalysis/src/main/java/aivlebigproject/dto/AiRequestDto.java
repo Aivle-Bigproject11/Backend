@@ -10,7 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AiRequestDto {
-    private String date; // YearMonth -> String으로 변경
+    private String date; 
     private String region;
     private Long previousYearDeaths;
 }
