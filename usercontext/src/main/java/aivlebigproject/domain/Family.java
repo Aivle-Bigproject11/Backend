@@ -36,6 +36,15 @@ public class Family {
 
     private Date updatedAt;
 
+    public void approveFamily(ApproveFamilyCommand approveFamilyCommand) {
+        // 비즈니스 로직: 유가족의 상태를 'APPROVED'로 변경합니다.
+        this.setStatus("APPROVED");
+
+        // 유가족 승인 완료 이벤트를 발행합니다.
+        FamilyApproved familyApproved = new FamilyApproved(this);
+        familyApproved.publishAfterCommit();
+    }
+
     @PostPersist
     public void onPostPersist() {
         FamilyRegistered familyRegistered = new FamilyRegistered(this);

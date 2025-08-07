@@ -13,6 +13,10 @@ public class ManagerRegistered extends AbstractEvent {
 
     private Long id;
 
+    public boolean validate() {
+        return this.id != null;
+    }
+
     public ManagerRegistered(Manager aggregate) {
         super(aggregate);
     }

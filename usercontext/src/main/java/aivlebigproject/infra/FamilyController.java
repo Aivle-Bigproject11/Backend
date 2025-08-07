@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-//<<< Clean Arch / Inbound Adaptor
+import java.util.NoSuchElementException;
 
 @RestController
-// @RequestMapping(value="/families")
 @Transactional
 public class FamilyController {
 
@@ -30,11 +28,46 @@ public class FamilyController {
         HttpServletResponse response,
         @RequestBody ApproveFamilyCommand approveFamilyCommand
     ) throws Exception {
-        System.out.println("##### /family/approveFamily  called #####");
-        Family family = new Family();
+        System.out.println("##### /family/approveFamily called #####");
+
+        // 1. approveFamilyCommand의 memorialId로 기존 유가족을 찾습니다.
+        Optional<Family> familyOptional = familyRepository.findByMemorialId(
+            approveFamilyCommand.getMemorialId()
+        );
+
+        if (!familyOptional.isPresent()) {
+            throw new NoSuchElementException("해당 memorialId를 가진 유가족을 찾을 수 없습니다.");
+        }
+
+        Family family = familyOptional.get();
+
+        // 2. Family 엔티티의 비즈니스 로직을 호출합니다.
         family.approveFamily(approveFamilyCommand);
-        familyRepository.save(family);
+
+        // 3. 변경된 엔티티를 반환합니다.
         return family;
+    }
+
+    @PostMapping("/families/login")
+    public ResponseEntity<FamilyLoginResponseDto> login(@RequestBody Family loginInfo) {
+        Optional<Family> familyOptional = familyRepository.findByLoginIdAndLoginPassword(
+            loginInfo.getLoginId(),
+            loginInfo.getLoginPassword()
+        );
+
+        if (familyOptional.isPresent()) {
+            Family family = familyOptional.get();
+            String token = JwtUtil.generateToken(family.getLoginId());
+            
+            FamilyLoginResponseDto responseDto = new FamilyLoginResponseDto();
+            responseDto.setId(family.getId());
+            responseDto.setName(family.getName());
+            responseDto.setToken(token);
+
+            return ResponseEntity.ok(responseDto);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 }
 //>>> Clean Arch / Inbound Adaptor
