@@ -1,14 +1,17 @@
 package aivlebigproject.infra;
 
 import aivlebigproject.domain.*;
+import aivlebigproject.dto.FamilyLoginResponseDto;
+
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
 import java.util.NoSuchElementException;
 
 @RestController
@@ -31,7 +34,7 @@ public class FamilyController {
         System.out.println("##### /family/approveFamily called #####");
 
         // 1. approveFamilyCommand의 memorialId로 기존 유가족을 찾습니다.
-        Optional<Family> familyOptional = familyRepository.findByMemorialId(
+        Optional<Family> familyOptional = familyRepository.findFirstByMemorialId(
             approveFamilyCommand.getMemorialId()
         );
 

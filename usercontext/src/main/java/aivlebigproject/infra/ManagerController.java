@@ -2,7 +2,7 @@ package aivlebigproject.infra;
 
 import aivlebigproject.domain.Manager;
 import aivlebigproject.domain.ManagerRepository;
-import aivlebigproject.util.JwtUtil; // JwtUtil 클래스 import
+import aivlebigproject.domain.JwtUtil; // JwtUtil 클래스 import
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import aivlebigproject.dto.*;
 
 @RestController
 @Transactional
@@ -18,6 +19,7 @@ public class ManagerController {
 
     @Autowired
     ManagerRepository managerRepository;
+    
 
     @PostMapping("/managers/login")
     public ResponseEntity<ManagerLoginResponseDto> login(@RequestBody Manager loginInfo) {

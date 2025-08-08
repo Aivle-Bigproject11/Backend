@@ -1,9 +1,6 @@
 package aivlebigproject.domain;
 
 import aivlebigproject.UsercontextApplication;
-import aivlebigproject.domain.FamilyRegistered;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.time.LocalDate;
 import java.util.*;
 import javax.persistence.*;
 import lombok.Data;
@@ -58,13 +55,6 @@ public class Family {
         return familyRepository;
     }
 
-    //<<< Clean Arch / Port Method
-    public void approveFamily(ApproveFamilyCommand approveFamilyCommand) {
-        //implement business logic here:
-
-        FamilyApproved familyApproved = new FamilyApproved(this);
-        familyApproved.publishAfterCommit();
-    }
     //>>> Clean Arch / Port Method
 
 }
