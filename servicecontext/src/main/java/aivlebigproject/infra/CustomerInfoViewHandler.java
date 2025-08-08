@@ -27,10 +27,16 @@ public class CustomerInfoViewHandler {
 
             CustomerInfo customerInfo = new CustomerInfo();
             customerInfo.setId(customerRegistered.getCustomerId());
+            customerInfo.setName(customerRegistered.getName());
             customerInfo.setAge(customerRegistered.getAge());
+            customerInfo.setPhone(customerRegistered.getPhone());
+            customerInfo.setJob(customerRegistered.getJob());
+            customerInfo.setAddress(customerRegistered.getAddress());
             customerInfo.setGender(customerRegistered.getGender());
             customerInfo.setHasChildren(customerRegistered.getHasChildren());
             customerInfo.setIsMarried(customerRegistered.getIsMarried());
+            customerInfo.setBirthDate(customerRegistered.getBirthDate());
+            customerInfo.setDisease(customerRegistered.getDiseaseList());
 
             // ✅ List<String> 그대로 전달 (컨버터가 자동 처리)
             customerInfo.setDisease(customerRegistered.getDiseaseList());

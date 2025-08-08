@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -44,14 +44,16 @@ public class RecommendMessage {
     private String ageGroup;
     private String gender;
     private String disease;
-    private String family;
+    private Boolean isMarried;
+    private Boolean hasChildren;
 
     public RecommendMessage(String msg, FilterCriteria criteria) {
         this.message = msg;
         this.ageGroup = criteria.getAgeGroup();
         this.gender = criteria.getGender();
         this.disease = criteria.getDisease();
-        this.family = criteria.getFamily();
+        this.isMarried = criteria.getIsMarried();
+        this.hasChildren = criteria.getHasChildren();
     }
 }
 

@@ -17,7 +17,7 @@ import java.util.Map;
 public class GptClient {
 
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
-    private static final String API_KEY = "...";  // 보안 주의
+    private static final String API_KEY = "000";  // 보안 주의
     private static final HttpClient httpClient = HttpClient.newHttpClient();
     private static final ObjectMapper mapper = new ObjectMapper();
 

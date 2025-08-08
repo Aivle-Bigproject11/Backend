@@ -4,12 +4,14 @@ import aivlebigproject.infra.AbstractEvent;
 
 import java.util.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 public class CustomerRegistered extends AbstractEvent {
 
     private Long customerId;
     private Long userId;
+    private String name;
     private String phone;
     private List<String> diseaseList;
     private Integer age;
@@ -18,5 +20,6 @@ public class CustomerRegistered extends AbstractEvent {
     private String gender;
     private Boolean hasChildren;
     private Boolean isMarried;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 }

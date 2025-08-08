@@ -3,7 +3,6 @@ package aivlebigproject.service;
 import aivlebigproject.domain.*;
 import aivlebigproject.domain.dto.FilterCriteria;
 import aivlebigproject.domain.dto.SaveGroupMessageCommand;
-import aivlebigproject.domain.dto.SavePreviewMessageCommand;
 import aivlebigproject.llm.GptClient;
 import aivlebigproject.domain.dto.ParsedResult;
 import aivlebigproject.llm.PromptBuilder;
@@ -11,9 +10,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +29,7 @@ public class GroupMessageGenerator {
 
     /**
      * 고객 그룹을 대상으로 GPT 메시지를 생성하고 DB에 저장
-     */
+
     public ParsedResult generate(FilterCriteria criteria) {
         List<CustomerInfo> group = filteringService.filterCustomers(criteria);
         if (group.isEmpty()) {
@@ -54,7 +53,7 @@ public class GroupMessageGenerator {
         }
 
         return parsed;
-    }
+     }*/
 
     /**
      * GPT 메시지를 생성만 하고, DB에는 저장하지 않음 (미리보기용)
@@ -102,7 +101,6 @@ public class GroupMessageGenerator {
 
     /**
      * 최종 RecommendMessage 객체 생성
-     */
     private RecommendMessage buildMessage(CustomerInfo customer, FilterCriteria criteria,
                                           ParsedResult parsed, ConversionService s1, ConversionService s2) {
         RecommendMessage msg = new RecommendMessage();
@@ -136,10 +134,12 @@ public class GroupMessageGenerator {
 
         repository.save(message);
     }
+     */
+
 
     /**
      * 고객별 메시지 포맷 템플릿
-     */
+
     private String formatFinalMessage(CustomerInfo customer, FilterCriteria criteria, ParsedResult result) {
         return String.format(
                 "%s %s 고객님께 가장 어울리는 전환 서비스를 추천드립니다.\n%s\n\n[서비스 자세히 보기]\n- %s: %s\n- %s: %s",
@@ -150,6 +150,7 @@ public class GroupMessageGenerator {
                 result.getService2(), result.getService2DetailedUrl()
         );
     }
+     */
 
     public void saveToGroup(SaveGroupMessageCommand command) {
         List<CustomerInfo> group = filteringService.filterCustomers(command.getFilterCriteria());
@@ -166,7 +167,8 @@ public class GroupMessageGenerator {
                     .ageGroup(command.getFilterCriteria().getAgeGroup())
                     .gender(command.getFilterCriteria().getGender())
                     .disease(command.getFilterCriteria().getDisease())
-                    .family(command.getFilterCriteria().getFamily())
+                    .isMarried(command.getFilterCriteria().getIsMarried())
+                    .hasChildren(command.getFilterCriteria().getHasChildren())
                     .createMessageDate(LocalDateTime.now())
                     .build();
 

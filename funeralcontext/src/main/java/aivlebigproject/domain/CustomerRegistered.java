@@ -1,7 +1,7 @@
 package aivlebigproject.domain;
 
 import aivlebigproject.infra.AbstractEvent;
-import java.time.LocalDate;
+
 import java.util.*;
 import lombok.Data;
 
@@ -19,5 +19,5 @@ public class CustomerRegistered extends AbstractEvent {
     private Boolean hasChildren;
     private Boolean isMarried;
     private String name;
-    private Date birthOfDate;
+    private Date birthDate;
 }

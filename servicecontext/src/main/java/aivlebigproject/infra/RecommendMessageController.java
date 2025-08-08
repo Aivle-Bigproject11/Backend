@@ -49,7 +49,8 @@ public class RecommendMessageController {
                 .ageGroup(command.getFilterCriteria().getAgeGroup())
                 .gender(command.getFilterCriteria().getGender())
                 .disease(command.getFilterCriteria().getDisease())
-                .family(command.getFilterCriteria().getFamily())
+                .isMarried(command.getFilterCriteria().getIsMarried())
+                .hasChildren((command.getFilterCriteria().getHasChildren()))
                 .createMessageDate(LocalDateTime.now())
                 .build();
 

@@ -1,15 +1,9 @@
 package aivlebigproject.domain;
 
 import aivlebigproject.UsercontextApplication;
-import aivlebigproject.domain.CustomerDeleted;
-import aivlebigproject.domain.CustomerRegistered;
-import aivlebigproject.domain.CustomerUpdated;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.time.LocalDate;
-import java.util.Collections;
+
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.*;
 import lombok.Data;
 
@@ -35,7 +29,7 @@ public class CustomerProfile {
 
     private String gender;
 
-    private Date birthOfDate;
+    private Date birthDate;
 
     private Boolean hasChildren;
 
