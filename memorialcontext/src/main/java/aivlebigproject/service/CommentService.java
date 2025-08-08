@@ -39,6 +39,7 @@ public class CommentService {
                 .memorialId(saved.getMemorialId())
                 .content(saved.getContent())
                 .name(saved.getName())
+                .createdAt(comment.getCreatedAt())
                 .relationship(saved.getRelationship())
                 .build();
     }
