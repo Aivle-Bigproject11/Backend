@@ -8,7 +8,6 @@ import lombok.Data;
 @Entity
 @Table(name = "Family_table")
 @Data
-//<<< DDD / Aggregate Root
 public class Family {
 
     @Id
@@ -16,26 +15,27 @@ public class Family {
     private Long id;
 
     private String loginId;
-
     private String loginPassword;
-
     private String name;
-
     private String email;
-
     private String phone;
-
     private String status;
-
     private UUID memorialId;
-
     private Date createdAt;
-
     private Date updatedAt;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.memorialId == null) {
+            this.memorialId = UUID.randomUUID(); // memorialId가 없으면 자동으로 생성
+        }
+    }
+
 
     public void approveFamily(ApproveFamilyCommand approveFamilyCommand) {
         // 비즈니스 로직: 유가족의 상태를 'APPROVED'로 변경합니다.
         this.setStatus("APPROVED");
+        this.setMemorialId(approveFamilyCommand.getMemorialId()); // **추가: 커맨드에서 받은 memorialId를 저장**
 
         // 유가족 승인 완료 이벤트를 발행합니다.
         FamilyApproved familyApproved = new FamilyApproved(this);
@@ -54,8 +54,5 @@ public class Family {
         );
         return familyRepository;
     }
-
-    //>>> Clean Arch / Port Method
-
 }
 //>>> DDD / Aggregate Root

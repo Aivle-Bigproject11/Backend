@@ -1,12 +1,10 @@
 package aivlebigproject.domain;
 
-import aivlebigproject.domain.*;
 import aivlebigproject.infra.AbstractEvent;
-import java.time.LocalDate;
 import java.util.*;
-import lombok.*;
+import lombok.Data;
+import lombok.ToString;
 
-//<<< DDD / Domain Event
 @Data
 @ToString
 public class FamilyApproved extends AbstractEvent {
@@ -15,11 +13,14 @@ public class FamilyApproved extends AbstractEvent {
     private UUID memorialId;
 
     public FamilyApproved(Family aggregate) {
-        super(aggregate);
+        // 부모 클래스 생성자 호출
+        super(); 
+        this.id = aggregate.getId();
+        this.memorialId = aggregate.getMemorialId(); 
     }
 
     public FamilyApproved() {
         super();
     }
-}
+}  
 //>>> DDD / Domain Event

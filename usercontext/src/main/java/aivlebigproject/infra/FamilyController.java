@@ -22,27 +22,19 @@ public class FamilyController {
     FamilyRepository familyRepository;
 
     @RequestMapping(
-        value = "/families/approvefamily",
+        value = "/families/{familyId}/approve", // 경로를 familyId를 받도록 변경
         method = RequestMethod.POST,
         produces = "application/json;charset=UTF-8"
     )
     public Family approveFamily(
-        HttpServletRequest request,
-        HttpServletResponse response,
+        @PathVariable Long familyId,
         @RequestBody ApproveFamilyCommand approveFamilyCommand
     ) throws Exception {
         System.out.println("##### /family/approveFamily called #####");
 
-        // 1. approveFamilyCommand의 memorialId로 기존 유가족을 찾습니다.
-        Optional<Family> familyOptional = familyRepository.findFirstByMemorialId(
-            approveFamilyCommand.getMemorialId()
-        );
-
-        if (!familyOptional.isPresent()) {
-            throw new NoSuchElementException("해당 memorialId를 가진 유가족을 찾을 수 없습니다.");
-        }
-
-        Family family = familyOptional.get();
+        // 1. familyId로 유가족 엔티티를 찾습니다.
+        Family family = familyRepository.findById(familyId)
+            .orElseThrow(() -> new NoSuchElementException("해당 ID의 유가족을 찾을 수 없습니다."));
 
         // 2. Family 엔티티의 비즈니스 로직을 호출합니다.
         family.approveFamily(approveFamilyCommand);
