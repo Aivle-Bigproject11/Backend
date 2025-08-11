@@ -4,16 +4,38 @@ server:
 spring:
   application:
     name: servicecontext
+
 ---
 
 spring:
   profiles: default
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
   jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: true
     properties:
       hibernate:
         show_sql: true
         format_sql: true
         implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data.sql
+
   cloud:
     stream:
       kafka:
@@ -30,21 +52,16 @@ spring:
       bindings:
         event-in:
           group: servicecontext
-#<<< EDA / Topic Name
           destination: aivlebigproject
-#>>> EDA / Topic Name
           contentType: application/json
         event-out:
-#<<< EDA / Topic Name
           destination: aivlebigproject
-#>>> EDA / Topic Name
           contentType: application/json
 
 logging:
   level:
     org.hibernate.type: trace
     org.springframework.cloud: debug
-
 
 server:
   port: 8082
@@ -54,6 +71,8 @@ server:
 spring:
   profiles: docker
   jpa:
+    hibernate:
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true
@@ -80,5 +99,3 @@ spring:
         event-out:
           destination: aivlebigproject
           contentType: application/json
-
-

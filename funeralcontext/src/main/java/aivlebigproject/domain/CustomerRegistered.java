@@ -2,7 +2,7 @@ package aivlebigproject.domain;
 
 import aivlebigproject.domain.*;
 import aivlebigproject.infra.AbstractEvent;
-import java.time.LocalDate;
+
 import java.util.*;
 import lombok.*;
 
