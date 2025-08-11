@@ -31,7 +31,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 현재 폴더(test-ai)의 모든 파일을 컨테이너의 /app 폴더로 복사합니다.
 COPY . .
 
-RUN mkdir -p /app/storage
+# RUN mkdir -p /app/storage
 
 # 5. 포트 노출
 # FastAPI 서버가 8000번 포트를 사용하므로, 컨테이너의 8000번 포트를 외부에 공개합니다.

@@ -1,0 +1,31 @@
+﻿id,keyword,file_path
+1,"기본, 국화, 추모",resources/templates/template_1.png
+2,"안식, 평안",resources/templates/template_2.png
+3,"침묵, 조용함, 사색",resources/templates/template_3.png
+4,"아름다움, 추억",resources/templates/template_4.png
+5,"낚시, 강",resources/templates/template_5.png
+6,"등산, 자연, 도전",resources/templates/template_6.png
+7,"기독교, 믿음, 신앙",resources/templates/template_7.png
+8,"기억, 기도, 고요",resources/templates/template_8.png
+9,"평온, 자연, 안식",resources/templates/template_9.png
+10,"지혜, 선생님, 독서",resources/templates/template_10.png
+11,"지조, 전통",resources/templates/template_11.png
+12,"천국, 하늘",resources/templates/template_12.png
+13,"평화, 자유 영혼",resources/templates/template_13.png
+14,"불교, 자비",resources/templates/template_14.png
+15,천주교,resources/templates/template_15.png
+16,"가벼움, 천사, 부드러움",resources/templates/template_16.png
+17,"그리움, 영원, 우주",resources/templates/template_17.png
+18,"산책, 여정, 인생길",resources/templates/template_18.png
+19,"가을, 낭만",resources/templates/template_19.png
+20,"바다, 해변",resources/templates/template_20.png
+21,"성취, 도전, 듬직함",resources/templates/template_21.png
+22,"버팀목, 안정감",resources/templates/template_22.png
+23,"예술가, 감성",resources/templates/template_23.png
+24,"피아노, 선율, 음악",resources/templates/template_24.png
+25,"미술, 화가",resources/templates/template_25.png
+26,"항해, 모험, 자유로운 영혼",resources/templates/template_26.png
+27,"정원, 돌봄",resources/templates/template_27.png
+28,"위로, 치유",resources/templates/template_28.png
+29,"부부, 사랑, 영원한 약속",resources/templates/template_29.png
+30,"헌신, 희생",resources/templates/template_30.png

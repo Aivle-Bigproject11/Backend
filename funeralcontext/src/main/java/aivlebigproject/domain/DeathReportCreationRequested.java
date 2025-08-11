@@ -13,21 +13,25 @@ public class DeathReportCreationRequested extends AbstractEvent {
 
     private Long funeralInfoId;
     private Long customerId;
-    private String customerName;
-    private String customerRrn;
-    private String customerPhone;
     private String deceasedName;
-    private Integer deceasedAge;
-    private Date deceasedDate;
-    private Date deceasedBirthOfDate;
-    private String deceasedGender;
     private String deceasedNameHanja;
     private String deceasedRrn;
+    private Integer deceasedAge;
+    private Date deceasedBirthOfDate;
+    private String deceasedGender;
+    private Date deceasedDate;
     private String deceasedReligion;
+    private String deceasedRegisteredAddress;
+    private String deceasedAddress;
     private String deceasedRelationToHouseholdHead;
     private Date reportRegistrationDate;
+    private String deathLocation;
+    private String deathLocationType;
+    private String deathLocationEtc;
+    private String deathReportEtc;
     private String reporterName;
     private String reporterRrn;
+    private String reporterQualification;
     private String reporterRelationToDeceased;
     private String reporterAddress;
     private String reporterPhone;
@@ -38,12 +42,17 @@ public class DeathReportCreationRequested extends AbstractEvent {
     private String directorName;
     private String directorPhone;
     private String funeralHomeName;
-    private String mortuaryInfo;
     private String funeralHomeAddress;
+    private String funeralHomeAddressUrl;
     private String funeralDuration;
+    private String mortuaryInfo;
     private String processionDateTime;
     private String burialSiteInfo;
     private String chiefMourners;
+    private String chiefMournersContact;
+    private String chiefMournerAccountHolder;
+    private String chiefMournerBankName;
+    private String chiefMournerAccountNumber;
     private String templateKeyword;
 
     public DeathReportCreationRequested(FuneralInfo aggregate) {

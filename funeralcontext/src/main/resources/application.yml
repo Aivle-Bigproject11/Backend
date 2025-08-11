@@ -47,23 +47,42 @@ logging:
 
 
 server:
-  port: 8082
+  port: 8083
 
 ---
 
 spring:
   profiles: docker
+  # H2 DB 미사용
   jpa:
     properties:
       hibernate:
         show_sql: true
         format_sql: true
         implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+  # [추가] docker 프로필이 활성화될 때, Azure MySQL에 연결하도록 datasource 설정을 추가합니다.
+  # datasource:
+  #   # [주석] .env 파일에 정의된 환경 변수들을 사용하여 연결 정보를 구성합니다.
+  #   url: jdbc:mysql://${DB_URL}:3306/${DB_NAME}?sslmode=REQUIRED
+  #   username: ${DB_USERNAME}
+  #   password: ${DB_PASSWORD}
+  #   driver-class-name: com.mysql.cj.jdbc.Driver
+  # jpa:
+  #   hibernate:
+  #     # [주석] 테이블 자동 생성/수정 전략을 'update'로 설정합니다.
+  #     ddl-auto: update 
+  #   properties:
+  #     hibernate:
+  #       show_sql: true
+  #       format_sql: true
+  #       implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+  #       # [주석] 데이터베이스 종류에 맞는 방언(Dialect)을 MySQL로 변경합니다.
+  #       dialect: org.hibernate.dialect.MySQL8Dialect
   cloud:
     stream:
       kafka:
         binder:
-          brokers: kafka:9092 # 'my-kafka'에서 'kafka'로 수정
+          brokers: my-kafka:9092
         streams:
           binder:
             configuration:
@@ -80,5 +99,9 @@ spring:
         event-out:
           destination: aivlebigproject
           contentType: application/json
-
+  # [추가] OpenAI API 키 설정을 추가합니다.
+  # .env 파일의 OPENAI_API_KEY 값을 읽어옵니다.
+  openai:
+    api:
+      key: ${OPENAI_API_KEY}
 

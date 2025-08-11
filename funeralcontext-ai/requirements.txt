@@ -5,3 +5,6 @@ pydantic
 pillow
 PyMuPDF
 qrcode[pil]
+azure-storage-blob
+pandas
+openai

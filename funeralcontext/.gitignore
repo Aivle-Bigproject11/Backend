@@ -1,46 +1,76 @@
-/target/
-/bin/
-/.settings/
-*#
+# ==================================
+# Build Tool (Maven/Gradle)
+# ==================================
+target/
+build/
+.gradle/
+.gradletasknamecache
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+dependency-reduced-pom.xml
+.flattened-pom.xml
+
+# ==================================
+# IDE & Editor Settings
+# ==================================
+# IntelliJ
+.idea/
 *.iml
 *.ipr
 *.iws
-*.jar
-*.sw?
-*~
-.#*
-.*.md.html
-.DS_Store
+
+# Eclipse
 .classpath
-.factorypath
-.gradle
-.idea
-.metadata
 .project
-.recommenders
-.settings
+.settings/
+.factorypath
+
+# STS (Spring Tool Suite)
 .springBeans
-/build
-/code
-MANIFEST.MF
-_site/
-activemq-data
-bin
-build
-build.log
-dependency-reduced-pom.xml
-dump.rdb
-interpolated*.xml
-lib/
-manifest.yml
-overridedb.*
-settings.xml
-target
-transaction-logs
-.flattened-pom.xml
-secrets.yml
-.gradletasknamecache
 .sts4-cache
-node_modules
+
+# ==================================
+# Operating System Files
+# ==================================
+.DS_Store
+Thumbs.db
+
+# ==================================
+# Logs & Temporary Files
+# ==================================
+*.log
+build.log
+dump.rdb
+transaction-logs
+activemq-data/
+
+# Temporary files (Vim, Emacs etc.)
+*~
+*#
+.#*
+*.sw?
+
+# ==================================
+# Project Specific & Dependencies
+# ==================================
+# Compiled Java files
+bin/
+*.jar
+
+# Node.js dependencies (if using a JavaScript front-end)
+node_modules/
 .dist/
-.pem
+
+# Configuration & Secrets
+secrets.yml
+manifest.yml
+
+# Other generated files
+/code/
+lib/
+MANIFEST.MF
+*.pem
+.*.md.html
+_site/

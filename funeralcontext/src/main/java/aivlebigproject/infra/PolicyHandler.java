@@ -1,6 +1,6 @@
 // ========================================
 // FILENAME: aivlebigproject/funeralcontext/src/main/java/aivlebigproject/domain/PolicyHandler.java
-// 역할 : 
+// 역할 : Kafka 이벤트를 수신하여 각 문서 Aggregate의 데이터를 업데이트
 // ========================================
 
 package aivlebigproject.infra;
@@ -21,14 +21,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.BeanUtils; // [추가]
 
 //<<< Clean Arch / Inbound Adaptor
 @Service
 @Transactional
 public class PolicyHandler {
-
-    @Autowired
-    CustomerRepository customerRepository;
 
     @Autowired
     FuneralInfoRepository funeralInfoRepository;
@@ -45,112 +43,73 @@ public class PolicyHandler {
     @StreamListener(KafkaProcessor.INPUT)
     public void whatever(@Payload String eventString) {}
 
+    // [주석] ObituaryDataCreated 이벤트를 수신하여, 미리 생성된 Obituary 객체의 내용을 채웁니다.
     @StreamListener(
         value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='ObituaryCreationRequested'"
+        condition = "headers['type']=='ObituaryDataCreated'"
     )
-    public void wheneverObituaryCreationRequested_CreateObituaryData(
-        @Payload ObituaryCreationRequested obituaryCreationRequested
+    public void wheneverObituaryDataCreated_UpdateObituaryWithDetails(
+        @Payload ObituaryDataCreated obituaryDataCreated
     ) {
-        ObituaryCreationRequested event = obituaryCreationRequested;
-        System.out.println(
-            "\n\n##### listener CreateObituaryData : " +
-            obituaryCreationRequested +
-            "\n\n"
-        );
-
-        // Sample Logic //
-        Obituary.createObituaryData(event);
+        try {
+            System.out.println(
+                "\n\n##### listener UpdateObituaryWithDetails : " +
+                obituaryDataCreated +
+                "\n\n"
+            );
+            Obituary obituary = obituaryRepository.findById(obituaryDataCreated.getObituaryId())
+                .orElseThrow(() -> new RuntimeException("Obituary not found"));
+            BeanUtils.copyProperties(obituaryDataCreated, obituary);
+            obituaryRepository.save(obituary);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
+    // [수정] DeathReportDataCreated 이벤트를 수신하여, 미리 생성된 DeathReport 객체의 내용을 채웁니다.
     @StreamListener(
         value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='AllDocumentsCreationRequested'"
+        condition = "headers['type']=='DeathReportDataCreated'"
     )
-    public void wheneverAllDocumentsCreationRequested_CreateObituaryData(
-        @Payload AllDocumentsCreationRequested allDocumentsCreationRequested
+    public void wheneverDeathReportDataCreated_UpdateDeathReportWithDetails(
+        @Payload DeathReportDataCreated deathReportDataCreated
     ) {
-        AllDocumentsCreationRequested event = allDocumentsCreationRequested;
-        System.out.println(
-            "\n\n##### listener CreateObituaryData : " +
-            allDocumentsCreationRequested +
-            "\n\n"
-        );
-
-        // Sample Logic //
-        Obituary.createObituaryData(event);
+        try {
+            System.out.println(
+                "\n\n##### listener UpdateDeathReportWithDetails : " +
+                deathReportDataCreated +
+                "\n\n"
+            );
+            DeathReport deathReport = deathReportRepository.findById(deathReportDataCreated.getDeathReportId())
+                .orElseThrow(() -> new RuntimeException("DeathReport not found"));
+            BeanUtils.copyProperties(deathReportDataCreated, deathReport);
+            deathReportRepository.save(deathReport);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
+    // [수정] ScheduleDataCreated 이벤트를 수신하여, 미리 생성된 Schedule 객체의 내용을 채웁니다.
     @StreamListener(
         value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='DeathReportCreationRequested'"
+        condition = "headers['type']=='ScheduleDataCreated'"
     )
-    public void wheneverDeathReportCreationRequested_CreateDeathReportData(
-        @Payload DeathReportCreationRequested deathReportCreationRequested
+    public void wheneverScheduleDataCreated_UpdateScheduleWithDetails(
+        @Payload ScheduleDataCreated scheduleDataCreated
     ) {
-        DeathReportCreationRequested event = deathReportCreationRequested;
-        System.out.println(
-            "\n\n##### listener CreateDeathReportData : " +
-            deathReportCreationRequested +
-            "\n\n"
-        );
-
-        // Sample Logic //
-        DeathReport.createDeathReportData(event);
-    }
-
-    @StreamListener(
-        value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='AllDocumentsCreationRequested'"
-    )
-    public void wheneverAllDocumentsCreationRequested_CreateDeathReportData(
-        @Payload AllDocumentsCreationRequested allDocumentsCreationRequested
-    ) {
-        AllDocumentsCreationRequested event = allDocumentsCreationRequested;
-        System.out.println(
-            "\n\n##### listener CreateDeathReportData : " +
-            allDocumentsCreationRequested +
-            "\n\n"
-        );
-
-        // Sample Logic //
-        DeathReport.createDeathReportData(event);
-    }
-
-    @StreamListener(
-        value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='ScheduleCreationRequested'"
-    )
-    public void wheneverScheduleCreationRequested_CreateScheduleData(
-        @Payload ScheduleCreationRequested scheduleCreationRequested
-    ) {
-        ScheduleCreationRequested event = scheduleCreationRequested;
-        System.out.println(
-            "\n\n##### listener CreateScheduleData : " +
-            scheduleCreationRequested +
-            "\n\n"
-        );
-
-        // Sample Logic //
-        Schedule.createScheduleData(event);
-    }
-
-    @StreamListener(
-        value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='AllDocumentsCreationRequested'"
-    )
-    public void wheneverAllDocumentsCreationRequested_CreateScheduleData(
-        @Payload AllDocumentsCreationRequested allDocumentsCreationRequested
-    ) {
-        AllDocumentsCreationRequested event = allDocumentsCreationRequested;
-        System.out.println(
-            "\n\n##### listener CreateScheduleData : " +
-            allDocumentsCreationRequested +
-            "\n\n"
-        );
-
-        // Sample Logic //
-        Schedule.createScheduleData(event);
+        try {
+            System.out.println(
+                "\n\n##### listener UpdateScheduleWithDetails : " +
+                scheduleDataCreated +
+                "\n\n"
+            );
+            Schedule schedule = scheduleRepository.findById(scheduleDataCreated.getScheduleId())
+                .orElseThrow(() -> new RuntimeException("Schedule not found"));
+            BeanUtils.copyProperties(scheduleDataCreated, schedule);
+            scheduleRepository.save(schedule);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
     
     // --- Python -> Java 이벤트 처리 ---
