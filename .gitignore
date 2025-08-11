@@ -4,9 +4,14 @@
 ### Java ###
 # Compiled class file
 *.class
+.env
 
-# Maven build directories
+# Local Maven Repository & Temp Files
 **/target/
+maven-repo/
+**/resolver-status.properties
+**/_remote.repositories
+*.sha1
 
 # Log file
 *.log

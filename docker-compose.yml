@@ -51,11 +51,11 @@ services:
     command: mvn spring-boot:run
     working_dir: /usr/src
     depends_on:
-      # - servicecontext # 서비스가 실행된 후에 gateway가 실행되도록 설정
+      - servicecontext # 서비스가 실행된 후에 gateway가 실행되도록 설정
       - funeralcontext 
-      # - usercontext
+      - usercontext
       # - memorialcontext
-      # - dataanalysis
+      - dataanalysis
       - funeralcontext-ai
       # - memorialcontext-ai
       # - dataanalysis-ai
@@ -99,19 +99,19 @@ services:
       - ./funeralcontext:/usr/src
       - ./maven-repo:/root/.m2
 
-  # usercontext:
-  #   # build: ... 를 삭제하고 아래 내용으로 변경
-  #   image: adoptopenjdk/maven-openjdk11:latest
-  #   command: mvn spring-boot:run
-  #   working_dir: /usr/src
-  #   depends_on:
-  #     my-kafka:
-  #       condition: service_healthy # kafka 서비스가 healthy 상태가 될 때까지 기다림
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=docker   
-  #   volumes:
-  #     - ./usercontext:/usr/src
-  #     - ./maven-repo:/root/.m2
+  usercontext:
+    # build: ... 를 삭제하고 아래 내용으로 변경
+    image: adoptopenjdk/maven-openjdk11:latest
+    command: mvn spring-boot:run
+    working_dir: /usr/src
+    depends_on:
+      my-kafka:
+        condition: service_healthy # kafka 서비스가 healthy 상태가 될 때까지 기다림
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker   
+    volumes:
+      - ./usercontext:/usr/src
+      - ./maven-repo:/root/.m2
 
   # memorialcontext:
   #   # build: ... 를 삭제하고 아래 내용으로 변경
@@ -129,19 +129,19 @@ services:
   #     - ./memorialcontext:/usr/src
   #     - ./maven-repo:/root/.m2
 
-  # dataanalysis:
-  #   # build: ... 를 삭제하고 아래 내용으로 변경
-  #   image: adoptopenjdk/maven-openjdk11:latest
-  #   command: mvn spring-boot:run
-  #   working_dir: /usr/src
-  #   depends_on:
-  #     my-kafka:
-  #       condition: service_healthy # kafka 서비스가 healthy 상태가 될 때까지 기다림
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=docker   
-  #   volumes:
-  #     - ./dataanalysis:/usr/src
-  #     - ./maven-repo:/root/.m2
+  dataanalysis:
+    # build: ... 를 삭제하고 아래 내용으로 변경
+    image: adoptopenjdk/maven-openjdk11:latest
+    command: mvn spring-boot:run
+    working_dir: /usr/src
+    depends_on:
+      my-kafka:
+        condition: service_healthy # kafka 서비스가 healthy 상태가 될 때까지 기다림
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker   
+    volumes:
+      - ./dataanalysis:/usr/src
+      - ./maven-repo:/root/.m2
 
   funeralcontext-ai:
     # build: ... 를 삭제하고 아래 내용으로 변경

@@ -65,11 +65,11 @@ spring:
         - id: servicecontext
           uri: http://servicecontext:8080
           predicates:
-            - Path=/conversionServices/**, /recommendMessages/**, 
+            - Path=/conversionServices/**, /recommendMessages/**, /customerInfos/**
         - id: funeralcontext
           uri: http://funeralcontext:8080
           predicates:
-            - Path=/funeralInfos/**, /obituaries/**, /deathReports/**, /schedules/**, 
+            - Path=/funeralInfos/**, /obituaries/**, /deathReports/**, /schedules/**, /customerReadmodels/**
         - id: usercontext
           uri: http://usercontext:8080
           predicates:
