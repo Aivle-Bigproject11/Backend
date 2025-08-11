@@ -1,0 +1,13 @@
+aivlebigproject/domain/DeathPredictionEvent.class
+aivlebigproject/config/kafka/KafkaProcessor.class
+aivlebigproject/infra/DeathPredictionService.class
+aivlebigproject/dto/AiRequestDto.class
+aivlebigproject/domain/DeathPrediction.class
+aivlebigproject/infra/DeathPredictionController.class
+aivlebigproject/infra/DeathPredictionHateoasProcessor.class
+aivlebigproject/infra/AbstractEvent.class
+aivlebigproject/domain/DeathPredictionRepository.class
+aivlebigproject/infra/PolicyHandler.class
+aivlebigproject/DataanalysisApplication.class
+aivlebigproject/infra/KafkaPublisher.class
+aivlebigproject/domain/DeathPredictionId.class
