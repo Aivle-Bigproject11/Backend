@@ -1,26 +1,31 @@
 package aivlebigproject.domain;
 
-import javax.persistence.*;
-import java.util.List;
-import java.util.Date;
 import lombok.Data;
-import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
-//<<< EDA / CQRS
 @Entity
-@Table(name="CustomerInfo_table")
+@Table(name = "CustomerInfo_table")
 @Data
 public class CustomerInfo {
 
         @Id
-        //@GeneratedValue(strategy=GenerationType.AUTO)
-        private Long id;
+        private Long id;  // 고객 식별자  customerId
+
+        private String name;
         private Integer age;
-        private List&lt;String&gt; disease;
-        private Boolean hasChildern;
+        private String phone;
+        private String job;
+        private String address;
         private String gender;
-        private Boolean isMarriage;
+        private Boolean hasChildren;
+        private Boolean isMarried;
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
+        private Date birthDate;
 
-
+        @Convert(converter = StringListConverter.class)
+        private List<String> disease; // 질병 리스트 (저장용)
 }

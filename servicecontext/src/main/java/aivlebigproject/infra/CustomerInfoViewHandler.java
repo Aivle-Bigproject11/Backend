@@ -2,9 +2,6 @@ package aivlebigproject.infra;
 
 import aivlebigproject.config.kafka.KafkaProcessor;
 import aivlebigproject.domain.*;
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -13,37 +10,43 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerInfoViewHandler {
 
-    //<<< DDD / CQRS
     @Autowired
     private CustomerInfoRepository customerInfoRepository;
 
     @StreamListener(KafkaProcessor.INPUT)
     public void whenCustomerRegistered_then_CREATE_1(
-        @Payload CustomerRegistered customerRegistered
+            @Payload CustomerRegistered customerRegistered
     ) {
         try {
-            if (!customerRegistered.validate()) return;
+            if (!customerRegistered.validate()) {
+                System.out.println("❌ CustomerRegistered 이벤트 유효성 검사 실패: " + customerRegistered);
+                return;
+            }
 
-            // view 객체 생성
+            System.out.println("📩 [ServiceContext] 이벤트 수신: userId = " + customerRegistered.getUserId());
+
             CustomerInfo customerInfo = new CustomerInfo();
-            // view 객체에 이벤트의 Value 를 set 함
+            customerInfo.setId(customerRegistered.getCustomerId());
+            customerInfo.setName(customerRegistered.getName());
             customerInfo.setAge(customerRegistered.getAge());
-            customerInfo.setDisease(
-                String.valueOf(customerRegistered.getDiseaseList())
-            );
-            customerInfo.setHasChildern(customerRegistered.getHasChildren());
-            customerInfo.setGender(
-                String.valueOf(customerRegistered.getGender())
-            );
-            customerInfo.setIsMarriage(
-                Boolean.valueOf(customerRegistered.getIsMarried())
-            );
-            customerInfo.setId(Long.valueOf(customerRegistered.getUserId()));
-            // view 레파지 토리에 save
+            customerInfo.setPhone(customerRegistered.getPhone());
+            customerInfo.setJob(customerRegistered.getJob());
+            customerInfo.setAddress(customerRegistered.getAddress());
+            customerInfo.setGender(customerRegistered.getGender());
+            customerInfo.setHasChildren(customerRegistered.getHasChildren());
+            customerInfo.setIsMarried(customerRegistered.getIsMarried());
+            customerInfo.setBirthDate(customerRegistered.getBirthDate());
+            customerInfo.setDisease(customerRegistered.getDiseaseList());
+
+            // ✅ List<String> 그대로 전달 (컨버터가 자동 처리)
+            customerInfo.setDisease(customerRegistered.getDiseaseList());
+
+            System.out.println("🧪 저장할 데이터: " + customerInfo.toString());
             customerInfoRepository.save(customerInfo);
+            System.out.println("✅ 저장 완료");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    //>>> DDD / CQRS
 }

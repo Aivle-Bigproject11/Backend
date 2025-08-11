@@ -21,6 +21,31 @@ public class FuneralInfoController {
     FuneralInfoRepository funeralInfoRepository;
 
     @RequestMapping(
+        value = "/funeralInfos/{id}/updatefuneralinfo",
+        method = RequestMethod.PUT,
+        produces = "application/json;charset=UTF-8"
+    )
+    public FuneralInfo updateFuneralInfo(
+        @PathVariable(value = "id") Long id,
+        HttpServletRequest request,
+        HttpServletResponse response
+    ) throws Exception {
+        System.out.println(
+            "##### /funeralInfo/updateFuneralInfo  called #####"
+        );
+        Optional<FuneralInfo> optionalFuneralInfo = funeralInfoRepository.findById(
+            id
+        );
+
+        optionalFuneralInfo.orElseThrow(() -> new Exception("No Entity Found"));
+        FuneralInfo funeralInfo = optionalFuneralInfo.get();
+        funeralInfo.updateFuneralInfo();
+
+        funeralInfoRepository.save(funeralInfo);
+        return funeralInfo;
+    }
+
+    @RequestMapping(
         value = "/funeralInfos/{id}/createobituary",
         method = RequestMethod.PUT,
         produces = "application/json;charset=UTF-8"
@@ -38,31 +63,6 @@ public class FuneralInfoController {
         optionalFuneralInfo.orElseThrow(() -> new Exception("No Entity Found"));
         FuneralInfo funeralInfo = optionalFuneralInfo.get();
         funeralInfo.createObituary();
-
-        funeralInfoRepository.save(funeralInfo);
-        return funeralInfo;
-    }
-
-    @RequestMapping(
-        value = "/funeralInfos/{id}/createdeathreport",
-        method = RequestMethod.PUT,
-        produces = "application/json;charset=UTF-8"
-    )
-    public FuneralInfo createDeathReport(
-        @PathVariable(value = "id") Long id,
-        HttpServletRequest request,
-        HttpServletResponse response
-    ) throws Exception {
-        System.out.println(
-            "##### /funeralInfo/createDeathReport  called #####"
-        );
-        Optional<FuneralInfo> optionalFuneralInfo = funeralInfoRepository.findById(
-            id
-        );
-
-        optionalFuneralInfo.orElseThrow(() -> new Exception("No Entity Found"));
-        FuneralInfo funeralInfo = optionalFuneralInfo.get();
-        funeralInfo.createDeathReport();
 
         funeralInfoRepository.save(funeralInfo);
         return funeralInfo;
@@ -117,17 +117,17 @@ public class FuneralInfoController {
     }
 
     @RequestMapping(
-        value = "/funeralInfos/{id}/updatefuneralinfo",
+        value = "/funeralInfos/{id}/createdeathreport",
         method = RequestMethod.PUT,
         produces = "application/json;charset=UTF-8"
     )
-    public FuneralInfo updateFuneralInfo(
+    public FuneralInfo createDeathReport(
         @PathVariable(value = "id") Long id,
         HttpServletRequest request,
         HttpServletResponse response
     ) throws Exception {
         System.out.println(
-            "##### /funeralInfo/updateFuneralInfo  called #####"
+            "##### /funeralInfo/createDeathReport  called #####"
         );
         Optional<FuneralInfo> optionalFuneralInfo = funeralInfoRepository.findById(
             id
@@ -135,7 +135,7 @@ public class FuneralInfoController {
 
         optionalFuneralInfo.orElseThrow(() -> new Exception("No Entity Found"));
         FuneralInfo funeralInfo = optionalFuneralInfo.get();
-        funeralInfo.updateFuneralInfo();
+        funeralInfo.createDeathReport();
 
         funeralInfoRepository.save(funeralInfo);
         return funeralInfo;

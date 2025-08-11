@@ -1,11 +1,10 @@
 package aivlebigproject.domain;
 
-import java.time.LocalDate;
-import java.util.*;
 import lombok.Data;
+import java.util.UUID;
 
 @Data
 public class ApproveFamilyCommand {
-
+    private Long familyId; // 승인할 유가족의 ID 추가
     private UUID memorialId;
 }

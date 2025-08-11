@@ -1,41 +1,30 @@
 package aivlebigproject.domain;
 
-import aivlebigproject.DataanalysisApplication;
-import aivlebigproject.domain.DeathPredictedEvent;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.time.LocalDate;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
 import javax.persistence.*;
 import lombok.Data;
 
 @Entity
 @Table(name = "DeathPrediction_table")
 @Data
-//<<< DDD / Aggregate Root
 public class DeathPrediction {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long date;
+    @EmbeddedId
+    private DeathPredictionId id;
 
-    private String region;
+    private Long deaths;
 
-    private Long predictedDeath;
+    public DeathPrediction() {}
 
-    @PostPersist
-    public void onPostPersist() {
-        DeathPredictedEvent deathPredictedEvent = new DeathPredictedEvent(this);
-        deathPredictedEvent.publishAfterCommit();
+    public DeathPrediction(String date, String region, Long deaths) {
+        this.id = new DeathPredictionId(date, region);
+        this.deaths = deaths;
     }
 
-    public static DeathPredictionRepository repository() {
-        DeathPredictionRepository deathPredictionRepository = DataanalysisApplication.applicationContext.getBean(
-            DeathPredictionRepository.class
-        );
-        return deathPredictionRepository;
+    public String getDate() {
+        return id != null ? id.getDate() : null;
+    }
+
+    public String getRegion() {
+        return id != null ? id.getRegion() : null;
     }
 }
-//>>> DDD / Aggregate Root

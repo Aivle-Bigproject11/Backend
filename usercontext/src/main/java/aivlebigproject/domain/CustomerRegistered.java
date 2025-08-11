@@ -1,10 +1,11 @@
 package aivlebigproject.domain;
 
-import aivlebigproject.domain.*;
+
 import aivlebigproject.infra.AbstractEvent;
-import java.time.LocalDate;
+
 import java.util.*;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 //<<< DDD / Domain Event
 @Data
@@ -19,10 +20,12 @@ public class CustomerRegistered extends AbstractEvent {
     private String job;
     private String address;
     private String gender;
+    private String email;
     private Boolean hasChildren;
     private Boolean isMarried;
     private String name;
-    private Date birthOfDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthDate;
 
     public CustomerRegistered(CustomerProfile aggregate) {
         super(aggregate);

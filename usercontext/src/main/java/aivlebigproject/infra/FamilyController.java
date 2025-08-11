@@ -1,19 +1,20 @@
 package aivlebigproject.infra;
 
 import aivlebigproject.domain.*;
+import aivlebigproject.dto.FamilyLoginResponseDto;
+
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-//<<< Clean Arch / Inbound Adaptor
+import java.util.NoSuchElementException;
 
 @RestController
-// @RequestMapping(value="/families")
 @Transactional
 public class FamilyController {
 
@@ -21,20 +22,47 @@ public class FamilyController {
     FamilyRepository familyRepository;
 
     @RequestMapping(
-        value = "/families/approvefamily",
+        value = "/families/{familyId}/approve", // 경로를 familyId를 받도록 변경
         method = RequestMethod.POST,
         produces = "application/json;charset=UTF-8"
     )
     public Family approveFamily(
-        HttpServletRequest request,
-        HttpServletResponse response,
+        @PathVariable Long familyId,
         @RequestBody ApproveFamilyCommand approveFamilyCommand
     ) throws Exception {
-        System.out.println("##### /family/approveFamily  called #####");
-        Family family = new Family();
+        System.out.println("##### /family/approveFamily called #####");
+
+        // 1. familyId로 유가족 엔티티를 찾습니다.
+        Family family = familyRepository.findById(familyId)
+            .orElseThrow(() -> new NoSuchElementException("해당 ID의 유가족을 찾을 수 없습니다."));
+
+        // 2. Family 엔티티의 비즈니스 로직을 호출합니다.
         family.approveFamily(approveFamilyCommand);
-        familyRepository.save(family);
+
+        // 3. 변경된 엔티티를 반환합니다.
         return family;
+    }
+
+    @PostMapping("/families/login")
+    public ResponseEntity<FamilyLoginResponseDto> login(@RequestBody Family loginInfo) {
+        Optional<Family> familyOptional = familyRepository.findByLoginIdAndLoginPassword(
+            loginInfo.getLoginId(),
+            loginInfo.getLoginPassword()
+        );
+
+        if (familyOptional.isPresent()) {
+            Family family = familyOptional.get();
+            String token = JwtUtil.generateToken(family.getLoginId());
+            
+            FamilyLoginResponseDto responseDto = new FamilyLoginResponseDto();
+            responseDto.setId(family.getId());
+            responseDto.setName(family.getName());
+            responseDto.setToken(token);
+
+            return ResponseEntity.ok(responseDto);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 }
 //>>> Clean Arch / Inbound Adaptor

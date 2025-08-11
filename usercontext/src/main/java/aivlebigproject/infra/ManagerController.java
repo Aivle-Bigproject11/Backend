@@ -1,23 +1,49 @@
 package aivlebigproject.infra;
 
-import aivlebigproject.domain.*;
+import aivlebigproject.domain.Manager;
+import aivlebigproject.domain.ManagerRepository;
+import aivlebigproject.domain.JwtUtil; // JwtUtil 클래스 import
 import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-//<<< Clean Arch / Inbound Adaptor
+import aivlebigproject.dto.*;
 
 @RestController
-// @RequestMapping(value="/managers")
 @Transactional
 public class ManagerController {
 
     @Autowired
     ManagerRepository managerRepository;
+    
+
+    @PostMapping("/managers/login")
+    public ResponseEntity<ManagerLoginResponseDto> login(@RequestBody Manager loginInfo) {
+        Optional<Manager> managerOptional = managerRepository.findByLoginIdAndLoginPassword(
+            loginInfo.getLoginId(),
+            loginInfo.getLoginPassword()
+        );
+
+        if (managerOptional.isPresent()) {
+            Manager manager = managerOptional.get();
+
+            // JWT 토큰 생성
+            String token = JwtUtil.generateToken(manager.getLoginId());
+
+            // 응답 DTO 생성
+            ManagerLoginResponseDto responseDto = new ManagerLoginResponseDto();
+            responseDto.setId(manager.getId());
+            responseDto.setName(manager.getName());
+            responseDto.setToken(token);
+
+            return ResponseEntity.ok(responseDto);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
 }
 //>>> Clean Arch / Inbound Adaptor

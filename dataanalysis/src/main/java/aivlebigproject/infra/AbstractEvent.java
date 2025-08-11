@@ -5,6 +5,7 @@ import aivlebigproject.config.kafka.KafkaProcessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.BeanUtils;
+import org.springframework.messaging.Message; // <-- 이 줄 추가
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
@@ -13,51 +14,14 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import org.springframework.util.MimeTypeUtils;
 
 //<<< Clean Arch / Outbound Adaptor
-public class AbstractEvent {
+public abstract class AbstractEvent {
 
     String eventType;
     Long timestamp;
 
-    public AbstractEvent(Object aggregate) {
-        this();
-        BeanUtils.copyProperties(aggregate, this);
-    }
-
     public AbstractEvent() {
         this.setEventType(this.getClass().getSimpleName());
         this.timestamp = System.currentTimeMillis();
-    }
-
-    public void publish() {
-        /**
-         * spring streams 방식
-         */
-        KafkaProcessor processor = DataanalysisApplication.applicationContext.getBean(
-            KafkaProcessor.class
-        );
-        MessageChannel outputChannel = processor.outboundTopic();
-
-        outputChannel.send(
-            MessageBuilder
-                .withPayload(this)
-                .setHeader(
-                    MessageHeaders.CONTENT_TYPE,
-                    MimeTypeUtils.APPLICATION_JSON
-                )
-                .setHeader("type", getEventType())
-                .build()
-        );
-    }
-
-    public void publishAfterCommit() {
-        TransactionSynchronizationManager.registerSynchronization(
-            new TransactionSynchronization() {
-                @Override
-                public void afterCommit() {
-                    AbstractEvent.this.publish();
-                }
-            }
-        );
     }
 
     public String getEventType() {
@@ -76,10 +40,6 @@ public class AbstractEvent {
         this.timestamp = timestamp;
     }
 
-    public boolean validate() {
-        return getEventType().equals(getClass().getSimpleName());
-    }
-
     public String toJson() {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = null;
@@ -92,5 +52,5 @@ public class AbstractEvent {
 
         return json;
     }
+
 }
-//>>> Clean Arch / Outbound Adaptor

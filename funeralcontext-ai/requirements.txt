@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+kafka-python
+pydantic
+pillow
+PyMuPDF
+qrcode[pil]

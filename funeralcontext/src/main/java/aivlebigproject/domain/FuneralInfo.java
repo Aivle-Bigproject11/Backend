@@ -1,3 +1,8 @@
+// ========================================
+// FILENAME: aivlebigproject/funeralcontext/src/main/java/aivlebigproject/domain/FuneralInfo.java
+// 역할 : 
+// ========================================
+
 package aivlebigproject.domain;
 
 import aivlebigproject.FuneralcontextApplication;
@@ -18,7 +23,7 @@ import lombok.Data;
 public class FuneralInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long funeralInfoId;
 
     private Long customerId;
@@ -103,6 +108,15 @@ public class FuneralInfo {
     }
 
     //<<< Clean Arch / Port Method
+    public void updateFuneralInfo() {
+        //implement business logic here:
+
+        FuneralInfoUpdated funeralInfoUpdated = new FuneralInfoUpdated(this);
+        funeralInfoUpdated.publishAfterCommit();
+    }
+
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
     public void createObituary() {
         //implement business logic here:
 
@@ -110,17 +124,6 @@ public class FuneralInfo {
             this
         );
         obituaryCreationRequested.publishAfterCommit();
-    }
-
-    //>>> Clean Arch / Port Method
-    //<<< Clean Arch / Port Method
-    public void createDeathReport() {
-        //implement business logic here:
-
-        DeathReportCreationRequested deathReportCreationRequested = new DeathReportCreationRequested(
-            this
-        );
-        deathReportCreationRequested.publishAfterCommit();
     }
 
     //>>> Clean Arch / Port Method
@@ -147,11 +150,13 @@ public class FuneralInfo {
 
     //>>> Clean Arch / Port Method
     //<<< Clean Arch / Port Method
-    public void updateFuneralInfo() {
+    public void createDeathReport() {
         //implement business logic here:
 
-        FuneralInfoUpdated funeralInfoUpdated = new FuneralInfoUpdated(this);
-        funeralInfoUpdated.publishAfterCommit();
+        DeathReportCreationRequested deathReportCreationRequested = new DeathReportCreationRequested(
+            this
+        );
+        deathReportCreationRequested.publishAfterCommit();
     }
     //>>> Clean Arch / Port Method
 
