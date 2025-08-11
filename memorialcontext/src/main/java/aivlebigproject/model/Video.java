@@ -38,11 +38,16 @@ public class Video {
     @Column(name="completed_at")
     private LocalDateTime completedAt;
 
-    @PostPersist
-    public void onPostPersist() {
-        VideoRequested videoRequested = new VideoRequested(this);
-        videoRequested.publishAfterCommit();
-    }
+//    @PostPersist
+//    public void onPostPersist() {
+//        VideoRequested videoRequested = new VideoRequested(this);
+//        videoRequested.publishAfterCommit();
+//    }
 
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+        status = "REQUESTED";
+    }
 }
 //>>> DDD / Aggregate Root

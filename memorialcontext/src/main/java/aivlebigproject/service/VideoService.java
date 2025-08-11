@@ -1,5 +1,6 @@
 package aivlebigproject.service;
 
+import aivlebigproject.dto.VideoResponse;
 import aivlebigproject.event.listener.VideoCreated;
 import aivlebigproject.model.Memorial;
 import aivlebigproject.event.publisher.VideoRequested;
@@ -29,7 +30,7 @@ public class VideoService {
     private final AzureBlobService azureBlobService;
 
     @Transactional
-    public Long createVideoRequest(UUID memorialId, String keywords, List<MultipartFile> images) throws IOException {
+    public VideoResponse createVideoRequest(UUID memorialId, String keywords, List<MultipartFile> images, MultipartFile outroImage) throws IOException {
         // 1. Video 엔티티 생성 (이미지 URL 제외)
         Memorial memorial = memorialRepository.findById(memorialId).orElse(null);
         Video video = new Video();
@@ -49,6 +50,7 @@ public class VideoService {
             imageUrls.add(url);
             idx++;
         }
+        String outroImageUrl = azureBlobService.uploadTributeOutroPhoto(outroImage, memorialId);
 
         // 3. 수동으로 이벤트 발행 (이미지 URL 포함)
         VideoRequested videoRequested = new VideoRequested(savedVideo);
@@ -57,14 +59,19 @@ public class VideoService {
         videoRequested.setMemorialId(memorialId);
         videoRequested.setBirthDate(memorial.getBirthDate());
         videoRequested.setDeceasedDate(memorial.getDeceasedDate());
-        videoRequested.setKeywords(keywords);
-        videoRequested.setPhotoCount(imageUrls.size());
+        videoRequested.setKeywords(savedVideo.getKeywords());
+        videoRequested.setOutroImageUrl(outroImageUrl);
 
         videoRequested.publish();
 
-        return savedVideo.getVideoId();
+        return VideoResponse.builder()
+                .id(video.getVideoId())
+                .status(savedVideo.getStatus())
+                .message("비디오 생성 요청이 성공적으로 수행되었습니다.")
+                .build();
     }
 
+    @Transactional
     public Video saveVideo(VideoCreated videoCreated) {
         Video video = videoRepository.findById(videoCreated.getVideoId()).orElse(null);
         video.setVideoUrl(videoCreated.getVideoUrl());

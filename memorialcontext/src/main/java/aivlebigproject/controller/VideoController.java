@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping("/videos")
+@RequestMapping("memorials/{memorialId}/videos")
 @RequiredArgsConstructor
 public class VideoController {
 
@@ -25,22 +25,17 @@ public class VideoController {
     /*
     1. 추모사진들 + 키워드 -> 추모사진 업로드 -> 파이썬 서버에 추모영상 요청
      */
-    @PostMapping("/generate")
+    @PostMapping
     public ResponseEntity<VideoResponse> generateVideo(
+            @PathVariable("memorialId") UUID memorialId,
             @RequestParam("images") List<MultipartFile> images,
-            @RequestParam("memorialId") UUID memorialId,
+            @RequestParam("outroImage") MultipartFile outroImage,
             @RequestParam("keywords") String keywords) {
         try {
-            log.info("비디오 생성 요청 - memorialId: {}, keyword: {}, 이미지 수: {}",
-                    memorialId, keywords, images.size());
 
-            Long id = videoService.createVideoRequest(memorialId, keywords, images);
+            VideoResponse response = videoService.createVideoRequest(memorialId, keywords, images, outroImage);
 
-            return ResponseEntity.ok(VideoResponse.builder()
-                    .id(id)
-                    .status("REQUESTED")
-                    .message("비디오 생성 요청이 접수되었습니다.")
-                    .build());
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
 
         } catch (Exception e) {
             log.error("비디오 생성 요청 실패", e);

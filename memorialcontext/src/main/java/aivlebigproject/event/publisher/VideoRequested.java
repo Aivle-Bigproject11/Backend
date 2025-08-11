@@ -17,8 +17,8 @@ public class VideoRequested extends AbstractEvent {
     private LocalDate birthDate;
     private LocalDate deceasedDate;
     private String keywords;
-    private Integer photoCount;
     private List<String> imageUrls;
+    private String outroImageUrl;
 
     public VideoRequested(Video aggregate) {
         super(aggregate);

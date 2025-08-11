@@ -81,8 +81,8 @@ public class AzureBlobService {
         return blobClient.getBlobUrl();
     }
 
-    public String uploadTributeOutroPhoto(MultipartFile file, UUID memorialId, Integer index) throws IOException {
-        String fileName = index + getFileExtension(file.getOriginalFilename());
+    public String uploadTributeOutroPhoto(MultipartFile file, UUID memorialId) throws IOException {
+        String fileName = "outro" + getFileExtension(file.getOriginalFilename());
         String blobPath = String.format("%s/tribute-video/outro/%s",
                 memorialId.toString(), fileName);
         BlobClient blobClient = containerClient.getBlobClient(blobPath);
