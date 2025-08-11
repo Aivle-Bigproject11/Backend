@@ -99,3 +99,8 @@ spring:
         event-out:
           destination: aivlebigproject
           contentType: application/json
+# [추가] OpenAI API 키 설정을 추가합니다.
+# .env 파일의 OPENAI_API_KEY 값을 읽어옵니다.
+openai:
+  api:
+    key: ${OPENAI_API_KEY}
