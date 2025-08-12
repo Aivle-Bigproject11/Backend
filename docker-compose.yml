@@ -47,14 +47,15 @@ services:
 
   # Gateway 서비스 추가
   gateway:
-    image: adoptopenjdk/maven-openjdk11:latest
+    # [수정] pom.xml의 Java 8 버전에 맞는 이미지로 명시
+    image: adoptopenjdk/maven-openjdk8:latest 
     command: mvn spring-boot:run
     working_dir: /usr/src
     depends_on:
       - servicecontext # 서비스가 실행된 후에 gateway가 실행되도록 설정
       - funeralcontext 
       - usercontext
-      # - memorialcontext
+      - memorialcontext
       - dataanalysis
       - funeralcontext-ai
       # - memorialcontext-ai
@@ -65,7 +66,8 @@ services:
       - "8080:8080" # 외부 8080 포트를 컨테이너 8080 포트로 연결
     volumes:
       - ./gateway:/usr/src # 로컬 gateway 폴더를 컨테이너와 연결
-      - ./maven-repo:/root/.m2
+      # [수정] gateway만을 위한 별도의 캐시 폴더(maven-repo-gateway)를 사용하도록 변경
+      - ./maven-repo-gateway:/root/.m2
 
   servicecontext:
     # build: ... 를 삭제하고 아래 내용으로 변경
@@ -113,21 +115,21 @@ services:
       - ./usercontext:/usr/src
       - ./maven-repo:/root/.m2
 
-  # memorialcontext:
-  #   # build: ... 를 삭제하고 아래 내용으로 변경
-  #   image: adoptopenjdk/maven-openjdk11:latest
-  #   command: mvn spring-boot:run
-  #   working_dir: /usr/src
-  #   depends_on:
-  #     my-kafka:
-  #       condition: service_healthy # kafka 서비스가 healthy 상태가 될 때까지 기다림
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=docker
-  #   env_file: # <-- env : OpenAI API, Azureblob, AzuremySQL, 영상-음악API
-  #     - .env          
-  #   volumes:
-  #     - ./memorialcontext:/usr/src
-  #     - ./maven-repo:/root/.m2
+  memorialcontext:
+    # build: ... 를 삭제하고 아래 내용으로 변경
+    image: adoptopenjdk/maven-openjdk11:latest
+    command: mvn spring-boot:run
+    working_dir: /usr/src
+    depends_on:
+      my-kafka:
+        condition: service_healthy # kafka 서비스가 healthy 상태가 될 때까지 기다림
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    env_file: # <-- env : OpenAI API, Azureblob, AzuremySQL, 영상-음악API
+      - .env          
+    volumes:
+      - ./memorialcontext:/usr/src
+      - ./maven-repo-memorial:/root/.m2
 
   dataanalysis:
     # build: ... 를 삭제하고 아래 내용으로 변경
@@ -184,4 +186,6 @@ services:
 
 volumes:
   kafka-data:
-  maven-repo: # Maven 라이브러리 캐시를 위한 볼륨 추가
+  maven-repo: # 다른 Java 11 서비스들이 사용하는 공용 캐시
+  maven-repo-gateway: # [추가] Java 8을 사용하는 gateway만 독립적으로 사용하는 캐시
+  maven-repo-memorial:

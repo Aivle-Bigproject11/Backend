@@ -1,6 +1,7 @@
 fastapi
 uvicorn
-kafka-python
+# kafka-python
+aiokafka
 pydantic
 pillow
 PyMuPDF

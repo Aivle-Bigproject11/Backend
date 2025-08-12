@@ -3,10 +3,11 @@
 # 역할 : 
 # ========================================
 
-import threading
+# import threading
+import asyncio # [수정] threading 대신 asyncio를 import 합니다.
 import uvicorn
 from fastapi import FastAPI
-from app.consumer import start_consumer # consumer.py에서 함수를 가져옵니다.
+from app.consumer import start_consumer # 이제 이 함수는 비동기(async) 함수입니다.
 
 print("✅ main.py 파일 로드 완료", flush=True)
 
@@ -16,8 +17,11 @@ app = FastAPI()
 # FastAPI 앱이 시작될 때 실행되는 이벤트 핸들러
 @app.on_event("startup")
 async def startup_event():
-    threading.Thread(target=start_consumer, daemon=True).start()
-    print("✅ Kafka consumer 백그라운드에서 실행됨", flush=True)
+    # [수정] threading.Thread 대신, asyncio.create_task를 사용하여
+    # 비동기 함수인 start_consumer를 FastAPI의 이벤트 루프 안에서
+    # 백그라운드 작업으로 안전하게 실행합니다.
+    asyncio.create_task(start_consumer())
+    print("✅ Kafka consumer 백그라운드 작업으로 등록됨", flush=True)
 
 # 서비스 상태 확인용 API
 @app.get("/")

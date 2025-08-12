@@ -9,6 +9,8 @@
 # Local Maven Repository & Temp Files
 **/target/
 maven-repo/
+maven-repo-gateway/
+maven-repo-memorial/
 **/resolver-status.properties
 **/_remote.repositories
 *.sha1
