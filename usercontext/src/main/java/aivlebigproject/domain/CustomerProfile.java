@@ -15,16 +15,13 @@ public class CustomerProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long customerId;
-
     private String name;
     private Integer age;
     private String phone;
     private String job;
     private String address;
     private String gender;
-
     private Date birthDate;
-
     private Boolean hasChildren;
     private Boolean isMarried;
 

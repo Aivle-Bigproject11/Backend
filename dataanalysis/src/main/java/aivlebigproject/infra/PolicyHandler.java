@@ -27,7 +27,7 @@ public class PolicyHandler {
             DeathPredictionEvent event = mapper.readValue(message, DeathPredictionEvent.class);
 
             if (event.getDate() == null || event.getRegion() == null || event.getPredictedDeaths() == null) {
-                log.warn("❌ 누락된 필드 있음, 저장 생략");
+                log.warn("누락된 필드 있음, 저장 생략");
                 return;
             }
 
@@ -36,9 +36,9 @@ public class PolicyHandler {
             prediction.setDeaths(event.getPredictedDeaths());
             deathPredictionRepository.save(prediction);
 
-            log.info("✅ 저장 완료: {}", prediction);
+            log.info("저장 완료: {}", prediction);
         } catch (Exception e) {
-            log.error("❌ 메시지 처리 실패: {}", e.getMessage(), e);
+            log.error("메시지 처리 실패: {}", e.getMessage(), e);
         }
     }
 }
