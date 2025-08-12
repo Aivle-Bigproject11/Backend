@@ -11,7 +11,9 @@ public class ScheduleDocumentGenerated {
     private Long scheduleId;
     private Long funeralInfoId;
     private Long scheduleTemplateId;
-    private String scheduleFilePath;
+    private String scheduleDallePrompt;
+    private String scheduleDalleTemplateImageUrl;
+    private String scheduleFileName;
     private String scheduleFileUrl;
     private String scheduleStatus;
     private Date scheduleCreatedAt;

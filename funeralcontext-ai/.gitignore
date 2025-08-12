@@ -1,0 +1,17 @@
+# =====================================
+# aivlebigproject/funeralcontext-ai/.gitignore
+# =====================================
+
+# Python Bytecode
+__pycache__/
+*.pyc
+
+# 가상환경
+venv/
+.venv/
+env/
+.env
+
+# IDE / Editor
+.idea/
+.vscode/

@@ -1,8 +1,7 @@
 package aivlebigproject.domain;
 
-import aivlebigproject.domain.CustomerDeleted;
-import aivlebigproject.domain.CustomerRegistered;
-import aivlebigproject.domain.CustomerUpdated;
+import aivlebigproject.UsercontextApplication;
+
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -23,7 +22,9 @@ public class CustomerProfile {
     private String job;
     private String address;
     private String gender;
-    private Date birthOfDate;
+
+    private Date birthDate;
+
     private Boolean hasChildren;
     private Boolean isMarried;
 

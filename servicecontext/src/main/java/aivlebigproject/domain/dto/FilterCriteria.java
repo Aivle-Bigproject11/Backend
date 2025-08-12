@@ -12,6 +12,7 @@ import lombok.Setter;
 public class FilterCriteria {
     private String ageGroup;
     private String gender;
-    private String disease;
-    private String family;
+    private String disease; //질병은 유/무로만 받으려고 함.
+    private Boolean isMarried;
+    private Boolean hasChildren;
 }

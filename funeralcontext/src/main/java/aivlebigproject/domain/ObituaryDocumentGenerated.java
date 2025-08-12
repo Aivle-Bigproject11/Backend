@@ -11,8 +11,9 @@ public class ObituaryDocumentGenerated {
     private Long obituaryId;
     private Long funeralInfoId;
     private Long obituaryTemplateId; // 향후 기능 확장을 위해 추가
-    private String obituaryFilePath;
+    private String obituaryFileName;
     private String obituaryFileUrl;
     private String obituaryStatus;
     private Date obituaryCreatedAt;
+    private String funeralHomeAddressUrl; // 지도 URL
 }

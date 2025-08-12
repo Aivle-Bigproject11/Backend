@@ -16,9 +16,13 @@ spec:
     spec:
       containers:
         - name: funeralcontext
-          image: "username/funeralcontext:latest"
+          image: "a071098registry.azurecr.io/funeralcontext:v1"
           ports:
             - containerPort: 8080
+          # [추가] secret.yaml에 정의된 값들을 환경 변수로 주입합니다.
+          envFrom:
+            - secretRef:
+                name: api-keys
           readinessProbe:
             httpGet:
               path: '/actuator/health'

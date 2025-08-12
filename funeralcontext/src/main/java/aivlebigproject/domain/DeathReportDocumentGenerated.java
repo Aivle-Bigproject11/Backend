@@ -11,7 +11,7 @@ public class DeathReportDocumentGenerated {
     private Long deathReportId;
     private Long funeralInfoId;
     private Long deathReportTemplateId;
-    private String deathReportFilePath;
+    private String deathReportFileName;
     private String deathReportFileUrl;
     private String deathReportStatus;
     private Date deathReportCreatedAt;
