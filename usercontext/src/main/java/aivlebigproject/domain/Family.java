@@ -24,13 +24,6 @@ public class Family {
     private Date createdAt;
     private Date updatedAt;
 
-    @PrePersist
-    public void prePersist() {
-        if (this.memorialId == null) {
-            this.memorialId = UUID.randomUUID(); // memorialId가 없으면 자동으로 생성
-        }
-    }
-
 
     public void approveFamily(ApproveFamilyCommand approveFamilyCommand) {
         // 비즈니스 로직: 유가족의 상태를 'APPROVED'로 변경합니다.
