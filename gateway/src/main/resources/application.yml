@@ -77,7 +77,7 @@ spring:
         - id: memorialcontext
           uri: http://memorialcontext:8080
           predicates:
-            - Path=/memorials/**, /videos/**, /photos/**, /comments/**, /tributes/**, 
+            - Path=/memorials/**, /videos/**, /photos/**, /comments/**, /tributes/**, /kafka/**
         - id: dataanalysis
           uri: http://dataanalysis:8080
           predicates:
