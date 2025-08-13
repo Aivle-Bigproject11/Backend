@@ -42,8 +42,9 @@ public class Video {
         status = "REQUESTED";
     }
 
-    public void updateVideo(String url) {
+    public void saveVideoUrl(String url) {
         this.videoUrl = url;
+        this.status = "COMPLETED";
         this.completedAt = LocalDateTime.now();
     }
 }

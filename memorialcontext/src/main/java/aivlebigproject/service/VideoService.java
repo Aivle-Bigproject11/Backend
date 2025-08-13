@@ -72,7 +72,7 @@ public class VideoService {
     @Transactional
     public Video saveVideo(VideoCreated videoCreated) {
         Video video = videoRepository.findById(videoCreated.getVideoId()).orElse(null);
-        video.updateVideo(videoCreated.getVideoUrl());
+        video.saveVideoUrl(videoCreated.getVideoUrl());
 
         return videoRepository.save(video);
     }
