@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -38,8 +37,7 @@ public class VideoService {
         video.setKeywords(keywords);
         video.setStatus("REQUESTED");
         video.setVideoTitle(memorial.getName()+"님의 추모영상");
-        video.setCreatedAt(LocalDateTime.now());
-        video.setCompletedAt(LocalDateTime.now());
+
 
         Video savedVideo = videoRepository.save(video);
 
@@ -62,7 +60,7 @@ public class VideoService {
         videoRequested.setKeywords(savedVideo.getKeywords());
         videoRequested.setOutroImageUrl(outroImageUrl);
 
-        videoRequested.publish();
+        videoRequested.publishAfterCommit();
 
         return VideoResponse.builder()
                 .id(video.getVideoId())
@@ -74,8 +72,7 @@ public class VideoService {
     @Transactional
     public Video saveVideo(VideoCreated videoCreated) {
         Video video = videoRepository.findById(videoCreated.getVideoId()).orElse(null);
-        video.setVideoUrl(videoCreated.getVideoUrl());
-        video.setCompletedAt(LocalDateTime.now());
+        video.saveVideoUrl(videoCreated.getVideoUrl());
 
         return videoRepository.save(video);
     }

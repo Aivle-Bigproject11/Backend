@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memorialcontext-ai
+  labels:
+    app: memorialcontext-ai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memorialcontext-ai
+  template:
+    metadata:
+      labels:
+        app: memorialcontext-ai
+    spec:
+      containers:
+        - name: memorialcontext-ai
+          image: "a071098registry.azurecr.io/memorialcontext-ai:v1"
+          ports:
+            - containerPort: 8000
+          # [추가] secret.yaml에 정의된 값들을 환경 변수로 주입합니다.
+          envFrom:
+            - secretRef:
+                name: api-keys
