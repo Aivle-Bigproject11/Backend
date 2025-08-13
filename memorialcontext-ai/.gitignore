@@ -1,0 +1,7 @@
+# =====================================
+# aivlebigproject/memorialcontext-ai/.gitignore
+# =====================================
+
+# Python Bytecode
+__pycache__/
+*.pyc

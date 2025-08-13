@@ -6,7 +6,7 @@ import json
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from config import SCENARIO_PROMPT, TEST_MODE
+from app.config import SCENARIO_PROMPT, TEST_MODE
 
 
 def generate_scenario(keywords, name, birth, death, photo_count):

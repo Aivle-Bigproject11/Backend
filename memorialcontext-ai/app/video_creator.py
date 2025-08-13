@@ -6,10 +6,10 @@ import os
 
 from moviepy import TextClip, AudioFileClip, ImageClip, CompositeVideoClip, ColorClip, VideoFileClip
 
-from azure_blob import upload_video_to_blob
-from config import TEST_MODE,  VIDEO_SIZE, FONT_PATH
-from scenario import generate_scenario
-from utils import create_directories
+from app.azure_blob import upload_video_to_blob
+from app.config import TEST_MODE,  VIDEO_SIZE, FONT_PATH
+from app.scenario import generate_scenario
+from app.utils import create_directories
 
 
 class MemorialVideoCreator:

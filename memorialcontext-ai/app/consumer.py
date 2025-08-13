@@ -23,7 +23,7 @@ from app.video_creator import MemorialVideoCreator
 
 
 ################################
-KAFKA_BROKER_URL = "localhost:9092"
+KAFKA_BROKER_URL = "my-kafka:9092"
 KAFKA_GROUP_ID = "aivlebigproject"
 TOPIC_NAME = "aivlebigproject"
 

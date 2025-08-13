@@ -6,6 +6,6 @@ azure-storage-blob
 openai
 # 민서가 추가한 부분
 moviepy
-PIL
+pillow
 dotenv
 runwayml

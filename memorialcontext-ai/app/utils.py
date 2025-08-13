@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 import requests
 from PIL import Image
 
-from config import VIDEO_SIZE
+from app.config import VIDEO_SIZE
 
 
 def resize_with_padding(image_path, outro_size=VIDEO_SIZE, bg_color=(0, 0, 0)):
