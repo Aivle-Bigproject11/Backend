@@ -6,47 +6,78 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+//import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class CustomerInfoViewHandler {
 
-    @Autowired
-    private CustomerInfoRepository customerInfoRepository;
+    private final CustomerInfoRepository customerInfoRepository;
 
-    @StreamListener(KafkaProcessor.INPUT)
-    public void whenCustomerRegistered_then_CREATE_1(
-            @Payload CustomerRegistered customerRegistered
-    ) {
-        try {
-            if (!customerRegistered.validate()) {
-                System.out.println("❌ CustomerRegistered 이벤트 유효성 검사 실패: " + customerRegistered);
-                return;
-            }
+    public CustomerInfoViewHandler(CustomerInfoRepository customerInfoRepository) {
+        this.customerInfoRepository = customerInfoRepository;
+    }
 
-            System.out.println("📩 [ServiceContext] 이벤트 수신: userId = " + customerRegistered.getUserId());
+    // CREATE
+    @StreamListener(
+            target = KafkaProcessor.INPUT,
+            condition = "headers['type']=='CustomerRegistered'"
+    )
+    public void whenCustomerRegistered_then_CREATE_1(@Payload CustomerRegistered e) {
+        if (!e.validate()) return;
 
-            CustomerInfo customerInfo = new CustomerInfo();
-            customerInfo.setId(customerRegistered.getCustomerId());
-            customerInfo.setName(customerRegistered.getName());
-            customerInfo.setAge(customerRegistered.getAge());
-            customerInfo.setPhone(customerRegistered.getPhone());
-            customerInfo.setJob(customerRegistered.getJob());
-            customerInfo.setAddress(customerRegistered.getAddress());
-            customerInfo.setGender(customerRegistered.getGender());
-            customerInfo.setHasChildren(customerRegistered.getHasChildren());
-            customerInfo.setIsMarried(customerRegistered.getIsMarried());
-            customerInfo.setBirthDate(customerRegistered.getBirthDate());
-            customerInfo.setDisease(customerRegistered.getDiseaseList());
+        CustomerInfo ci = new CustomerInfo();
+        ci.setId(e.getCustomerId());
+        ci.setName(e.getName());
+        ci.setAge(e.getAge());
+        ci.setPhone(e.getPhone());
+        ci.setJob(e.getJob());
+        ci.setAddress(e.getAddress());
+        ci.setGender(e.getGender());
+        ci.setHasChildren(e.getHasChildren());
+        ci.setIsMarried(e.getIsMarried());
+        ci.setBirthDate(e.getBirthDate());
+        ci.setDisease(e.getDiseaseList()); // List<String> 컨버터
 
-            // ✅ List<String> 그대로 전달 (컨버터가 자동 처리)
-            customerInfo.setDisease(customerRegistered.getDiseaseList());
+        customerInfoRepository.save(ci);
+    }
 
-            System.out.println("🧪 저장할 데이터: " + customerInfo.toString());
-            customerInfoRepository.save(customerInfo);
-            System.out.println("✅ 저장 완료");
+    // UPDATE
+    @Transactional
+    @StreamListener(
+            target = KafkaProcessor.INPUT,
+            condition = "headers['type']=='CustomerUpdated'"
+    )
+    public void whenCustomerUpdated_then_UPDATE_1(@Payload CustomerUpdated e) {
+        if (!e.validate()) return;
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        customerInfoRepository.findById(e.getCustomerId()).ifPresent(ci -> {
+            // 부분 업데이트: null인 필드는 건드리지 않음
+            if (e.getName() != null) ci.setName(e.getName());
+            if (e.getAge() != null) ci.setAge(e.getAge());
+            if (e.getPhone() != null) ci.setPhone(e.getPhone());
+            if (e.getJob() != null) ci.setJob(e.getJob());
+            if (e.getAddress() != null) ci.setAddress(e.getAddress());
+            if (e.getGender() != null) ci.setGender(e.getGender());
+            if (e.getBirthDate() != null) ci.setBirthDate(e.getBirthDate());
+            if (e.getHasChildren() != null) ci.setHasChildren(e.getHasChildren());
+            if (e.getIsMarried() != null) ci.setIsMarried(e.getIsMarried());
+            if (e.getDiseaseList() != null) ci.setDisease(e.getDiseaseList());
+            // @Transactional이라 flush 자동
+        });
+    }
+
+    // DELETE
+    @Transactional
+    @StreamListener(
+            target = KafkaProcessor.INPUT,
+            condition = "headers['type']=='CustomerDeleted'"
+    )
+    public void whenCustomerDeleted_then_DELETE_1(@Payload CustomerDeleted e) {
+        if (!e.validate()) return;
+        if (customerInfoRepository.existsById(e.getCustomerId())) {
+            customerInfoRepository.deleteById(e.getCustomerId());
         }
     }
 }
