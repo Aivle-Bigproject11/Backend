@@ -36,7 +36,7 @@ spring:
         format_sql: true
         implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   cloud:
     stream:
       kafka:
@@ -85,7 +85,7 @@ spring:
         format_sql: true
         implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
   cloud:
     stream:
       kafka:
