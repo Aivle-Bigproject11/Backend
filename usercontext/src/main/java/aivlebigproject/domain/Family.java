@@ -13,7 +13,7 @@ public class Family {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @Column(unique = true)
     private String loginId;
     private String loginPassword;
     private String name;

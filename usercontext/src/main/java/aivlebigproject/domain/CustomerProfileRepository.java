@@ -3,6 +3,7 @@ package aivlebigproject.domain;
 import aivlebigproject.domain.*;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import java.util.Optional;
 
 //<<< PoEAA / Repository
 @RepositoryRestResource(
@@ -10,4 +11,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
     path = "customerProfiles"
 )
 public interface CustomerProfileRepository
-    extends PagingAndSortingRepository<CustomerProfile, Long> {}
+    extends PagingAndSortingRepository<CustomerProfile, Long> {
+        Optional<CustomerProfile> findByLoginId(String loginId);
+    }

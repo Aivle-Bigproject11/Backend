@@ -21,6 +21,16 @@ public class FamilyController {
     @Autowired
     FamilyRepository familyRepository;
 
+    @Autowired
+    FamilyService familyService;
+
+
+    @GetMapping("/families/check-id")
+    public ResponseEntity<Boolean> checkDuplicateId(@RequestParam String loginId) {
+        boolean isDuplicate = familyService.isLoginIdDuplicate(loginId);
+        return ResponseEntity.ok(isDuplicate);
+    }
+
     @RequestMapping(
         value = "/families/{familyId}/approve", // 경로를 familyId를 받도록 변경
         method = RequestMethod.POST,

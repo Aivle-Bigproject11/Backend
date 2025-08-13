@@ -15,6 +15,8 @@ public class CustomerProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long customerId;
+    @Column(unique = true)
+    private String loginId; 
     private String name;
     private Integer age;
     private String phone;
