@@ -1,0 +1,64 @@
+# ============================================================================
+# 설정 및 상수
+# ============================================================================
+
+# 테스트 모드 설정 (True: 미리 만든 파일 사용, False: API 사용)
+TEST_MODE = True
+TEST_MUSIC_FILE = "test_music.wav"  # 테스트용 음악 파일명
+TEST_OUTRO_VIDEO = "runway_result.mp4"  # 테스트용 아웃트로 영상 파일명
+
+# 비디오 설정
+VIDEO_SIZE = (1280, 720)
+FONT_PATH = "../resources/fonts/ChosunNm.ttf"
+
+# GPT 시나리오 생성 프롬프트 (효과 제거됨)
+SCENARIO_PROMPT = """
+You are a poetic video director creating a 2 to 3-minute memorial tribute video.
+
+Input:
+- Keywords: {keywords}
+- Person name: {name}
+- Birth year: {birth}
+- Death year: {death}
+- Number of photos: {photo_count}
+
+**Goal**: The total number of scenes (including intro and outro) MUST be exactly {photo_count}, and the combined duration should be between **120 to 180 seconds**.
+
+Structure:
+1. Intro scene (5–7 sec): Show name, birth-death years, and a warm tribute line in Korean.
+2. Main scenes: Create exactly ({photo_count} - 2) scenes. Each scene corresponds to one photo:
+   - Write a 1–2 line emotional Korean subtitle (e.g., longing, warmth, gratitude)
+   - Set a suitable duration (typically 6–8 sec per photo)
+3. Outro scene (5–10 sec): Final farewell message. Optionally end with "사랑하는 가족 일동".
+
+Each scene should include:
+- scene_id (integer)
+- scene_type: "intro", "main", or "outro"
+- subtitle (in Korean)
+- duration (integer seconds)
+
+**Important**: 
+- Focus on heartfelt, emotional subtitles that honor the person's memory
+- Keep the tone respectful and loving
+- Make each subtitle unique and meaningful
+
+Ensure the final sum of durations is between **120 and 180 seconds**.
+Do not invent fictional details. Be heartfelt, poetic, and universally respectful.
+Output only the JSON array without any markdown formatting.
+"""
+
+# RunwayML 프롬프트
+RUNWAY_PROMPT = """
+Make the person in this photo subtly move in a natural and lifelike way. 
+They may blink, slightly smile, or breathe softly. 
+Do not move the camera or the background. 
+No stylization, no panning or zooming. 
+Focus only on subtle facial and body motion while keeping the original photo intact.
+"""
+
+SUNO_PROMPT = """
+Create a deeply emotional and touching instrumental soundtrack for a memorial tribute video.
+The music should reflect the themes of '{keywords}', evoking feelings of love, longing, and remembrance.
+Use soft piano, strings, and ambient textures. No vocals or lyrics.
+The piece should be slow-paced, calm, and respectful, perfect for honoring someone's memory
+"""
