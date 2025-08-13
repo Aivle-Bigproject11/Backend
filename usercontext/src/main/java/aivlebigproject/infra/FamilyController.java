@@ -4,13 +4,13 @@ import aivlebigproject.domain.*;
 import aivlebigproject.dto.FamilyLoginResponseDto;
 
 import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
 
 import java.util.NoSuchElementException;
 
@@ -74,5 +74,33 @@ public class FamilyController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
+
+
+    @GetMapping("/search-name")
+    public ResponseEntity<List<Family>> searchByName(@RequestParam String name) {
+        List<Family> families = familyService.searchByName(name);
+        return ResponseEntity.ok(families);
+    }
+
+    @GetMapping("/search-phone")
+    public ResponseEntity<List<Family>> searchByPhone(@RequestParam String phone) {
+        List<Family> families = familyService.searchByPhone(phone);
+        return ResponseEntity.ok(families);
+    }
+
+    @GetMapping("/search-loginId")
+    public ResponseEntity<Optional<Family>> searchByLoginId(@RequestParam String loginId) {
+        Optional<Family> family = familyService.searchByLoginId(loginId);
+        return ResponseEntity.ok(family);
+    }
+
+    @GetMapping("/search-email")
+    public ResponseEntity<Optional<Family>> searchByEmail(@RequestParam String email) {
+        Optional<Family> family = familyService.searchByEmail(email);
+        return ResponseEntity.ok(family);
+    }
+
+
+
 }
 //>>> Clean Arch / Inbound Adaptor

@@ -1,7 +1,9 @@
 package aivlebigproject.domain;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service; 
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FamilyService {
@@ -14,5 +16,21 @@ public class FamilyService {
     }
     public boolean isLoginIdDuplicate(String loginId) {
         return familyRepository.findByLoginId(loginId).isPresent();
+    }
+
+     public List<Family> searchByName(String name) {
+        return familyRepository.findByNameContaining(name);
+    }
+    
+    public List<Family> searchByPhone(String phone) {
+        return familyRepository.findByPhoneContaining(phone);
+    }
+
+    public Optional<Family> searchByLoginId(String loginId) {
+        return familyRepository.findByLoginId(loginId);
+    }
+
+    public Optional<Family> searchByEmail(String email) {
+        return familyRepository.findByEmail(email);
     }
 }

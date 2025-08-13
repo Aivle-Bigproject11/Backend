@@ -23,8 +23,6 @@ public class FamilyRegistered extends AbstractEvent {
     private Date updatedAt;
 
     public boolean validate() {
-        // 이벤트 유효성 검사 로직
-        // 예: memorialId가 null이 아닌지, loginId가 비어있지 않은지 등
         return this.memorialId != null && this.loginId != null;
     }
     public FamilyRegistered(Family aggregate) {
