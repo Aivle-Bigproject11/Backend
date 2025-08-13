@@ -15,4 +15,5 @@ public class DeathReportDocumentGenerated {
     private String deathReportFileUrl;
     private String deathReportStatus;
     private Date deathReportCreatedAt;
+    private Date reportRegistrationDate;
 }

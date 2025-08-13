@@ -93,10 +93,16 @@ public class DeathReport {
             deathReport.setDeathReportFileName(deathReportDocumentGenerated.getDeathReportFileName()); // [수정] FilePath -> FileName
             deathReport.setDeathReportFileUrl(deathReportDocumentGenerated.getDeathReportFileUrl());
             deathReport.setDeathReportStatus(deathReportDocumentGenerated.getDeathReportStatus());
-            
+            deathReport.setReportRegistrationDate(deathReportDocumentGenerated.getReportRegistrationDate());
+            deathReport.setDeathReportCreatedAt(deathReportDocumentGenerated.getDeathReportCreatedAt());
+
             // 3. 변경된 내용을 DB에 다시 저장합니다.
             repository().save(deathReport);
-
+            
+            // 4. [핵심] 데이터가 업데이트되었다는 'DeathReportDataUpdated' 이벤트를 발행(publish)합니다.
+            //    이 이벤트를 funeralcontext 서비스가 수신하여 데이터를 동기화하게 됩니다.
+            DeathReportDataUpdated deathReportDataUpdated = new DeathReportDataUpdated(deathReport);
+            deathReportDataUpdated.publishAfterCommit();
         });
     }
     //>>> Clean Arch / Port Method

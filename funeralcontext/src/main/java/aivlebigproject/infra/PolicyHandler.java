@@ -15,7 +15,6 @@ import java.util.Map;
 import org.springframework.messaging.handler.annotation.Headers;
 
 import javax.naming.NameParser;
-import javax.naming.NameParser;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
@@ -110,6 +109,24 @@ public class PolicyHandler {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    @StreamListener(
+        value = KafkaProcessor.INPUT,
+        condition = "headers['type']=='DeathReportDataUpdated'"
+    )
+    public void wheneverDeathReportDataUpdated_SyncDataOnDeathReportUpdated(
+        @Payload DeathReportDataUpdated deathReportDataUpdated
+    ) {
+        DeathReportDataUpdated event = deathReportDataUpdated;
+        System.out.println(
+            "\n\n##### listener SyncDataOnDeathReportUpdated : " +
+            deathReportDataUpdated +
+            "\n\n"
+        );
+
+        // Sample Logic //
+        FuneralInfo.syncDataOnDeathReportUpdated(event);
     }
     
     // --- Python -> Java 이벤트 처리 ---

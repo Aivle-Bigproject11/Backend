@@ -105,14 +105,13 @@ def create_death_report_document(event_data: DeathReportDataCreated, blob_servic
         }
         
         # 날짜/시간 데이터 처리
-        if event_data.reportRegistrationDate:
-            dt_obj = event_data.reportRegistrationDate
-            if isinstance(dt_obj, str):
-                dt_obj = datetime.fromisoformat(dt_obj.replace('Z', ''))
-            data_to_fill["declaration_year"] = dt_obj.strftime("%Y")
-            data_to_fill["declaration_month"] = dt_obj.strftime("%m")
-            data_to_fill["declaration_day"] = dt_obj.strftime("%d")
-
+        # --- 1. 신고일(reportRegistrationDate)은 현재 시간으로 타임스탬프를 찍습니다. ---
+        report_time = datetime.now(timezone.utc)
+        data_to_fill["declaration_year"] = report_time.strftime("%Y")
+        data_to_fill["declaration_month"] = report_time.strftime("%m")
+        data_to_fill["declaration_day"] = report_time.strftime("%d")
+        
+        # --- 2. 사망일시(deceasedDate)는 기존과 동일하게 이벤트 데이터를 사용합니다. ---
         if event_data.deceasedDate:
             dt_obj = event_data.deceasedDate
             if isinstance(dt_obj, str):
@@ -191,7 +190,8 @@ def create_death_report_document(event_data: DeathReportDataCreated, blob_servic
             # 3. 성공 시, 파일 이름과 URL을 담은 딕셔너리 반환
             return {
                 "fileName": blob_name,
-                "fileUrl": file_url
+                "fileUrl": file_url,
+                "reportRegistrationDate": report_time.isoformat() # ISO 형식으로 반환
             }
         else:
             return None

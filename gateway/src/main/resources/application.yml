@@ -21,7 +21,7 @@ spring:
         - id: funeralcontext
           uri: http://localhost:8083
           predicates:
-            - Path=/funeralInfos/**, /obituaries/**, /deathReports/**, /schedules/**, /customerReadmodels/**
+            - Path=/funeralInfos/**, /obituaries/**, /deathReports/**, /schedules/**, /customerReadModels/**
         - id: usercontext
           uri: http://localhost:8084
           predicates:
@@ -69,7 +69,7 @@ spring:
         - id: funeralcontext
           uri: http://funeralcontext:8080
           predicates:
-            - Path=/funeralInfos/**, /obituaries/**, /deathReports/**, /schedules/**, /customerReadmodels/**
+            - Path=/funeralInfos/**, /obituaries/**, /deathReports/**, /schedules/**, /customerReadModels/**
         - id: usercontext
           uri: http://usercontext:8080
           predicates:

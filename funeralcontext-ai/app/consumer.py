@@ -4,7 +4,9 @@
 # ========================================
 
 import json
-from kafka import KafkaConsumer, KafkaProducer
+import asyncio # [추가] 비동기 처리를 위한 asyncio 라이브러리
+# [수정] 동기 라이브러리 대신 비동기 AIOKafka 라이브러리를 import 합니다.
+from aiokafka import AIOKafkaConsumer, AIOKafkaProducer
 from datetime import datetime, timezone
 from pathlib import Path
 from app.schemas import ObituaryDataCreated, DeathReportDataCreated, ScheduleDataCreated
@@ -36,115 +38,127 @@ except Exception as e:
 KAFKA_BROKER_URL = "my-kafka:9092"
 TOPIC_NAME = "aivlebigproject"
 
-consumer = KafkaConsumer(
-    TOPIC_NAME,
-    bootstrap_servers=KAFKA_BROKER_URL,
-    group_id="test-ai-group",
-    value_deserializer=lambda m: json.loads(m.decode("utf-8")),
-    auto_offset_reset="earliest"
-)
-
-producer = KafkaProducer(
-    bootstrap_servers=KAFKA_BROKER_URL,
-    value_serializer=lambda m: json.dumps(m).encode("utf-8")
-)
-
-def start_consumer():
+# [수정] start_consumer 함수를 비동기(async) 함수로 변경합니다.
+async def start_consumer():
     """
-    Kafka Consumer를 시작하고 수신된 이벤트에 따라 각 서비스 모듈에 문서 생성을 위임한 뒤,
-    그 결과를 받아 다시 이벤트를 발행합니다.
+    AIOKafka Consumer를 비동기적으로 시작하고 메시지를 처리합니다.
     """
-    print("📡 Kafka Consumer 시작", flush=True)
+    print("📡 비동기 Kafka Consumer 시작", flush=True)
 
-    for message in consumer:
-        event_type = message.value.get("eventType")
-        print(f"\n📥 수신 이벤트: {event_type}", flush=True)
-        
-        if not blob_service_client:
-            print("❌ Azure 클라이언트가 연결되지 않아 파일 처리를 건너뜁니다.")
-            continue
+    # [수정] AIOKafkaConsumer와 AIOKafkaProducer를 초기화합니다.
+    consumer = AIOKafkaConsumer(
+        TOPIC_NAME,
+        bootstrap_servers=KAFKA_BROKER_URL,
+        group_id="test-ai-group-async",
+        auto_offset_reset="latest", # latest로 변경하여 재시작 시 과거 메시지를 읽지 않도록 합니다.
+        value_deserializer=lambda m: json.loads(m.decode("utf-8"))
+    )
+    producer = AIOKafkaProducer(bootstrap_servers=KAFKA_BROKER_URL)
 
-        try:
-            # 1. 부고 이미지 생성 이벤트 처리
-            if event_type == "ObituaryDataCreated":
-                event_data = ObituaryDataCreated(**message.value)
-                doc_id = event_data.obituaryId
-                print(f"  -> 부고 이미지 생성 작업 시작 (ID: {doc_id})")
-                
-                # [수정] obituary.py에 모든 작업을 위임하고 결과(dict)만 받습니다.
-                result = create_obituary_document(event_data, blob_service_client, AZURE_CONTAINER_NAME)
+    # [추가] 비동기적으로 Kafka 클라이언트를 시작합니다.
+    await consumer.start()
+    await producer.start()
 
-                if result:
-                    generated_event = {
-                        "eventType": "ObituaryDocumentGenerated",
-                        "obituaryId": doc_id,
-                        "funeralInfoId": event_data.funeralInfoId,
-                        "obituaryFileName": result["fileName"],
-                        "obituaryFileUrl": result["fileUrl"],
-                        "funeralHomeAddressUrl": result.get("funeralHomeAddressUrl"),
-                        "obituaryStatus": "COMPLETED",
-                        "obituaryCreatedAt": datetime.now(timezone.utc).isoformat()
-                    }
-                    producer.send(TOPIC_NAME, value=generated_event, headers=[("type", b"ObituaryDocumentGenerated")])
-                    producer.flush()
-                    print(f"  📤 'ObituaryDocumentGenerated' 이벤트 전송 완료")
-                else:
-                    print(f"❌ 부고 이미지 생성/업로드 실패", flush=True)
+    try:
+        # [수정] 'for message in consumer:' 대신 'async for message in consumer:'를 사용합니다.
+        async for message in consumer:
+            event_type = message.value.get("eventType")
+            print(f"\n📥 수신 이벤트: {event_type}", flush=True)
+            
+            if not blob_service_client:
+                print("❌ Azure 클라이언트가 연결되지 않아 파일 처리를 건너뜁니다.")
+                continue
 
-            # 2. 사망진단서 PDF 생성 이벤트 처리
-            elif event_type == "DeathReportDataCreated":
-                event_data = DeathReportDataCreated(**message.value)
-                doc_id = event_data.deathReportId
-                print(f"  -> 사망진단서 PDF 생성 작업 시작 (ID: {doc_id})")
+            try:
+                # [핵심] 이미지/PDF 생성은 CPU를 많이 사용하는 동기 작업이므로,
+                # 비동기 이벤트 루프를 막지 않도록 별도의 스레드에서 실행합니다.
+                loop = asyncio.get_running_loop()
+                result = None
 
-                # [수정] deathreport.py에 모든 작업을 위임하고 결과(dict)만 받습니다.
-                result = create_death_report_document(event_data, blob_service_client, AZURE_CONTAINER_NAME)
-                
-                if result:
-                    generated_event = {
-                        "eventType": "DeathReportDocumentGenerated",
-                        "deathReportId": doc_id,
-                        "funeralInfoId": event_data.funeralInfoId,
-                        "deathReportFileName": result["fileName"],
-                        "deathReportFileUrl": result["fileUrl"],
-                        "deathReportStatus": "COMPLETED",
-                        "deathReportCreatedAt": datetime.now(timezone.utc).isoformat()
-                    }
-                    producer.send(TOPIC_NAME, value=generated_event, headers=[("type", b"DeathReportDocumentGenerated")])
-                    producer.flush()
-                    print(f"  📤 'DeathReportDocumentGenerated' 이벤트 전송 완료")
-                else:
-                    print(f"❌ 사망진단서 PDF 생성/업로드 실패", flush=True)
+                # 1. 부고 이미지 생성 이벤트 처리
+                if event_type == "ObituaryDataCreated":
+                    event_data = ObituaryDataCreated(**message.value)
+                    doc_id = event_data.obituaryId
+                    print(f"  -> 부고 이미지 생성 작업 시작 (ID: {doc_id})")
+                    
+                    result = await loop.run_in_executor(
+                        None, create_obituary_document, event_data, blob_service_client, AZURE_CONTAINER_NAME
+                    )
 
-            # 3. 장례일정표 이미지 생성 이벤트 처리
-            elif event_type == "ScheduleDataCreated":
-                event_data = ScheduleDataCreated(**message.value)
-                doc_id = event_data.scheduleId
-                print(f"  -> 장례일정표 이미지 생성 작업 시작 (ID: {doc_id})")
+                    if result:
+                        generated_event = {
+                            "eventType": "ObituaryDocumentGenerated",
+                            "obituaryId": doc_id,
+                            "funeralInfoId": event_data.funeralInfoId,
+                            "obituaryFileName": result["fileName"],
+                            "obituaryFileUrl": result["fileUrl"],
+                            "funeralHomeAddressUrl": result.get("funeralHomeAddressUrl"),
+                            "obituaryStatus": "COMPLETED",
+                            "obituaryCreatedAt": datetime.now(timezone.utc).isoformat()
+                        }
+                        # [수정] producer.send().flush() 대신 await producer.send_and_wait()를 사용합니다.
+                        await producer.send_and_wait(TOPIC_NAME, json.dumps(generated_event).encode("utf-8"), headers=[("type", b"ObituaryDocumentGenerated")])
+                        print(f"  📤 'ObituaryDocumentGenerated' 이벤트 전송 완료")
+                    else:
+                        print(f"❌ 부고 이미지 생성/업로드 실패", flush=True)
 
-                # [수정] schedule.py에 모든 작업을 위임하고 결과(dict)만 받습니다.
-                result = create_schedule_document(event_data, blob_service_client, AZURE_CONTAINER_NAME)
+                # 2. 사망진단서 PDF 생성 이벤트 처리 (부고장과 동일한 패턴으로 수정)
+                elif event_type == "DeathReportDataCreated":
+                    event_data = DeathReportDataCreated(**message.value)
+                    doc_id = event_data.deathReportId
+                    print(f"  -> 사망진단서 PDF 생성 작업 시작 (ID: {doc_id})")
+                    
+                    result = await loop.run_in_executor(
+                        None, create_death_report_document, event_data, blob_service_client, AZURE_CONTAINER_NAME
+                    )
+                    
+                    if result:
+                        generated_event = {
+                            "eventType": "DeathReportDocumentGenerated",
+                            "deathReportId": doc_id,
+                            "funeralInfoId": event_data.funeralInfoId,
+                            "deathReportFileName": result["fileName"],
+                            "deathReportFileUrl": result["fileUrl"],
+                            "deathReportStatus": "COMPLETED",
+                            "reportRegistrationDate": result.get("reportRegistrationDate"),
+                            "deathReportCreatedAt": datetime.now(timezone.utc).isoformat()
+                        }
+                        await producer.send_and_wait(TOPIC_NAME, json.dumps(generated_event).encode("utf-8"), headers=[("type", b"DeathReportDocumentGenerated")])
+                        print(f"  📤 'DeathReportDocumentGenerated' 이벤트 전송 완료")
+                    else:
+                        print(f"❌ 사망진단서 PDF 생성/업로드 실패", flush=True)
 
-                if result:
-                    generated_event = {
-                        "eventType": "ScheduleDocumentGenerated",
-                        "scheduleId": doc_id,
-                        "funeralInfoId": event_data.funeralInfoId,
-                        "scheduleDallePrompt": result["scheduleDallePrompt"],
-                        "scheduleDalleTemplateImageUrl": result["scheduleDalleTemplateImageUrl"],
-                        "scheduleFileName": result["scheduleFileName"],
-                        "scheduleFileUrl": result["scheduleFileUrl"],
-                        "scheduleStatus": "COMPLETED",
-                        "scheduleCreatedAt": datetime.now(timezone.utc).isoformat()
-                    }
-                    producer.send(TOPIC_NAME, value=generated_event, headers=[("type", b"ScheduleDocumentGenerated")])
-                    producer.flush()
-                    print(f"  📤 'ScheduleDocumentGenerated' 이벤트 전송 완료")
-                else:
-                    print(f"❌ 장례일정표 이미지 생성/업로드 실패", flush=True)
-        
-        except Exception as e:
-            print(f"❌ 이벤트 처리 중 최상위 오류 발생: {e}", flush=True)
+                # 3. 장례일정표 이미지 생성 이벤트 처리 (부고장과 동일한 패턴으로 수정)
+                elif event_type == "ScheduleDataCreated":
+                    event_data = ScheduleDataCreated(**message.value)
+                    doc_id = event_data.scheduleId
+                    print(f"  -> 장례일정표 이미지 생성 작업 시작 (ID: {doc_id})")
+                    
+                    result = await loop.run_in_executor(
+                        None, create_schedule_document, event_data, blob_service_client, AZURE_CONTAINER_NAME
+                    )
 
-if __name__ == "__main__":
-    start_consumer()
+                    if result:
+                        generated_event = {
+                            "eventType": "ScheduleDocumentGenerated",
+                            "scheduleId": doc_id,
+                            "funeralInfoId": event_data.funeralInfoId,
+                            "scheduleDallePrompt": result["scheduleDallePrompt"],
+                            "scheduleDalleTemplateImageUrl": result["scheduleDalleTemplateImageUrl"],
+                            "scheduleFileName": result["scheduleFileName"],
+                            "scheduleFileUrl": result["scheduleFileUrl"],
+                            "scheduleStatus": "COMPLETED",
+                            "scheduleCreatedAt": datetime.now(timezone.utc).isoformat()
+                        }
+                        await producer.send_and_wait(TOPIC_NAME, json.dumps(generated_event).encode("utf-8"), headers=[("type", b"ScheduleDocumentGenerated")])
+                        print(f"  📤 'ScheduleDocumentGenerated' 이벤트 전송 완료")
+                    else:
+                        print(f"❌ 장례일정표 이미지 생성/업로드 실패", flush=True)
+            
+            except Exception as e:
+                print(f"❌ 이벤트 처리 중 최상위 오류 발생: {e}", flush=True)
+    finally:
+        # [추가] 서비스 종료 시 Kafka 클라이언트를 안전하게 중지합니다.
+        await consumer.stop()
+        await producer.stop()
+        print("📡 비동기 Kafka Consumer 종료", flush=True)
