@@ -4,11 +4,6 @@ server:
 spring:
   application:
     name: memorialcontext
-  datasource:
-    url: ${AWS_RDS_URL}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${AWS_USERNAME}
-    password: ${AWS_PASSWORD}
   servlet:
     multipart:
       max-file-size: 10MB
