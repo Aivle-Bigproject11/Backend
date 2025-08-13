@@ -103,6 +103,33 @@ public class FuneralInfo {
         funeralInfoUpdated.publishAfterCommit();
     }
 
+    //<<< Clean Arch / Port Method
+    public static void syncDataOnDeathReportUpdated(
+        DeathReportDataUpdated deathReportDataUpdated
+    ) {
+        // [수정] 아래에 실제 데이터 동기화 로직을 구현합니다.
+
+        // 1. 이벤트에서 funeralInfoId를 가져옵니다.
+        Long targetFuneralInfoId = deathReportDataUpdated.getFuneralInfoId();
+
+        // 2. 해당 funeralInfoId를 가진 FuneralInfo 데이터를 DB에서 찾습니다.
+        //    (FuneralInfoRepository에 findById 메소드는 기본적으로 제공됩니다.)
+        repository().findById(targetFuneralInfoId).ifPresent(funeralInfo->{
+            
+            // 3. 찾은 FuneralInfo 데이터에, 이벤트로 받은 reportRegistrationDate 값을 업데이트합니다.
+            funeralInfo.setReportRegistrationDate(deathReportDataUpdated.getReportRegistrationDate());
+            
+            // 4. 변경된 내용을 DB에 다시 저장합니다.
+            repository().save(funeralInfo);
+
+            System.out.println(
+                "✅ DeathReportDataUpdated 이벤트 수신 -> FuneralInfo 동기화 완료 (ID: " +
+                funeralInfo.getFuneralInfoId() + ")"
+            );
+        });
+    }
+    //>>> Clean Arch / Port Method
+
     // [주석] 이 메서드는 이제 ObituaryController에서 직접 로직을 처리하므로 사용되지 않습니다.
     public void createObituary() {
         // No operation

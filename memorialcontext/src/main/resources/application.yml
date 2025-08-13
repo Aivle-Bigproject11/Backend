@@ -1,26 +1,19 @@
-# ========================================
-# FILENAME: aivlebigproject/memorialcontext/src/main/resoureces/application.yml
-# 역할 : 
-# ========================================
-
 server:
   port: 8080
 
 spring:
   application:
     name: memorialcontext
----
-
-spring:
-  profiles: default
-  jpa:
-    properties:
-      hibernate:
-        show_sql: true
-        format_sql: true
-        implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+  datasource:
+    url: ${AWS_RDS_URL}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${AWS_USERNAME}
+    password: ${AWS_PASSWORD}
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 15MB
   cloud:
-    # [추가] Azure Blob Storage 설정 (로컬)
     azure:
       storage:
         blob:
@@ -28,6 +21,28 @@ spring:
           account-key: ${AZURE_STORAGE_ACCOUNT_KEY}
           endpoint: ${AZURE_STORAGE_ENDPOINT:https://${AZURE_STORAGE_ACCOUNT_NAME}.blob.core.windows.net}
           container-name: ${AZURE_STORAGE_CONTAINER:memorial-files}
+
+openai:
+  api:
+    key: ${OPENAI_API_KEY:}
+    url: ${OPENAI_API_URL:https://api.openai.com/v1/chat/completions}
+  model: ${OPENAI_MODEL:gpt-4o-mini}
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: default
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+    hibernate:
+      ddl-auto: create
+  cloud:
     stream:
       kafka:
         binder:
@@ -62,31 +77,21 @@ logging:
 server:
   port: 8085
 
-# [추가] OpenAI 설정 (로컬)
-openai:
-  api:
-    key: ${OPENAI_API_KEY:}
-    url: ${OPENAI_API_URL:https://api.openai.com/v1/chat/completions}
-    model: ${OPENAI_MODEL:gpt-4o-mini}
 ---
 
 spring:
-  profiles: docker
+  config:
+    activate:
+      on-profile: docker
   jpa:
     properties:
       hibernate:
         show_sql: true
         format_sql: true
         implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
+    hibernate:
+      ddl-auto: validate
   cloud:
-    # [추가] Azure Blob Storage 설정 (Docker)
-    azure:
-      storage:
-        blob:
-          account-name: ${AZURE_STORAGE_ACCOUNT_NAME}
-          account-key: ${AZURE_STORAGE_ACCOUNT_KEY}
-          endpoint: ${AZURE_STORAGE_ENDPOINT:https://${AZURE_STORAGE_ACCOUNT_NAME}.blob.core.windows.net}
-          container-name: ${AZURE_STORAGE_CONTAINER:memorial-files}
     stream:
       kafka:
         binder:
@@ -107,10 +112,3 @@ spring:
         event-out:
           destination: aivlebigproject
           contentType: application/json
-        
-# [추가] OpenAI 설정 (Docker)
-openai:
-  api:
-    key: ${OPENAI_API_KEY:}
-    url: ${OPENAI_API_URL:https://api.openai.com/v1/chat/completions}
-    model: ${OPENAI_MODEL:gpt-4o-mini}

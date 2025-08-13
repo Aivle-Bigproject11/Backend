@@ -11,6 +11,7 @@ from PIL import Image, ImageDraw, ImageFont
 from datetime import datetime, timezone
 import qrcode
 import urllib.parse
+import img2pdf # [추가] PNG를 PDF로 변환하기 위한 라이브러리
 from app.schemas import ObituaryDataCreated
 from .azure_uploader import upload_to_blob # [주석] Azure 업로드 함수를 import 합니다.
 
@@ -202,16 +203,23 @@ def create_obituary_document(event_data: ObituaryDataCreated, blob_service_clien
                 fill=text_color, 
                 anchor="mt"
             )
-        # 5. 완성된 이미지를 메모리상의 바이트 데이터로 변환
+        # --- [수정 시작] PNG 생성 후 PDF로 변환하여 업로드 ---
+
+        # 6-1. 완성된 이미지를 PNG 형식의 바이트 데이터로 변환 (메모리 사용)
         img_byte_arr = io.BytesIO()
         image.save(img_byte_arr, format='PNG')
-        file_data = img_byte_arr.getvalue()
+        png_bytes = img_byte_arr.getvalue()
         
-        # 6. Azure에 업로드
+        # 6-2. [추가] PNG 바이트 데이터를 PDF 바이트 데이터로 변환
+        pdf_bytes = img2pdf.convert(png_bytes)
+
+        # 6-3. [수정] Azure에 PDF 데이터를 업로드
         doc_id = event_data.obituaryId
         time_stamp = datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')
-        blob_name = f"obituaries/obituary_{doc_id}_{time_stamp}.png"
-        file_url = upload_to_blob(blob_service_client, container_name, blob_name, file_data)
+        # [수정] 파일 확장자를 .pdf로 변경
+        blob_name = f"obituaries/obituary_{doc_id}_{time_stamp}.pdf"
+        # [수정] 업로드할 데이터를 png_bytes 대신 pdf_bytes로 변경
+        file_url = upload_to_blob(blob_service_client, container_name, blob_name, pdf_bytes)
 
         if file_url:
             # 7. 성공 시, 파일 이름과 URL을 담은 딕셔너리 반환

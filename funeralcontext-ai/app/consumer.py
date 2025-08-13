@@ -120,6 +120,7 @@ async def start_consumer():
                             "deathReportFileName": result["fileName"],
                             "deathReportFileUrl": result["fileUrl"],
                             "deathReportStatus": "COMPLETED",
+                            "reportRegistrationDate": result.get("reportRegistrationDate"),
                             "deathReportCreatedAt": datetime.now(timezone.utc).isoformat()
                         }
                         await producer.send_and_wait(TOPIC_NAME, json.dumps(generated_event).encode("utf-8"), headers=[("type", b"DeathReportDocumentGenerated")])
