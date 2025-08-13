@@ -4,8 +4,6 @@ import aivlebigproject.domain.dto.ParsedResult;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
@@ -18,27 +16,21 @@ import java.util.Map;
 @Component
 public class GptClient {
 
-    // [수정] application.yml을 통해 주입받을 API 키를 저장할 멤버 변수입니다.
-    // 기존의 static final String API_KEY 라인은 삭제했습니다.
-    @Value("${openai.api.key}")
-    private String openaiApiKey;
-
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
-    // [수정] Spring Component에서는 static이 아닌 멤버 변수로 선언하는 것이 일반적입니다.
-    private final HttpClient httpClient = HttpClient.newHttpClient();
-    private final ObjectMapper mapper = new ObjectMapper();
+    private static final String API_KEY = "...";  // 보안 주의
+    private static final HttpClient httpClient = HttpClient.newHttpClient();
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     public String callChatGpt(List<Map<String, String>> messages) throws Exception {
         String requestBody = mapper.writeValueAsString(Map.of(
-                "model", "gpt-4.1-mini", // 모델명을 gpt-4.1-mini에서 최신 모델로 변경했습니다.
+                "model", "gpt-4.1-mini",
                 "messages", messages,
                 "temperature", 0.5
         ));
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL))
-                // [핵심] 하드코딩된 API_KEY 대신, @Value로 주입받은 this.openaiApiKey를 사용합니다.
-                .header("Authorization", "Bearer " + this.openaiApiKey)
+                .header("Authorization", "Bearer " + API_KEY)
                 .header("Content-Type", "application/json")
                 .timeout(Duration.ofSeconds(30))
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
