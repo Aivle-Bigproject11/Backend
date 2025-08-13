@@ -17,6 +17,7 @@ public class CustomerUpdated extends AbstractEvent {
     private Integer age;
     private String job;
     private String address;
+    private String email;
     private String gender;
     private Boolean hasChildren;
     private Boolean isMarried;

@@ -17,6 +17,7 @@ public class CustomerRegistered extends AbstractEvent {
     private String phone;
     private List<String> diseaseList;
     private Integer age;
+    
     private String job;
     private String address;
     private String gender;

@@ -20,6 +20,7 @@ public class CustomerProfile {
     private String name;
     private Integer age;
     private String phone;
+    private String email;
     private String job;
     private String address;
     private String gender;

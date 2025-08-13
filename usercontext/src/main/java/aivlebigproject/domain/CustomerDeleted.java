@@ -8,11 +8,11 @@ import lombok.ToString;
 @ToString
 public class CustomerDeleted extends AbstractEvent {
 
-    private Long customerId;
+    private String loginId;
 
     public CustomerDeleted(CustomerProfile aggregate) {
         super(aggregate);
-        this.customerId = aggregate.getCustomerId();
+        this.loginId = aggregate.getLoginId();
     }
 
     public CustomerDeleted() {
