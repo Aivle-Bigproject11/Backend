@@ -1,0 +1,3434 @@
+[
+  {
+    "date": "2024-01",
+    "regionName": "강원도",
+    "predictedDeaths": 1229,
+    "growthRate": -4.8,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-01",
+    "regionName": "경기도",
+    "predictedDeaths": 6602,
+    "growthRate": -4.1,
+    "staff": 99,
+    "staffChange": 15
+  },
+  {
+    "date": "2024-01",
+    "regionName": "경상남도",
+    "predictedDeaths": 2444,
+    "growthRate": -4.2,
+    "staff": 33,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-01",
+    "regionName": "경상북도",
+    "predictedDeaths": 2340,
+    "growthRate": 0.8,
+    "staff": 32,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-01",
+    "regionName": "광주광역시",
+    "predictedDeaths": 752,
+    "growthRate": -4.0,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-01",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1457,
+    "growthRate": -4.6,
+    "staff": 17,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-01",
+    "regionName": "대전광역시",
+    "predictedDeaths": 786,
+    "growthRate": -7.1,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-01",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2336,
+    "growthRate": -3.3,
+    "staff": 27,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-01",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4626,
+    "growthRate": -2.3,
+    "staff": 54,
+    "staffChange": -5
+  },
+  {
+    "date": "2024-01",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 152,
+    "growthRate": -8.3,
+    "staff": 2,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-01",
+    "regionName": "울산광역시",
+    "predictedDeaths": 524,
+    "growthRate": -5.6,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-01",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1616,
+    "growthRate": -5.0,
+    "staff": 18,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-01",
+    "regionName": "전국",
+    "predictedDeaths": 31855,
+    "growthRate": -2.5,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2024-01",
+    "regionName": "전라남도",
+    "predictedDeaths": 1748,
+    "growthRate": -3.6,
+    "staff": 24,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-01",
+    "regionName": "전라북도",
+    "predictedDeaths": 1527,
+    "growthRate": -4.5,
+    "staff": 20,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-01",
+    "regionName": "제주도",
+    "predictedDeaths": 383,
+    "growthRate": -13.1,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-01",
+    "regionName": "충청남도",
+    "predictedDeaths": 1639,
+    "growthRate": -6.9,
+    "staff": 20,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-01",
+    "regionName": "충청북도",
+    "predictedDeaths": 1221,
+    "growthRate": -4.0,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-02",
+    "regionName": "강원도",
+    "predictedDeaths": 1157,
+    "growthRate": 1.7,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-02",
+    "regionName": "경기도",
+    "predictedDeaths": 6315,
+    "growthRate": 8.5,
+    "staff": 104,
+    "staffChange": 18
+  },
+  {
+    "date": "2024-02",
+    "regionName": "경상남도",
+    "predictedDeaths": 2130,
+    "growthRate": 0.5,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2024-02",
+    "regionName": "경상북도",
+    "predictedDeaths": 2057,
+    "growthRate": 6.8,
+    "staff": 30,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-02",
+    "regionName": "광주광역시",
+    "predictedDeaths": 695,
+    "growthRate": 5.5,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-02",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1334,
+    "growthRate": 5.5,
+    "staff": 16,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-02",
+    "regionName": "대전광역시",
+    "predictedDeaths": 704,
+    "growthRate": 8.6,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-02",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2342,
+    "growthRate": 19.3,
+    "staff": 29,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-02",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4537,
+    "growthRate": 13.2,
+    "staff": 56,
+    "staffChange": -5
+  },
+  {
+    "date": "2024-02",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 127,
+    "growthRate": 14.1,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-02",
+    "regionName": "울산광역시",
+    "predictedDeaths": 491,
+    "growthRate": 4.2,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-02",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1481,
+    "growthRate": 5.2,
+    "staff": 17,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-02",
+    "regionName": "전국",
+    "predictedDeaths": 31164,
+    "growthRate": 13.9,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2024-02",
+    "regionName": "전라남도",
+    "predictedDeaths": 1665,
+    "growthRate": 3.8,
+    "staff": 24,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-02",
+    "regionName": "전라북도",
+    "predictedDeaths": 1444,
+    "growthRate": 3.4,
+    "staff": 20,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-02",
+    "regionName": "제주도",
+    "predictedDeaths": 384,
+    "growthRate": 6.8,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-02",
+    "regionName": "충청남도",
+    "predictedDeaths": 1499,
+    "growthRate": 5.0,
+    "staff": 19,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-02",
+    "regionName": "충청북도",
+    "predictedDeaths": 1197,
+    "growthRate": 16.4,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-03",
+    "regionName": "강원도",
+    "predictedDeaths": 1245,
+    "growthRate": 9.5,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-03",
+    "regionName": "경기도",
+    "predictedDeaths": 6270,
+    "growthRate": 3.4,
+    "staff": 99,
+    "staffChange": 18
+  },
+  {
+    "date": "2024-03",
+    "regionName": "경상남도",
+    "predictedDeaths": 2593,
+    "growthRate": 15.1,
+    "staff": 35,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-03",
+    "regionName": "경상북도",
+    "predictedDeaths": 2641,
+    "growthRate": 23.9,
+    "staff": 36,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-03",
+    "regionName": "광주광역시",
+    "predictedDeaths": 823,
+    "growthRate": 11.2,
+    "staff": 9,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-03",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1491,
+    "growthRate": 10.3,
+    "staff": 17,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-03",
+    "regionName": "대전광역시",
+    "predictedDeaths": 769,
+    "growthRate": 9.4,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-03",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2192,
+    "growthRate": 0.8,
+    "staff": 26,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-03",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4221,
+    "growthRate": 1.4,
+    "staff": 50,
+    "staffChange": -4
+  },
+  {
+    "date": "2024-03",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 134,
+    "growthRate": 1.4,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-03",
+    "regionName": "울산광역시",
+    "predictedDeaths": 514,
+    "growthRate": 4.1,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-03",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1654,
+    "growthRate": 14.0,
+    "staff": 18,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-03",
+    "regionName": "전국",
+    "predictedDeaths": 33282,
+    "growthRate": 15.0,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2024-03",
+    "regionName": "전라남도",
+    "predictedDeaths": 1705,
+    "growthRate": 0.8,
+    "staff": 24,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-03",
+    "regionName": "전라북도",
+    "predictedDeaths": 1425,
+    "growthRate": 1.9,
+    "staff": 18,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-03",
+    "regionName": "제주도",
+    "predictedDeaths": 402,
+    "growthRate": 8.8,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-03",
+    "regionName": "충청남도",
+    "predictedDeaths": 1739,
+    "growthRate": 13.6,
+    "staff": 21,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-03",
+    "regionName": "충청북도",
+    "predictedDeaths": 1244,
+    "growthRate": 7.4,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-04",
+    "regionName": "강원도",
+    "predictedDeaths": 1193,
+    "growthRate": 8.2,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-04",
+    "regionName": "경기도",
+    "predictedDeaths": 6976,
+    "growthRate": 17.0,
+    "staff": 108,
+    "staffChange": 17
+  },
+  {
+    "date": "2024-04",
+    "regionName": "경상남도",
+    "predictedDeaths": 2204,
+    "growthRate": 7.8,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2024-04",
+    "regionName": "경상북도",
+    "predictedDeaths": 2205,
+    "growthRate": 10.1,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2024-04",
+    "regionName": "광주광역시",
+    "predictedDeaths": 730,
+    "growthRate": 8.1,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-04",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1326,
+    "growthRate": 7.6,
+    "staff": 16,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-04",
+    "regionName": "대전광역시",
+    "predictedDeaths": 741,
+    "growthRate": 4.3,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-04",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2152,
+    "growthRate": 7.9,
+    "staff": 25,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-04",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4232,
+    "growthRate": 6.9,
+    "staff": 51,
+    "staffChange": -4
+  },
+  {
+    "date": "2024-04",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 127,
+    "growthRate": 7.4,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-04",
+    "regionName": "울산광역시",
+    "predictedDeaths": 507,
+    "growthRate": 1.3,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-04",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1651,
+    "growthRate": 11.8,
+    "staff": 19,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-04",
+    "regionName": "전국",
+    "predictedDeaths": 30166,
+    "growthRate": 9.5,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2024-04",
+    "regionName": "전라남도",
+    "predictedDeaths": 1850,
+    "growthRate": 20.8,
+    "staff": 26,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-04",
+    "regionName": "전라북도",
+    "predictedDeaths": 1634,
+    "growthRate": 19.4,
+    "staff": 21,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-04",
+    "regionName": "제주도",
+    "predictedDeaths": 381,
+    "growthRate": 6.8,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-04",
+    "regionName": "충청남도",
+    "predictedDeaths": 1605,
+    "growthRate": 8.7,
+    "staff": 20,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-04",
+    "regionName": "충청북도",
+    "predictedDeaths": 1120,
+    "growthRate": 9.2,
+    "staff": 13,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-05",
+    "regionName": "강원도",
+    "predictedDeaths": 1155,
+    "growthRate": -0.1,
+    "staff": 15,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-05",
+    "regionName": "경기도",
+    "predictedDeaths": 6243,
+    "growthRate": 1.4,
+    "staff": 103,
+    "staffChange": 17
+  },
+  {
+    "date": "2024-05",
+    "regionName": "경상남도",
+    "predictedDeaths": 2104,
+    "growthRate": -0.7,
+    "staff": 31,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-05",
+    "regionName": "경상북도",
+    "predictedDeaths": 2078,
+    "growthRate": 1.7,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2024-05",
+    "regionName": "광주광역시",
+    "predictedDeaths": 741,
+    "growthRate": -2.1,
+    "staff": 9,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-05",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1322,
+    "growthRate": -2.3,
+    "staff": 17,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-05",
+    "regionName": "대전광역시",
+    "predictedDeaths": 696,
+    "growthRate": -1.2,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-05",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2120,
+    "growthRate": 1.0,
+    "staff": 27,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-05",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4258,
+    "growthRate": -1.4,
+    "staff": 54,
+    "staffChange": -5
+  },
+  {
+    "date": "2024-05",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 120,
+    "growthRate": -0.7,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-05",
+    "regionName": "울산광역시",
+    "predictedDeaths": 476,
+    "growthRate": 3.2,
+    "staff": 5,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-05",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1512,
+    "growthRate": -1.1,
+    "staff": 18,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-05",
+    "regionName": "전국",
+    "predictedDeaths": 27859,
+    "growthRate": -3.5,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2024-05",
+    "regionName": "전라남도",
+    "predictedDeaths": 1664,
+    "growthRate": 5.0,
+    "staff": 25,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-05",
+    "regionName": "전라북도",
+    "predictedDeaths": 1427,
+    "growthRate": 1.7,
+    "staff": 20,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-05",
+    "regionName": "제주도",
+    "predictedDeaths": 371,
+    "growthRate": -5.3,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-05",
+    "regionName": "충청남도",
+    "predictedDeaths": 1484,
+    "growthRate": -5.7,
+    "staff": 19,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-05",
+    "regionName": "충청북도",
+    "predictedDeaths": 1099,
+    "growthRate": -0.8,
+    "staff": 14,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-06",
+    "regionName": "강원도",
+    "predictedDeaths": 1093,
+    "growthRate": 0.7,
+    "staff": 15,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-06",
+    "regionName": "경기도",
+    "predictedDeaths": 5708,
+    "growthRate": 0.5,
+    "staff": 101,
+    "staffChange": 16
+  },
+  {
+    "date": "2024-06",
+    "regionName": "경상남도",
+    "predictedDeaths": 1950,
+    "growthRate": 1.7,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2024-06",
+    "regionName": "경상북도",
+    "predictedDeaths": 1957,
+    "growthRate": -0.1,
+    "staff": 31,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-06",
+    "regionName": "광주광역시",
+    "predictedDeaths": 680,
+    "growthRate": 1.8,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-06",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1240,
+    "growthRate": 1.1,
+    "staff": 17,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-06",
+    "regionName": "대전광역시",
+    "predictedDeaths": 637,
+    "growthRate": 4.8,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-06",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2065,
+    "growthRate": -1.5,
+    "staff": 28,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-06",
+    "regionName": "서울특별시",
+    "predictedDeaths": 3932,
+    "growthRate": -2.4,
+    "staff": 54,
+    "staffChange": -4
+  },
+  {
+    "date": "2024-06",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 117,
+    "growthRate": 2.0,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-06",
+    "regionName": "울산광역시",
+    "predictedDeaths": 483,
+    "growthRate": 0.0,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-06",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1447,
+    "growthRate": 7.0,
+    "staff": 19,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-06",
+    "regionName": "전국",
+    "predictedDeaths": 26573,
+    "growthRate": -0.8,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2024-06",
+    "regionName": "전라남도",
+    "predictedDeaths": 1516,
+    "growthRate": 2.6,
+    "staff": 24,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-06",
+    "regionName": "전라북도",
+    "predictedDeaths": 1295,
+    "growthRate": 1.8,
+    "staff": 19,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-06",
+    "regionName": "제주도",
+    "predictedDeaths": 369,
+    "growthRate": 0.8,
+    "staff": 5,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-06",
+    "regionName": "충청남도",
+    "predictedDeaths": 1438,
+    "growthRate": 2.4,
+    "staff": 20,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-06",
+    "regionName": "충청북도",
+    "predictedDeaths": 1043,
+    "growthRate": -1.3,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-07",
+    "regionName": "강원도",
+    "predictedDeaths": 1075,
+    "growthRate": -3.1,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-07",
+    "regionName": "경기도",
+    "predictedDeaths": 5865,
+    "growthRate": -2.9,
+    "staff": 103,
+    "staffChange": 18
+  },
+  {
+    "date": "2024-07",
+    "regionName": "경상남도",
+    "predictedDeaths": 2034,
+    "growthRate": -2.4,
+    "staff": 31,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-07",
+    "regionName": "경상북도",
+    "predictedDeaths": 1981,
+    "growthRate": 1.4,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2024-07",
+    "regionName": "광주광역시",
+    "predictedDeaths": 683,
+    "growthRate": -3.3,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-07",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1302,
+    "growthRate": 0.1,
+    "staff": 17,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-07",
+    "regionName": "대전광역시",
+    "predictedDeaths": 654,
+    "growthRate": -1.3,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-07",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2190,
+    "growthRate": -2.9,
+    "staff": 29,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-07",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4021,
+    "growthRate": -0.8,
+    "staff": 53,
+    "staffChange": -5
+  },
+  {
+    "date": "2024-07",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 123,
+    "growthRate": -6.8,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-07",
+    "regionName": "울산광역시",
+    "predictedDeaths": 507,
+    "growthRate": -0.9,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-07",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1441,
+    "growthRate": -0.2,
+    "staff": 18,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-07",
+    "regionName": "전국",
+    "predictedDeaths": 27626,
+    "growthRate": -1.8,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2024-07",
+    "regionName": "전라남도",
+    "predictedDeaths": 1595,
+    "growthRate": -1.6,
+    "staff": 25,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-07",
+    "regionName": "전라북도",
+    "predictedDeaths": 1298,
+    "growthRate": -1.2,
+    "staff": 19,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-07",
+    "regionName": "제주도",
+    "predictedDeaths": 373,
+    "growthRate": -1.3,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-07",
+    "regionName": "충청남도",
+    "predictedDeaths": 1463,
+    "growthRate": 1.3,
+    "staff": 20,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-07",
+    "regionName": "충청북도",
+    "predictedDeaths": 1072,
+    "growthRate": -4.8,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-08",
+    "regionName": "강원도",
+    "predictedDeaths": 1171,
+    "growthRate": -1.8,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-08",
+    "regionName": "경기도",
+    "predictedDeaths": 6272,
+    "growthRate": -1.2,
+    "staff": 102,
+    "staffChange": 17
+  },
+  {
+    "date": "2024-08",
+    "regionName": "경상남도",
+    "predictedDeaths": 2241,
+    "growthRate": -4.0,
+    "staff": 32,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-08",
+    "regionName": "경상북도",
+    "predictedDeaths": 2171,
+    "growthRate": 2.0,
+    "staff": 31,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-08",
+    "regionName": "광주광역시",
+    "predictedDeaths": 744,
+    "growthRate": -3.8,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-08",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1439,
+    "growthRate": -3.0,
+    "staff": 18,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-08",
+    "regionName": "대전광역시",
+    "predictedDeaths": 745,
+    "growthRate": -3.8,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-08",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2357,
+    "growthRate": -4.2,
+    "staff": 29,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-08",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4082,
+    "growthRate": -7.3,
+    "staff": 51,
+    "staffChange": -4
+  },
+  {
+    "date": "2024-08",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 130,
+    "growthRate": -11.9,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-08",
+    "regionName": "울산광역시",
+    "predictedDeaths": 535,
+    "growthRate": -3.6,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-08",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1488,
+    "growthRate": -2.4,
+    "staff": 17,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-08",
+    "regionName": "전국",
+    "predictedDeaths": 29947,
+    "growthRate": -1.9,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2024-08",
+    "regionName": "전라남도",
+    "predictedDeaths": 1703,
+    "growthRate": -2.1,
+    "staff": 25,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-08",
+    "regionName": "전라북도",
+    "predictedDeaths": 1377,
+    "growthRate": -8.4,
+    "staff": 19,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-08",
+    "regionName": "제주도",
+    "predictedDeaths": 400,
+    "growthRate": -6.3,
+    "staff": 5,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-08",
+    "regionName": "충청남도",
+    "predictedDeaths": 1601,
+    "growthRate": -2.0,
+    "staff": 21,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-08",
+    "regionName": "충청북도",
+    "predictedDeaths": 1103,
+    "growthRate": 0.5,
+    "staff": 13,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-09",
+    "regionName": "강원도",
+    "predictedDeaths": 1170,
+    "growthRate": 1.5,
+    "staff": 15,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-09",
+    "regionName": "경기도",
+    "predictedDeaths": 6147,
+    "growthRate": 1.5,
+    "staff": 102,
+    "staffChange": 17
+  },
+  {
+    "date": "2024-09",
+    "regionName": "경상남도",
+    "predictedDeaths": 2074,
+    "growthRate": 4.4,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2024-09",
+    "regionName": "경상북도",
+    "predictedDeaths": 2081,
+    "growthRate": 1.3,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2024-09",
+    "regionName": "광주광역시",
+    "predictedDeaths": 751,
+    "growthRate": -1.2,
+    "staff": 9,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-09",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1383,
+    "growthRate": 1.9,
+    "staff": 17,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-09",
+    "regionName": "대전광역시",
+    "predictedDeaths": 738,
+    "growthRate": 0.7,
+    "staff": 9,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-09",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2161,
+    "growthRate": 5.1,
+    "staff": 27,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-09",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4216,
+    "growthRate": 1.0,
+    "staff": 54,
+    "staffChange": -4
+  },
+  {
+    "date": "2024-09",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 129,
+    "growthRate": 1.6,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-09",
+    "regionName": "울산광역시",
+    "predictedDeaths": 478,
+    "growthRate": 5.0,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-09",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1495,
+    "growthRate": 0.4,
+    "staff": 18,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-09",
+    "regionName": "전국",
+    "predictedDeaths": 28962,
+    "growthRate": 2.4,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2024-09",
+    "regionName": "전라남도",
+    "predictedDeaths": 1624,
+    "growthRate": 3.7,
+    "staff": 24,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-09",
+    "regionName": "전라북도",
+    "predictedDeaths": 1412,
+    "growthRate": 0.5,
+    "staff": 20,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-09",
+    "regionName": "제주도",
+    "predictedDeaths": 374,
+    "growthRate": 5.3,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-09",
+    "regionName": "충청남도",
+    "predictedDeaths": 1539,
+    "growthRate": 2.7,
+    "staff": 20,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-09",
+    "regionName": "충청북도",
+    "predictedDeaths": 1106,
+    "growthRate": 3.2,
+    "staff": 14,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-10",
+    "regionName": "강원도",
+    "predictedDeaths": 1165,
+    "growthRate": -11.4,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-10",
+    "regionName": "경기도",
+    "predictedDeaths": 6428,
+    "growthRate": -1.1,
+    "staff": 103,
+    "staffChange": 18
+  },
+  {
+    "date": "2024-10",
+    "regionName": "경상남도",
+    "predictedDeaths": 2232,
+    "growthRate": -2.6,
+    "staff": 31,
+    "staffChange": 1
+  },
+  {
+    "date": "2024-10",
+    "regionName": "경상북도",
+    "predictedDeaths": 2183,
+    "growthRate": -0.2,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2024-10",
+    "regionName": "광주광역시",
+    "predictedDeaths": 791,
+    "growthRate": -2.8,
+    "staff": 9,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-10",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1366,
+    "growthRate": 1.0,
+    "staff": 16,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-10",
+    "regionName": "대전광역시",
+    "predictedDeaths": 758,
+    "growthRate": -1.4,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-10",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2168,
+    "growthRate": -0.5,
+    "staff": 26,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-10",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4463,
+    "growthRate": -2.4,
+    "staff": 55,
+    "staffChange": -4
+  },
+  {
+    "date": "2024-10",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 140,
+    "growthRate": -2.5,
+    "staff": 2,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-10",
+    "regionName": "울산광역시",
+    "predictedDeaths": 530,
+    "growthRate": -5.7,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-10",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1586,
+    "growthRate": -3.2,
+    "staff": 18,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-10",
+    "regionName": "전국",
+    "predictedDeaths": 30177,
+    "growthRate": -2.0,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2024-10",
+    "regionName": "전라남도",
+    "predictedDeaths": 1687,
+    "growthRate": -1.7,
+    "staff": 24,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-10",
+    "regionName": "전라북도",
+    "predictedDeaths": 1454,
+    "growthRate": -2.2,
+    "staff": 19,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-10",
+    "regionName": "제주도",
+    "predictedDeaths": 395,
+    "growthRate": -2.0,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-10",
+    "regionName": "충청남도",
+    "predictedDeaths": 1654,
+    "growthRate": -3.9,
+    "staff": 21,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-10",
+    "regionName": "충청북도",
+    "predictedDeaths": 1136,
+    "growthRate": -0.4,
+    "staff": 14,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-11",
+    "regionName": "강원도",
+    "predictedDeaths": 1208,
+    "growthRate": 1.8,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-11",
+    "regionName": "경기도",
+    "predictedDeaths": 6512,
+    "growthRate": -0.9,
+    "staff": 103,
+    "staffChange": 17
+  },
+  {
+    "date": "2024-11",
+    "regionName": "경상남도",
+    "predictedDeaths": 2214,
+    "growthRate": -1.5,
+    "staff": 31,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-11",
+    "regionName": "경상북도",
+    "predictedDeaths": 2185,
+    "growthRate": 1.3,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2024-11",
+    "regionName": "광주광역시",
+    "predictedDeaths": 796,
+    "growthRate": 10.2,
+    "staff": 9,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-11",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1444,
+    "growthRate": -1.5,
+    "staff": 17,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-11",
+    "regionName": "대전광역시",
+    "predictedDeaths": 757,
+    "growthRate": 0.5,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-11",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2191,
+    "growthRate": 1.1,
+    "staff": 26,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-11",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4515,
+    "growthRate": 0.7,
+    "staff": 54,
+    "staffChange": -5
+  },
+  {
+    "date": "2024-11",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 142,
+    "growthRate": 4.6,
+    "staff": 2,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-11",
+    "regionName": "울산광역시",
+    "predictedDeaths": 499,
+    "growthRate": 6.9,
+    "staff": 5,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-11",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1552,
+    "growthRate": 0.3,
+    "staff": 18,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-11",
+    "regionName": "전국",
+    "predictedDeaths": 30302,
+    "growthRate": -0.2,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2024-11",
+    "regionName": "전라남도",
+    "predictedDeaths": 1717,
+    "growthRate": 1.6,
+    "staff": 24,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-11",
+    "regionName": "전라북도",
+    "predictedDeaths": 1528,
+    "growthRate": -1.0,
+    "staff": 20,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-11",
+    "regionName": "제주도",
+    "predictedDeaths": 389,
+    "growthRate": -0.7,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-11",
+    "regionName": "충청남도",
+    "predictedDeaths": 1632,
+    "growthRate": 0.7,
+    "staff": 21,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-11",
+    "regionName": "충청북도",
+    "predictedDeaths": 1171,
+    "growthRate": -3.2,
+    "staff": 14,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-12",
+    "regionName": "강원도",
+    "predictedDeaths": 1329,
+    "growthRate": -2.0,
+    "staff": 15,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-12",
+    "regionName": "경기도",
+    "predictedDeaths": 6856,
+    "growthRate": -0.2,
+    "staff": 104,
+    "staffChange": 19
+  },
+  {
+    "date": "2024-12",
+    "regionName": "경상남도",
+    "predictedDeaths": 2451,
+    "growthRate": 0.4,
+    "staff": 32,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-12",
+    "regionName": "경상북도",
+    "predictedDeaths": 2429,
+    "growthRate": 0.4,
+    "staff": 32,
+    "staffChange": 2
+  },
+  {
+    "date": "2024-12",
+    "regionName": "광주광역시",
+    "predictedDeaths": 815,
+    "growthRate": 0.8,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-12",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1586,
+    "growthRate": -3.4,
+    "staff": 18,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-12",
+    "regionName": "대전광역시",
+    "predictedDeaths": 775,
+    "growthRate": 1.3,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-12",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2438,
+    "growthRate": -0.1,
+    "staff": 28,
+    "staffChange": -2
+  },
+  {
+    "date": "2024-12",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4679,
+    "growthRate": 2.8,
+    "staff": 53,
+    "staffChange": -5
+  },
+  {
+    "date": "2024-12",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 143,
+    "growthRate": -2.1,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-12",
+    "regionName": "울산광역시",
+    "predictedDeaths": 514,
+    "growthRate": -8.2,
+    "staff": 5,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-12",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1615,
+    "growthRate": -4.0,
+    "staff": 17,
+    "staffChange": -3
+  },
+  {
+    "date": "2024-12",
+    "regionName": "전국",
+    "predictedDeaths": 32172,
+    "growthRate": -0.2,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2024-12",
+    "regionName": "전라남도",
+    "predictedDeaths": 1743,
+    "growthRate": -0.4,
+    "staff": 23,
+    "staffChange": 1
+  },
+  {
+    "date": "2024-12",
+    "regionName": "전라북도",
+    "predictedDeaths": 1531,
+    "growthRate": 1.3,
+    "staff": 19,
+    "staffChange": 0
+  },
+  {
+    "date": "2024-12",
+    "regionName": "제주도",
+    "predictedDeaths": 389,
+    "growthRate": -10.9,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-12",
+    "regionName": "충청남도",
+    "predictedDeaths": 1681,
+    "growthRate": -0.5,
+    "staff": 20,
+    "staffChange": -1
+  },
+  {
+    "date": "2024-12",
+    "regionName": "충청북도",
+    "predictedDeaths": 1195,
+    "growthRate": 2.3,
+    "staff": 13,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-01",
+    "regionName": "강원도",
+    "predictedDeaths": 1239,
+    "growthRate": 0.8,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-01",
+    "regionName": "경기도",
+    "predictedDeaths": 6627,
+    "growthRate": 0.4,
+    "staff": 99,
+    "staffChange": 15
+  },
+  {
+    "date": "2025-01",
+    "regionName": "경상남도",
+    "predictedDeaths": 2449,
+    "growthRate": 0.2,
+    "staff": 33,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-01",
+    "regionName": "경상북도",
+    "predictedDeaths": 2353,
+    "growthRate": 0.6,
+    "staff": 32,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-01",
+    "regionName": "광주광역시",
+    "predictedDeaths": 756,
+    "growthRate": 0.5,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-01",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1460,
+    "growthRate": 0.2,
+    "staff": 17,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-01",
+    "regionName": "대전광역시",
+    "predictedDeaths": 795,
+    "growthRate": 1.1,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-01",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2352,
+    "growthRate": 0.7,
+    "staff": 27,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-01",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4613,
+    "growthRate": -0.3,
+    "staff": 54,
+    "staffChange": -4
+  },
+  {
+    "date": "2025-01",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 151,
+    "growthRate": -0.7,
+    "staff": 2,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-01",
+    "regionName": "울산광역시",
+    "predictedDeaths": 526,
+    "growthRate": 0.4,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-01",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1623,
+    "growthRate": 0.4,
+    "staff": 18,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-01",
+    "regionName": "전국",
+    "predictedDeaths": 31955,
+    "growthRate": 0.3,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2025-01",
+    "regionName": "전라남도",
+    "predictedDeaths": 1747,
+    "growthRate": -0.1,
+    "staff": 24,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-01",
+    "regionName": "전라북도",
+    "predictedDeaths": 1530,
+    "growthRate": 0.2,
+    "staff": 20,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-01",
+    "regionName": "제주도",
+    "predictedDeaths": 393,
+    "growthRate": 2.5,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-01",
+    "regionName": "충청남도",
+    "predictedDeaths": 1650,
+    "growthRate": 0.7,
+    "staff": 20,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-01",
+    "regionName": "충청북도",
+    "predictedDeaths": 1226,
+    "growthRate": 0.4,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-02",
+    "regionName": "강원도",
+    "predictedDeaths": 1169,
+    "growthRate": 1.0,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-02",
+    "regionName": "경기도",
+    "predictedDeaths": 6341,
+    "growthRate": 0.4,
+    "staff": 103,
+    "staffChange": 17
+  },
+  {
+    "date": "2025-02",
+    "regionName": "경상남도",
+    "predictedDeaths": 2145,
+    "growthRate": 0.7,
+    "staff": 31,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-02",
+    "regionName": "경상북도",
+    "predictedDeaths": 2059,
+    "growthRate": 0.1,
+    "staff": 29,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-02",
+    "regionName": "광주광역시",
+    "predictedDeaths": 704,
+    "growthRate": 1.3,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-02",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1347,
+    "growthRate": 1.0,
+    "staff": 17,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-02",
+    "regionName": "대전광역시",
+    "predictedDeaths": 708,
+    "growthRate": 0.6,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-02",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2272,
+    "growthRate": -3.0,
+    "staff": 28,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-02",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4458,
+    "growthRate": -1.7,
+    "staff": 55,
+    "staffChange": -5
+  },
+  {
+    "date": "2025-02",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 125,
+    "growthRate": -1.3,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-02",
+    "regionName": "울산광역시",
+    "predictedDeaths": 496,
+    "growthRate": 0.9,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-02",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1494,
+    "growthRate": 0.9,
+    "staff": 18,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-02",
+    "regionName": "전국",
+    "predictedDeaths": 31104,
+    "growthRate": -0.2,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2025-02",
+    "regionName": "전라남도",
+    "predictedDeaths": 1675,
+    "growthRate": 0.6,
+    "staff": 24,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-02",
+    "regionName": "전라북도",
+    "predictedDeaths": 1453,
+    "growthRate": 0.6,
+    "staff": 20,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-02",
+    "regionName": "제주도",
+    "predictedDeaths": 382,
+    "growthRate": -0.4,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-02",
+    "regionName": "충청남도",
+    "predictedDeaths": 1523,
+    "growthRate": 1.6,
+    "staff": 20,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-02",
+    "regionName": "충청북도",
+    "predictedDeaths": 1175,
+    "growthRate": -1.8,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-03",
+    "regionName": "강원도",
+    "predictedDeaths": 1222,
+    "growthRate": -1.9,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-03",
+    "regionName": "경기도",
+    "predictedDeaths": 6461,
+    "growthRate": 3.0,
+    "staff": 99,
+    "staffChange": 17
+  },
+  {
+    "date": "2025-03",
+    "regionName": "경상남도",
+    "predictedDeaths": 2549,
+    "growthRate": -1.7,
+    "staff": 34,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-03",
+    "regionName": "경상북도",
+    "predictedDeaths": 2544,
+    "growthRate": -3.7,
+    "staff": 34,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-03",
+    "regionName": "광주광역시",
+    "predictedDeaths": 816,
+    "growthRate": -0.9,
+    "staff": 9,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-03",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1482,
+    "growthRate": -0.6,
+    "staff": 17,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-03",
+    "regionName": "대전광역시",
+    "predictedDeaths": 769,
+    "growthRate": 0.0,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-03",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2293,
+    "growthRate": 4.6,
+    "staff": 26,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-03",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4447,
+    "growthRate": 5.4,
+    "staff": 52,
+    "staffChange": -4
+  },
+  {
+    "date": "2025-03",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 137,
+    "growthRate": 2.3,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-03",
+    "regionName": "울산광역시",
+    "predictedDeaths": 533,
+    "growthRate": 3.6,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-03",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1658,
+    "growthRate": 0.3,
+    "staff": 18,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-03",
+    "regionName": "전국",
+    "predictedDeaths": 32797,
+    "growthRate": -1.5,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2025-03",
+    "regionName": "전라남도",
+    "predictedDeaths": 1746,
+    "growthRate": 2.4,
+    "staff": 24,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-03",
+    "regionName": "전라북도",
+    "predictedDeaths": 1470,
+    "growthRate": 3.2,
+    "staff": 19,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-03",
+    "regionName": "제주도",
+    "predictedDeaths": 397,
+    "growthRate": -1.3,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-03",
+    "regionName": "충청남도",
+    "predictedDeaths": 1686,
+    "growthRate": -3.1,
+    "staff": 21,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-03",
+    "regionName": "충청북도",
+    "predictedDeaths": 1248,
+    "growthRate": 0.3,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-04",
+    "regionName": "강원도",
+    "predictedDeaths": 1193,
+    "growthRate": 0.0,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-04",
+    "regionName": "경기도",
+    "predictedDeaths": 6759,
+    "growthRate": -3.1,
+    "staff": 107,
+    "staffChange": 18
+  },
+  {
+    "date": "2025-04",
+    "regionName": "경상남도",
+    "predictedDeaths": 2254,
+    "growthRate": 2.3,
+    "staff": 31,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-04",
+    "regionName": "경상북도",
+    "predictedDeaths": 2237,
+    "growthRate": 1.5,
+    "staff": 31,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-04",
+    "regionName": "광주광역시",
+    "predictedDeaths": 736,
+    "growthRate": 0.8,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-04",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1338,
+    "growthRate": 0.9,
+    "staff": 16,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-04",
+    "regionName": "대전광역시",
+    "predictedDeaths": 744,
+    "growthRate": 0.4,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-04",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2148,
+    "growthRate": -0.2,
+    "staff": 26,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-04",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4199,
+    "growthRate": -0.8,
+    "staff": 51,
+    "staffChange": -4
+  },
+  {
+    "date": "2025-04",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 126,
+    "growthRate": -0.5,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-04",
+    "regionName": "울산광역시",
+    "predictedDeaths": 512,
+    "growthRate": 1.0,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-04",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1624,
+    "growthRate": -1.6,
+    "staff": 19,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-04",
+    "regionName": "전국",
+    "predictedDeaths": 30426,
+    "growthRate": 0.9,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2025-04",
+    "regionName": "전라남도",
+    "predictedDeaths": 1782,
+    "growthRate": -3.7,
+    "staff": 25,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-04",
+    "regionName": "전라북도",
+    "predictedDeaths": 1557,
+    "growthRate": -4.7,
+    "staff": 20,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-04",
+    "regionName": "제주도",
+    "predictedDeaths": 384,
+    "growthRate": 0.8,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-04",
+    "regionName": "충청남도",
+    "predictedDeaths": 1608,
+    "growthRate": 0.2,
+    "staff": 20,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-04",
+    "regionName": "충청북도",
+    "predictedDeaths": 1135,
+    "growthRate": 1.3,
+    "staff": 13,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-05",
+    "regionName": "강원도",
+    "predictedDeaths": 1161,
+    "growthRate": 0.5,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-05",
+    "regionName": "경기도",
+    "predictedDeaths": 6296,
+    "growthRate": 0.9,
+    "staff": 104,
+    "staffChange": 17
+  },
+  {
+    "date": "2025-05",
+    "regionName": "경상남도",
+    "predictedDeaths": 2105,
+    "growthRate": 0.0,
+    "staff": 31,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-05",
+    "regionName": "경상북도",
+    "predictedDeaths": 2081,
+    "growthRate": 0.2,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-05",
+    "regionName": "광주광역시",
+    "predictedDeaths": 741,
+    "growthRate": 0.1,
+    "staff": 9,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-05",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1327,
+    "growthRate": 0.4,
+    "staff": 17,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-05",
+    "regionName": "대전광역시",
+    "predictedDeaths": 707,
+    "growthRate": 1.6,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-05",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2114,
+    "growthRate": -0.3,
+    "staff": 26,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-05",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4266,
+    "growthRate": 0.2,
+    "staff": 54,
+    "staffChange": -5
+  },
+  {
+    "date": "2025-05",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 120,
+    "growthRate": 0.3,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-05",
+    "regionName": "울산광역시",
+    "predictedDeaths": 479,
+    "growthRate": 0.6,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-05",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1532,
+    "growthRate": 1.3,
+    "staff": 18,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-05",
+    "regionName": "전국",
+    "predictedDeaths": 28346,
+    "growthRate": 1.7,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2025-05",
+    "regionName": "전라남도",
+    "predictedDeaths": 1652,
+    "growthRate": -0.7,
+    "staff": 24,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-05",
+    "regionName": "전라북도",
+    "predictedDeaths": 1418,
+    "growthRate": -0.6,
+    "staff": 20,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-05",
+    "regionName": "제주도",
+    "predictedDeaths": 376,
+    "growthRate": 1.4,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-05",
+    "regionName": "충청남도",
+    "predictedDeaths": 1511,
+    "growthRate": 1.8,
+    "staff": 20,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-05",
+    "regionName": "충청북도",
+    "predictedDeaths": 1103,
+    "growthRate": 0.4,
+    "staff": 14,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-06",
+    "regionName": "강원도",
+    "predictedDeaths": 1096,
+    "growthRate": 0.3,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-06",
+    "regionName": "경기도",
+    "predictedDeaths": 5815,
+    "growthRate": 1.9,
+    "staff": 104,
+    "staffChange": 18
+  },
+  {
+    "date": "2025-06",
+    "regionName": "경상남도",
+    "predictedDeaths": 1957,
+    "growthRate": 0.4,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-06",
+    "regionName": "경상북도",
+    "predictedDeaths": 1959,
+    "growthRate": 0.1,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-06",
+    "regionName": "광주광역시",
+    "predictedDeaths": 687,
+    "growthRate": 1.0,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-06",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1249,
+    "growthRate": 0.7,
+    "staff": 17,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-06",
+    "regionName": "대전광역시",
+    "predictedDeaths": 634,
+    "growthRate": -0.5,
+    "staff": 8,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-06",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2066,
+    "growthRate": 0.0,
+    "staff": 28,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-06",
+    "regionName": "서울특별시",
+    "predictedDeaths": 3993,
+    "growthRate": 1.6,
+    "staff": 54,
+    "staffChange": -5
+  },
+  {
+    "date": "2025-06",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 117,
+    "growthRate": 0.3,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-06",
+    "regionName": "울산광역시",
+    "predictedDeaths": 482,
+    "growthRate": -0.1,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-06",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1436,
+    "growthRate": -0.8,
+    "staff": 18,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-06",
+    "regionName": "전국",
+    "predictedDeaths": 26900,
+    "growthRate": 1.2,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2025-06",
+    "regionName": "전라남도",
+    "predictedDeaths": 1548,
+    "growthRate": 2.1,
+    "staff": 24,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-06",
+    "regionName": "전라북도",
+    "predictedDeaths": 1302,
+    "growthRate": 0.5,
+    "staff": 19,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-06",
+    "regionName": "제주도",
+    "predictedDeaths": 369,
+    "growthRate": -0.1,
+    "staff": 5,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-06",
+    "regionName": "충청남도",
+    "predictedDeaths": 1441,
+    "growthRate": 0.2,
+    "staff": 20,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-06",
+    "regionName": "충청북도",
+    "predictedDeaths": 1053,
+    "growthRate": 0.9,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-07",
+    "regionName": "강원도",
+    "predictedDeaths": 1087,
+    "growthRate": 1.1,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-07",
+    "regionName": "경기도",
+    "predictedDeaths": 5922,
+    "growthRate": 1.0,
+    "staff": 102,
+    "staffChange": 17
+  },
+  {
+    "date": "2025-07",
+    "regionName": "경상남도",
+    "predictedDeaths": 2033,
+    "growthRate": -0.0,
+    "staff": 31,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-07",
+    "regionName": "경상북도",
+    "predictedDeaths": 1980,
+    "growthRate": -0.0,
+    "staff": 30,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-07",
+    "regionName": "광주광역시",
+    "predictedDeaths": 688,
+    "growthRate": 0.8,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-07",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1293,
+    "growthRate": -0.7,
+    "staff": 17,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-07",
+    "regionName": "대전광역시",
+    "predictedDeaths": 653,
+    "growthRate": -0.1,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-07",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2187,
+    "growthRate": -0.1,
+    "staff": 29,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-07",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4017,
+    "growthRate": -0.1,
+    "staff": 53,
+    "staffChange": -5
+  },
+  {
+    "date": "2025-07",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 125,
+    "growthRate": 1.9,
+    "staff": 2,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-07",
+    "regionName": "울산광역시",
+    "predictedDeaths": 504,
+    "growthRate": -0.5,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-07",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1445,
+    "growthRate": 0.3,
+    "staff": 18,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-07",
+    "regionName": "전국",
+    "predictedDeaths": 27773,
+    "growthRate": 0.5,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2025-07",
+    "regionName": "전라남도",
+    "predictedDeaths": 1598,
+    "growthRate": 0.2,
+    "staff": 25,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-07",
+    "regionName": "전라북도",
+    "predictedDeaths": 1300,
+    "growthRate": 0.1,
+    "staff": 19,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-07",
+    "regionName": "제주도",
+    "predictedDeaths": 374,
+    "growthRate": 0.2,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-07",
+    "regionName": "충청남도",
+    "predictedDeaths": 1458,
+    "growthRate": -0.4,
+    "staff": 20,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-07",
+    "regionName": "충청북도",
+    "predictedDeaths": 1077,
+    "growthRate": 0.5,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-08",
+    "regionName": "강원도",
+    "predictedDeaths": 1173,
+    "growthRate": 0.2,
+    "staff": 15,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-08",
+    "regionName": "경기도",
+    "predictedDeaths": 6240,
+    "growthRate": -0.5,
+    "staff": 101,
+    "staffChange": 17
+  },
+  {
+    "date": "2025-08",
+    "regionName": "경상남도",
+    "predictedDeaths": 2234,
+    "growthRate": -0.3,
+    "staff": 32,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-08",
+    "regionName": "경상북도",
+    "predictedDeaths": 2182,
+    "growthRate": 0.5,
+    "staff": 31,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-08",
+    "regionName": "광주광역시",
+    "predictedDeaths": 745,
+    "growthRate": 0.2,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-08",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1434,
+    "growthRate": -0.3,
+    "staff": 18,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-08",
+    "regionName": "대전광역시",
+    "predictedDeaths": 747,
+    "growthRate": 0.3,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-08",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2342,
+    "growthRate": -0.7,
+    "staff": 29,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-08",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4184,
+    "growthRate": 2.5,
+    "staff": 52,
+    "staffChange": -4
+  },
+  {
+    "date": "2025-08",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 133,
+    "growthRate": 2.3,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-08",
+    "regionName": "울산광역시",
+    "predictedDeaths": 531,
+    "growthRate": -0.7,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-08",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1492,
+    "growthRate": 0.3,
+    "staff": 17,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-08",
+    "regionName": "전국",
+    "predictedDeaths": 29721,
+    "growthRate": -0.8,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2025-08",
+    "regionName": "전라남도",
+    "predictedDeaths": 1697,
+    "growthRate": -0.4,
+    "staff": 25,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-08",
+    "regionName": "전라북도",
+    "predictedDeaths": 1401,
+    "growthRate": 1.8,
+    "staff": 19,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-08",
+    "regionName": "제주도",
+    "predictedDeaths": 398,
+    "growthRate": -0.4,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-08",
+    "regionName": "충청남도",
+    "predictedDeaths": 1604,
+    "growthRate": 0.2,
+    "staff": 21,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-08",
+    "regionName": "충청북도",
+    "predictedDeaths": 1100,
+    "growthRate": -0.2,
+    "staff": 13,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-09",
+    "regionName": "강원도",
+    "predictedDeaths": 1171,
+    "growthRate": 0.1,
+    "staff": 15,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-09",
+    "regionName": "경기도",
+    "predictedDeaths": 6129,
+    "growthRate": -0.3,
+    "staff": 102,
+    "staffChange": 17
+  },
+  {
+    "date": "2025-09",
+    "regionName": "경상남도",
+    "predictedDeaths": 2067,
+    "growthRate": -0.3,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-09",
+    "regionName": "경상북도",
+    "predictedDeaths": 2080,
+    "growthRate": -0.1,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-09",
+    "regionName": "광주광역시",
+    "predictedDeaths": 753,
+    "growthRate": 0.3,
+    "staff": 9,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-09",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1385,
+    "growthRate": 0.1,
+    "staff": 17,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-09",
+    "regionName": "대전광역시",
+    "predictedDeaths": 739,
+    "growthRate": 0.1,
+    "staff": 9,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-09",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2163,
+    "growthRate": 0.1,
+    "staff": 27,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-09",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4196,
+    "growthRate": -0.5,
+    "staff": 53,
+    "staffChange": -5
+  },
+  {
+    "date": "2025-09",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 129,
+    "growthRate": 0.1,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-09",
+    "regionName": "울산광역시",
+    "predictedDeaths": 485,
+    "growthRate": 1.5,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-09",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1496,
+    "growthRate": 0.1,
+    "staff": 18,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-09",
+    "regionName": "전국",
+    "predictedDeaths": 28962,
+    "growthRate": -0.0,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2025-09",
+    "regionName": "전라남도",
+    "predictedDeaths": 1633,
+    "growthRate": 0.5,
+    "staff": 24,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-09",
+    "regionName": "전라북도",
+    "predictedDeaths": 1409,
+    "growthRate": -0.2,
+    "staff": 20,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-09",
+    "regionName": "제주도",
+    "predictedDeaths": 376,
+    "growthRate": 0.5,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-09",
+    "regionName": "충청남도",
+    "predictedDeaths": 1548,
+    "growthRate": 0.6,
+    "staff": 21,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-09",
+    "regionName": "충청북도",
+    "predictedDeaths": 1099,
+    "growthRate": -0.6,
+    "staff": 14,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-10",
+    "regionName": "강원도",
+    "predictedDeaths": 1189,
+    "growthRate": 2.0,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-10",
+    "regionName": "경기도",
+    "predictedDeaths": 6430,
+    "growthRate": 0.0,
+    "staff": 102,
+    "staffChange": 17
+  },
+  {
+    "date": "2025-10",
+    "regionName": "경상남도",
+    "predictedDeaths": 2237,
+    "growthRate": 0.2,
+    "staff": 31,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-10",
+    "regionName": "경상북도",
+    "predictedDeaths": 2188,
+    "growthRate": 0.2,
+    "staff": 31,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-10",
+    "regionName": "광주광역시",
+    "predictedDeaths": 791,
+    "growthRate": 0.0,
+    "staff": 9,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-10",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1372,
+    "growthRate": 0.5,
+    "staff": 16,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-10",
+    "regionName": "대전광역시",
+    "predictedDeaths": 757,
+    "growthRate": -0.2,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-10",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2170,
+    "growthRate": 0.1,
+    "staff": 26,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-10",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4466,
+    "growthRate": 0.1,
+    "staff": 55,
+    "staffChange": -4
+  },
+  {
+    "date": "2025-10",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 140,
+    "growthRate": -0.2,
+    "staff": 2,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-10",
+    "regionName": "울산광역시",
+    "predictedDeaths": 530,
+    "growthRate": -0.1,
+    "staff": 6,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-10",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1582,
+    "growthRate": -0.3,
+    "staff": 18,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-10",
+    "regionName": "전국",
+    "predictedDeaths": 30102,
+    "growthRate": -0.2,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2025-10",
+    "regionName": "전라남도",
+    "predictedDeaths": 1691,
+    "growthRate": 0.3,
+    "staff": 24,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-10",
+    "regionName": "전라북도",
+    "predictedDeaths": 1453,
+    "growthRate": -0.1,
+    "staff": 19,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-10",
+    "regionName": "제주도",
+    "predictedDeaths": 394,
+    "growthRate": -0.1,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-10",
+    "regionName": "충청남도",
+    "predictedDeaths": 1652,
+    "growthRate": -0.1,
+    "staff": 21,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-10",
+    "regionName": "충청북도",
+    "predictedDeaths": 1137,
+    "growthRate": 0.1,
+    "staff": 14,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-11",
+    "regionName": "강원도",
+    "predictedDeaths": 1203,
+    "growthRate": -0.4,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-11",
+    "regionName": "경기도",
+    "predictedDeaths": 6513,
+    "growthRate": 0.0,
+    "staff": 103,
+    "staffChange": 17
+  },
+  {
+    "date": "2025-11",
+    "regionName": "경상남도",
+    "predictedDeaths": 2216,
+    "growthRate": 0.1,
+    "staff": 31,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-11",
+    "regionName": "경상북도",
+    "predictedDeaths": 2188,
+    "growthRate": 0.1,
+    "staff": 30,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-11",
+    "regionName": "광주광역시",
+    "predictedDeaths": 777,
+    "growthRate": -2.4,
+    "staff": 9,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-11",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1435,
+    "growthRate": -0.6,
+    "staff": 17,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-11",
+    "regionName": "대전광역시",
+    "predictedDeaths": 758,
+    "growthRate": 0.1,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-11",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2188,
+    "growthRate": -0.1,
+    "staff": 26,
+    "staffChange": -3
+  },
+  {
+    "date": "2025-11",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4502,
+    "growthRate": -0.3,
+    "staff": 54,
+    "staffChange": -5
+  },
+  {
+    "date": "2025-11",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 140,
+    "growthRate": -1.1,
+    "staff": 2,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-11",
+    "regionName": "울산광역시",
+    "predictedDeaths": 499,
+    "growthRate": -0.1,
+    "staff": 5,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-11",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1556,
+    "growthRate": 0.3,
+    "staff": 18,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-11",
+    "regionName": "전국",
+    "predictedDeaths": 30245,
+    "growthRate": -0.2,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2025-11",
+    "regionName": "전라남도",
+    "predictedDeaths": 1706,
+    "growthRate": -0.7,
+    "staff": 24,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-11",
+    "regionName": "전라북도",
+    "predictedDeaths": 1527,
+    "growthRate": -0.1,
+    "staff": 20,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-11",
+    "regionName": "제주도",
+    "predictedDeaths": 390,
+    "growthRate": 0.2,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-11",
+    "regionName": "충청남도",
+    "predictedDeaths": 1634,
+    "growthRate": 0.1,
+    "staff": 21,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-11",
+    "regionName": "충청북도",
+    "predictedDeaths": 1177,
+    "growthRate": 0.5,
+    "staff": 14,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-12",
+    "regionName": "강원도",
+    "predictedDeaths": 1322,
+    "growthRate": -0.5,
+    "staff": 15,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-12",
+    "regionName": "경기도",
+    "predictedDeaths": 6841,
+    "growthRate": -0.2,
+    "staff": 103,
+    "staffChange": 18
+  },
+  {
+    "date": "2025-12",
+    "regionName": "경상남도",
+    "predictedDeaths": 2448,
+    "growthRate": -0.1,
+    "staff": 32,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-12",
+    "regionName": "경상북도",
+    "predictedDeaths": 2431,
+    "growthRate": 0.1,
+    "staff": 32,
+    "staffChange": 2
+  },
+  {
+    "date": "2025-12",
+    "regionName": "광주광역시",
+    "predictedDeaths": 815,
+    "growthRate": -0.0,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-12",
+    "regionName": "대구광역시",
+    "predictedDeaths": 1584,
+    "growthRate": -0.1,
+    "staff": 18,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-12",
+    "regionName": "대전광역시",
+    "predictedDeaths": 775,
+    "growthRate": 0.0,
+    "staff": 8,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-12",
+    "regionName": "부산광역시",
+    "predictedDeaths": 2434,
+    "growthRate": -0.2,
+    "staff": 28,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-12",
+    "regionName": "서울특별시",
+    "predictedDeaths": 4669,
+    "growthRate": -0.2,
+    "staff": 53,
+    "staffChange": -5
+  },
+  {
+    "date": "2025-12",
+    "regionName": "세종특별자치시",
+    "predictedDeaths": 144,
+    "growthRate": 0.9,
+    "staff": 1,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-12",
+    "regionName": "울산광역시",
+    "predictedDeaths": 527,
+    "growthRate": 2.6,
+    "staff": 5,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-12",
+    "regionName": "인천광역시",
+    "predictedDeaths": 1627,
+    "growthRate": 0.7,
+    "staff": 18,
+    "staffChange": -2
+  },
+  {
+    "date": "2025-12",
+    "regionName": "전국",
+    "predictedDeaths": 32216,
+    "growthRate": 0.1,
+    "regionalPercentage": 100.0
+  },
+  {
+    "date": "2025-12",
+    "regionName": "전라남도",
+    "predictedDeaths": 1746,
+    "growthRate": 0.2,
+    "staff": 23,
+    "staffChange": 1
+  },
+  {
+    "date": "2025-12",
+    "regionName": "전라북도",
+    "predictedDeaths": 1530,
+    "growthRate": -0.1,
+    "staff": 19,
+    "staffChange": 0
+  },
+  {
+    "date": "2025-12",
+    "regionName": "제주도",
+    "predictedDeaths": 402,
+    "growthRate": 3.4,
+    "staff": 4,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-12",
+    "regionName": "충청남도",
+    "predictedDeaths": 1676,
+    "growthRate": -0.3,
+    "staff": 20,
+    "staffChange": -1
+  },
+  {
+    "date": "2025-12",
+    "regionName": "충청북도",
+    "predictedDeaths": 1191,
+    "growthRate": -0.3,
+    "staff": 13,
+    "staffChange": -2
+  }
+]
