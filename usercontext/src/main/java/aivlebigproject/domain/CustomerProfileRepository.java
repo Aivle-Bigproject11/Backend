@@ -10,6 +10,6 @@ import java.util.Optional;
     collectionResourceRel = "customerProfiles",
     path = "customerProfiles"
 )
-public interface CustomerProfileRepository
-    extends PagingAndSortingRepository<CustomerProfile, Long> {
-    }
+public interface CustomerProfileRepository extends PagingAndSortingRepository<CustomerProfile, Long> {
+
+}

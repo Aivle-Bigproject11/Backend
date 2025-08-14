@@ -12,7 +12,7 @@ public class CustomerDeleted extends AbstractEvent {
 
     public CustomerDeleted(CustomerProfile aggregate) {
         super(aggregate);
-        this.loginId = aggregate.getLoginId();
+        this.customerId = aggregate.getCustomerId();
     }
 
     public CustomerDeleted() {

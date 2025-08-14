@@ -12,11 +12,11 @@ public class FamilyApproved extends AbstractEvent {
     private Long id;
     private UUID memorialId;
 
+
     public FamilyApproved(Family aggregate) {
-        // 부모 클래스 생성자 호출
-        super(); 
+        super();
         this.id = aggregate.getId();
-        this.memorialId = aggregate.getMemorialId(); 
+        this.memorialId = aggregate.getMemorialId();
     }
 
     public FamilyApproved() {

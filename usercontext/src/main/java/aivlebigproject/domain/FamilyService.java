@@ -43,4 +43,11 @@ public class FamilyService {
             return Optional.empty();
         }
     }
+    public List<Family> findFamiliesByMemorialId(UUID memorialId) {
+    // 필요한 경우 유효성 검사 등 추가 로직을 여기에 작성
+        if (memorialId == null) {
+            throw new IllegalArgumentException("Memorial ID must not be null.");
+        }
+        return familyRepository.findByMemorialId(memorialId);
+    }
 }
