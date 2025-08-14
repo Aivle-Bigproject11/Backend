@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,8 +45,18 @@ public class MemorialService {
         memorial.setCustomerId(funeralInfoRegistered.getCustomerId());
         memorial.setName(funeralInfoRegistered.getDeceasedName());
         memorial.setAge(funeralInfoRegistered.getDeceasedAge());
-        memorial.setBirthDate(funeralInfoRegistered.getDeceasedBirthOfDate());
-        memorial.setDeceasedDate(funeralInfoRegistered.getDeceasedDate());
+        memorial.setBirthDate(
+                funeralInfoRegistered.getDeceasedBirthOfDate()
+                        .toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate()
+        );
+        memorial.setDeceasedDate(
+                funeralInfoRegistered.getDeceasedDate()
+                        .toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate()
+        );
         memorial.setGender(funeralInfoRegistered.getDeceasedGender());
 
         log.info("Memorial created: {}", memorial);
