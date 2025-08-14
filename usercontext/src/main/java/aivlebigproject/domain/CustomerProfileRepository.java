@@ -12,5 +12,4 @@ import java.util.Optional;
 )
 public interface CustomerProfileRepository
     extends PagingAndSortingRepository<CustomerProfile, Long> {
-        Optional<CustomerProfile> findByLoginId(String loginId);
     }

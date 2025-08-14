@@ -8,7 +8,7 @@ import lombok.ToString;
 @ToString
 public class CustomerDeleted extends AbstractEvent {
 
-    private String loginId;
+    private Long customerId;
 
     public CustomerDeleted(CustomerProfile aggregate) {
         super(aggregate);

@@ -24,13 +24,11 @@ public class FamilyController {
     @Autowired
     FamilyService familyService;
 
-
     @GetMapping("/families/check-id")
     public ResponseEntity<Boolean> checkDuplicateId(@RequestParam String loginId) {
         boolean isDuplicate = familyService.isLoginIdDuplicate(loginId);
         return ResponseEntity.ok(isDuplicate);
     }
-
     @RequestMapping(
         value = "/families/{familyId}/approve", // 경로를 familyId를 받도록 변경
         method = RequestMethod.POST,
@@ -75,7 +73,6 @@ public class FamilyController {
         }
     }
 
-
     @GetMapping("/search-name")
     public ResponseEntity<List<Family>> searchByName(@RequestParam String name) {
         List<Family> families = familyService.searchByName(name);
@@ -100,7 +97,20 @@ public class FamilyController {
         return ResponseEntity.ok(family);
     }
 
+    @GetMapping("/find-login-id")
+    public ResponseEntity<String> findLoginId(
+            @RequestParam("name") String name,
+            @RequestParam("email") String email) {
 
+        Optional<String> loginId = familyService.findFamilyLoginId(name, email);
 
+        if (loginId.isPresent()) {
+            // 아이디를 찾았을 경우 성공적으로 응답합니다.
+            return ResponseEntity.ok("찾으시는 아이디는: " + loginId.get());
+        } else {
+            // 아이디를 찾지 못했을 경우 404 Not Found를 반환합니다.
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
 //>>> Clean Arch / Inbound Adaptor

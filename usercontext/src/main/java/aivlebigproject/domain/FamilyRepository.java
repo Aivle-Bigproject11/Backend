@@ -10,8 +10,8 @@ public interface FamilyRepository extends PagingAndSortingRepository<Family, Lon
     List<Family> findByMemorialId(UUID memorialId);
     Optional<Family> findFirstByMemorialId(UUID memorialId);
     Optional<Family> findByLoginId(String loginId);
-
     List<Family> findByNameContaining(String name);
     List<Family> findByPhoneContaining(String phone);
     Optional<Family> findByEmail(String email);
+    Optional<Family> findByNameAndEmail(String name, String email);
 }

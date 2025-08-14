@@ -8,7 +8,7 @@ import java.util.Optional;
 @Service
 public class FamilyService {
     
-     private final FamilyRepository familyRepository;
+    private final FamilyRepository familyRepository;
 
     @Autowired
     public FamilyService(FamilyRepository familyRepository) {
@@ -32,5 +32,15 @@ public class FamilyService {
 
     public Optional<Family> searchByEmail(String email) {
         return familyRepository.findByEmail(email);
+    }
+
+    public Optional<String> findFamilyLoginId(String name, String email) {
+        Optional<Family> foundFamily = familyRepository.findByNameAndEmail(name, email);
+
+        if (foundFamily.isPresent()) {
+            return Optional.of(foundFamily.get().getLoginId());
+        } else {
+            return Optional.empty();
+        }
     }
 }

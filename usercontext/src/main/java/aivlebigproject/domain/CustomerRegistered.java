@@ -13,11 +13,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class CustomerRegistered extends AbstractEvent {
 
     private Long customerId;
-    private Long userId;
     private String phone;
     private List<String> diseaseList;
     private Integer age;
-    
     private String job;
     private String address;
     private String gender;
