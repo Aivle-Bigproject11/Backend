@@ -60,4 +60,4 @@ public class ManagerController {
       return ResponseEntity.badRequest().body("입력하신 정보와 일치하는 계정을 찾을 수 없습니다.");
     }
   }
-}
+} 

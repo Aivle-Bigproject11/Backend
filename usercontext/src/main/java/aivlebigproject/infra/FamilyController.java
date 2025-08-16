@@ -64,7 +64,7 @@ public class FamilyController {
     }
   }
 
-  @GetMapping("/families/search-name")
+  @GetMapping("/families/search/name")
   public ResponseEntity<?> searchByName(@RequestParam String name) {
     List<Family> families = familyService.searchByName(name);
     if (families.isEmpty()) {
@@ -73,7 +73,7 @@ public class FamilyController {
     return ResponseEntity.ok(families);
   }
 
-  @GetMapping("/families/search-phone")
+  @GetMapping("/families/search/phone")
   public ResponseEntity<?> searchByPhone(@RequestParam String phone) {
     List<Family> families = familyService.searchByPhone(phone);
     if (families.isEmpty()) {
@@ -82,7 +82,7 @@ public class FamilyController {
     return ResponseEntity.ok(families);
   }
 
-  @GetMapping("/families/search-loginId")
+  @GetMapping("/families/search/loginId")
   public ResponseEntity<?> searchByLoginId(@RequestParam String loginId) {
     Optional<Family> family = familyService.searchByLoginId(loginId);
     if (family.isEmpty()) {
@@ -91,7 +91,7 @@ public class FamilyController {
     return ResponseEntity.ok(family);
   }
 
-  @GetMapping("/families/search-email")
+  @GetMapping("/families/search/email")
   public ResponseEntity<?> searchByEmail(@RequestParam String email) {
     Optional<Family> family = familyService.searchByEmail(email);
     if (family.isEmpty()) {
