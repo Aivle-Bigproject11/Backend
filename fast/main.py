@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from aiokafka import AIOKafkaConsumer, AIOKafkaProducer
 from contextlib import asynccontextmanager
 import asyncio, json, os, joblib, logging, pandas as pd
-from deathPredict import train_and_save_models
+from rf_model import train_and_save_models
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -66,8 +66,8 @@ async def kafka_consumer_loop():
 
 async def process_one_kafka_message():
     msg = await app_state.consumer.getone()
-    logger.info(f"📨 메시지 수신: {msg.value.decode('utf-8')}")
-    logger.info(f"📨 수신 헤더 원본: {msg.headers}")
+    logger.info(f"메시지 수신: {msg.value.decode('utf-8')}")
+    logger.info(f"수신 헤더 원본: {msg.headers}")
 
     headers = dict(msg.headers)
     event_type = None
@@ -77,13 +77,13 @@ async def process_one_kafka_message():
             break
 
     if event_type != "AiRequestEvent":
-        logger.info(f"⏩ 무시된 이벤트: eventType={event_type}")
+        logger.info(f"무시된 이벤트: eventType={event_type}")
         return {"status": "ignored", "reason": f"eventType={event_type}"}
 
     payload = json.loads(msg.value.decode('utf-8'))
     date_str, region = payload.get("date"), payload.get("region")
     if not date_str:
-        logger.warning("❌ 'date' 필드 없음")
+        logger.warning("'date' 필드 없음")
         return
 
     start_date = pd.to_datetime(f"{date_str}-01").date()
@@ -96,10 +96,12 @@ async def process_one_kafka_message():
 
     for prediction in predictions:
         result_payload = {
-            "eventType": "DeathPredictionEvent",  # ✅ payload에 명시
+            "eventType": "DeathPredictionEvent",
             "date": prediction["date"],
-            "region": prediction["region"],
-            "predictedDeaths": prediction["predictedDeaths"]
+            "region": prediction["regionName"],
+            "growthRate": prediction["growthRate"],
+            "regionalPercentage": prediction["regionalPercentage"],
+            "previousYearDeaths": prediction["previousYearDeaths"]
         }
 
         await app_state.producer.send_and_wait(
@@ -108,13 +110,10 @@ async def process_one_kafka_message():
             headers=[
                 ("contentType", b"application/json"),
                 ("spring_json_header_types", b'{"eventType":"java.lang.String"}'),
-                ("eventType", b"DeathPredictionEvent")  # ✅ 여기를 바꾼 것!
+                ("eventType", b"DeathPredictionEvent")
             ]
         )
-
-        logger.info(f"✅ 예측 결과 발행: {result_payload}")
-
-
+        logger.info(f" 예측 결과 발행: {result_payload}")
 @app.get("/")
 async def health_check():
     return {"status": "ok"}

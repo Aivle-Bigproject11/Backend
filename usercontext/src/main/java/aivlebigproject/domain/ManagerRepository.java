@@ -8,4 +8,5 @@ import java.util.Optional;
 public interface ManagerRepository extends PagingAndSortingRepository<Manager, Long> {
     Optional<Manager> findByLoginIdAndLoginPassword(String loginId, String loginPassword);
     Optional<Manager> findByLoginId(String loginId);
+    Optional<Manager> findByNameAndEmail(String name, String email);
 }
