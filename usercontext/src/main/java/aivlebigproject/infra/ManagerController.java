@@ -21,7 +21,7 @@ public class ManagerController {
   @Autowired ManagerService managerService;
 
   // ✨ ID 중복 확인 API 엔드포인트 추가
-  @GetMapping("/managers/check-id")
+  @GetMapping("/managers/check/id")
   public ResponseEntity<Boolean> checkDuplicateId(@RequestParam String loginId) {
     boolean isDuplicate = managerService.isLoginIdDuplicate(loginId);
     return ResponseEntity.ok(isDuplicate);

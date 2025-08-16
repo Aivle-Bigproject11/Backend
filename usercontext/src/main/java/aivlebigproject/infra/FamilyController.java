@@ -19,7 +19,7 @@ public class FamilyController {
   @Autowired
   FamilyService familyService;
 
-  @GetMapping("/families/check-id")
+  @GetMapping("/families/check/id")
   public ResponseEntity<Boolean> checkDuplicateId(@RequestParam String loginId) {
     boolean isDuplicate = familyService.isLoginIdDuplicate(loginId);
     return ResponseEntity.ok(isDuplicate);
