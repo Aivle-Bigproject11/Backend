@@ -67,42 +67,55 @@ async def kafka_consumer_loop():
 async def process_one_kafka_message():
     msg = await app_state.consumer.getone()
     logger.info(f"메시지 수신: {msg.value.decode('utf-8')}")
-    logger.info(f"수신 헤더 원본: {msg.headers}")
 
     headers = dict(msg.headers)
     event_type = None
     for k, v in msg.headers:
-        if k =='eventType':
+        if k == 'eventType':
             event_type = v.decode()
             break
 
     if event_type != "AiRequestEvent":
         logger.info(f"무시된 이벤트: eventType={event_type}")
-        return {"status": "ignored", "reason": f"eventType={event_type}"}
+        return
 
     payload = json.loads(msg.value.decode('utf-8'))
     date_str, region = payload.get("date"), payload.get("region")
-    if not date_str:
-        logger.warning("'date' 필드 없음")
+
+    if not date_str or not region:
+        logger.warning("'date' 또는 'region' 필드 없음")
         return
 
-    start_date = pd.to_datetime(f"{date_str}-01").date()
+    try:
+        year, month = map(int, date_str.split('-'))
+    except (ValueError, IndexError):
+        logger.warning(f"잘못된 날짜 형식: {date_str}")
+        return
 
-    if not region or region == "전국":
-        predictions = app_state.ai_models.predict_all_regions(start_date)
-    else:
-        predictions = app_state.ai_models.predict_next_months(region, start_date)
-
+    # 'rf_model.py'의 통합된 make_predictions 함수를 호출합니다.
+    try:
+        predictions = make_predictions(
+            app_state.ai_models['model'],
+            app_state.ai_models['training_data'],
+            year,
+            [month],
+            region
+        )
+    except ValueError as e:
+        logger.error(f"🚨 예측 오류: {e}")
+        return
 
     for prediction in predictions:
         result_payload = {
             "eventType": "DeathPredictionEvent",
             "date": prediction["date"],
             "region": prediction["regionName"],
+            "predictedDeaths": prediction["predictedDeaths"],
             "growthRate": prediction["growthRate"],
-            "regionalPercentage": prediction["regionalPercentage"],
             "previousYearDeaths": prediction["previousYearDeaths"]
         }
+        if "regionalPercentage" in prediction:
+            result_payload["regionalPercentage"] = prediction["regionalPercentage"]
 
         await app_state.producer.send_and_wait(
             KAFKA_TOPIC,

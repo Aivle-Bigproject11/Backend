@@ -22,6 +22,7 @@ warnings.filterwarnings('ignore')
 import locale
 import codecs
 sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer)
+import joblib
 
 
 def load_training_data(csv_file):
@@ -378,7 +379,7 @@ if __name__ == "__main__":
     import os
     
     # 파일 경로 설정
-    training_data_path = '/Users/andohyung/Downloads/예측모델/AI_Model/지역_월별_사망자수_데이터_최종.csv'
+    training_data_path = './지역_월별_사망자수_데이터_최종.csv'
     
     # 파일 존재 확인
     if not os.path.exists(training_data_path):
