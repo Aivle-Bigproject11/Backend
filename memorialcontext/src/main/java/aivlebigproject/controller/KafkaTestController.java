@@ -1,18 +1,27 @@
 package aivlebigproject.controller;
 
+import aivlebigproject.event.listener.FamilyApproved;
 import aivlebigproject.event.listener.FuneralInfoRegistered;
+import aivlebigproject.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/kafka")
 public class KafkaTestController {
+
+    private final JwtUtil jwtUtil;
 
     @GetMapping("/funeral-regist")
     public String sendEvent() {
@@ -71,6 +80,24 @@ public class KafkaTestController {
     private Date toDate(LocalDate localDate) {
         return localDate == null ? null
                 : Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
+    @GetMapping("{memorialId}/family/{familyId}")
+    public ResponseEntity<?> loginFamilyAndAuthorized(@PathVariable UUID memorialId, @PathVariable Long familyId) {
+        String token = jwtUtil.generateToken(familyId, "FAMILY");
+        FamilyApproved event = new FamilyApproved();
+        event.setMemorialId(memorialId);
+        event.setId(familyId);
+        event.publish();
+
+        // 응답 객체 생성
+        Map<String, Object> response = new HashMap<>();
+        response.put("familyId", familyId);
+        response.put("role", "FAMILY");
+        response.put("message", "Family test token generated");
+        response.put("token", token);
+
+        return ResponseEntity.ok(response);
     }
 
 }

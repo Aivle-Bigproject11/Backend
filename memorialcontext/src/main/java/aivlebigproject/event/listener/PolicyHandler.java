@@ -59,8 +59,7 @@ public class PolicyHandler {
                 "\n\n##### listener AddFamily : " + familyApproved + "\n\n"
         );
 
-        // Sample Logic //
-//        Memorial.addFamily(event);
+        memorialService.addFamily(event);
     }
 
     // --- 통합 이벤트 핸들러 (Python -> Java 및 기타 이벤트 처리) ---

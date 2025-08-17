@@ -23,6 +23,12 @@ openai:
     url: ${OPENAI_API_URL:https://api.openai.com/v1/chat/completions}
   model: ${OPENAI_MODEL:gpt-4o-mini}
 
+jwt:
+  secret: ${JWT_SECRET:aivle-bigbig-project-super-secret-key-123456}
+  expiration: 3600000  # 1시간 (밀리초)
+  refresh-expiration: 604800000  # 7일 (밀리초)
+
+
 ---
 
 spring:
