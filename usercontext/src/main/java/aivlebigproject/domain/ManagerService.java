@@ -27,4 +27,19 @@ public class ManagerService {
       return Optional.empty();
     }
   }
+  public List<Manager> searchByName(String name) {
+    return managerRepository.findByNameContaining(name);
+  }
+    
+  public List<Manager> searchByPhone(String phone) {
+    return managerRepository.findByPhoneContaining(phone);
+  }
+
+  public Optional<Manager> searchByLoginId(String loginId) {
+    return managerRepository.findByLoginId(loginId);
+  }
+
+  public Optional<Manager> searchByEmail(String email) {
+    return managerRepository.findByEmail(email);
+  }
 }

@@ -5,7 +5,7 @@ import aivlebigproject.domain.Manager;
 import aivlebigproject.domain.ManagerRepository;
 import aivlebigproject.domain.ManagerService; // ManagerService import
 import aivlebigproject.dto.*;
-import java.util.Optional;
+import java.util.*;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -60,4 +60,42 @@ public class ManagerController {
       return ResponseEntity.badRequest().body("입력하신 정보와 일치하는 계정을 찾을 수 없습니다.");
     }
   }
+
+    @GetMapping("/managers/search/name")
+  public ResponseEntity<?> searchByName(@RequestParam String name) {
+    List<Manager> families = managerService.searchByName(name);
+    if (families.isEmpty()) {
+      return ResponseEntity.badRequest().body("입력하신 정보와 일치하는 계정을 찾을 수 없습니다.");
+    }
+    return ResponseEntity.ok(families);
+  }
+
+  @GetMapping("/managers/search/phone")
+  public ResponseEntity<?> searchByPhone(@RequestParam String phone) {
+    List<Manager> families = managerService.searchByPhone(phone);
+    if (families.isEmpty()) {
+      return ResponseEntity.badRequest().body("입력하신 정보와 일치하는 계정을 찾을 수 없습니다.");
+    }
+    return ResponseEntity.ok(families);
+  }
+
+  @GetMapping("/managers/search/loginId")
+  public ResponseEntity<?> searchByLoginId(@RequestParam String loginId) {
+    Optional<Manager> family = managerService.searchByLoginId(loginId);
+    if (family.isEmpty()) {
+      return ResponseEntity.badRequest().body("입력하신 정보와 일치하는 계정을 찾을 수 없습니다.");
+    }
+    return ResponseEntity.ok(family);
+  }
+
+  @GetMapping("/managers/search/email")
+  public ResponseEntity<?> searchByEmail(@RequestParam String email) {
+    Optional<Manager> family = managerService.searchByEmail(email);
+    if (family.isEmpty()) {
+      return ResponseEntity.badRequest().body("입력하신 정보와 일치하는 계정을 찾을 수 없습니다.");
+    }
+    return ResponseEntity.ok(family);
+  }
+
+
 } 
