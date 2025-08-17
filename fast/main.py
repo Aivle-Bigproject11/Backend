@@ -35,7 +35,7 @@ async def lifespan(app: FastAPI):
         logger.info("✅ Kafka 연결 성공")
 
         model_file = 'regional_models.joblib'
-        data_file = './지역월별_사망자수_데이터_최종.csv'
+        data_file = './지역_월별_사망자수_데이터_최종.csv'
 
         if os.path.exists(model_file):
             app_state.ai_models = joblib.load(model_file)
@@ -83,10 +83,11 @@ async def process_one_kafka_message():
         return
 
     payload = json.loads(msg.value.decode('utf-8'))
-    date_str, region = payload.get("date")
+    date_str = payload.get("date")
+    region = payload.get("region") # 📌 region 필드가 없어도 오류가 나지 않도록 get() 사용
 
-    if not date_str or not region:
-        logger.warning("'date' 또는 'region' 필드 없음")
+    if not date_str:
+        logger.warning("'date' 필드 없음. 메시지를 무시합니다.")
         return
 
     try:
@@ -96,12 +97,13 @@ async def process_one_kafka_message():
         return
 
     try:
+        # region이 None이면 전체 지역에 대한 예측을 수행합니다.
         predictions = make_predictions(
             app_state.ai_models,
             app_state.ai_models['training_data'],
             year,
-            [month],
-            None
+            list(range(1, 13)),
+            region # 📌 region 값을 그대로 전달
         )
     except Exception as e:
         logger.error(f"🚨 예측 오류: {e}")

@@ -34,7 +34,7 @@ public class DeathPredictionController {
             .map(pred -> new ResponseEntity<>(pred, HttpStatus.OK))
             .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-@GetMapping("/by-date/{date}")
+    @GetMapping("/by-date/{date}")
     public ResponseEntity<List<DeathPrediction>> getPredictionsByDate(@PathVariable String date) {
         List<DeathPrediction> predictions = deathPredictionRepository.findByIdDate(date);
 

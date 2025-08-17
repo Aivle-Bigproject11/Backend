@@ -32,7 +32,16 @@ public class PolicyHandler {
             }
 
             DeathPredictionId id = new DeathPredictionId(event.getDate(), event.getRegion());
-            DeathPrediction prediction = deathPredictionRepository.findById(id).orElse(new DeathPrediction(event.getDate(), event.getRegion(), null));
+            DeathPrediction prediction = deathPredictionRepository.findById(id).orElse(
+                new DeathPrediction(
+                    event.getDate(),
+                    event.getRegion(),
+                    event.getPredictedDeaths(),
+                    event.getGrowthRate(),
+                    event.getRegionalPercentage(),
+                    event.getPreviousYearDeaths()
+                    )
+                );
             prediction.setDeaths(event.getPredictedDeaths());
             prediction.setGrowthRate(event.getGrowthRate());
             prediction.setRegionalPercentage(event.getRegionalPercentage());
