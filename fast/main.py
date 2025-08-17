@@ -2,7 +2,8 @@ from fastapi import FastAPI
 from aiokafka import AIOKafkaConsumer, AIOKafkaProducer
 from contextlib import asynccontextmanager
 import asyncio, json, os, joblib, logging, pandas as pd
-from rf_model import train_and_save_models
+# rf_model에서 필요한 함수들을 정확하게 import 합니다.
+from rf_model import train_and_save_models, make_predictions
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -34,15 +35,17 @@ async def lifespan(app: FastAPI):
         logger.info("✅ Kafka 연결 성공")
 
         model_file = 'regional_models.joblib'
+        data_file = './지역월별_사망자수_데이터_최종.csv'
+
         if os.path.exists(model_file):
             app_state.ai_models = joblib.load(model_file)
             logger.info("✅ AI 모델 로드 완료")
         else:
-            app_state.ai_models = train_and_save_models('지역월별_사망자수_데이터.csv', model_file)
+            # rf_model.py의 train_and_save_models 함수를 호출합니다.
+            app_state.ai_models = train_and_save_models(data_file, model_file)
             logger.info("✅ AI 모델 학습 및 저장 완료")
 
-        asyncio.create_task(kafka_consumer_loop())  # ✅ 자동 처리 루프 등록
-
+        asyncio.create_task(kafka_consumer_loop())
         yield
 
     finally:
@@ -80,7 +83,7 @@ async def process_one_kafka_message():
         return
 
     payload = json.loads(msg.value.decode('utf-8'))
-    date_str, region = payload.get("date"), payload.get("region")
+    date_str, region = payload.get("date")
 
     if not date_str or not region:
         logger.warning("'date' 또는 'region' 필드 없음")
@@ -92,16 +95,15 @@ async def process_one_kafka_message():
         logger.warning(f"잘못된 날짜 형식: {date_str}")
         return
 
-    # 'rf_model.py'의 통합된 make_predictions 함수를 호출합니다.
     try:
         predictions = make_predictions(
-            app_state.ai_models['model'],
+            app_state.ai_models,
             app_state.ai_models['training_data'],
             year,
             [month],
-            region
+            None
         )
-    except ValueError as e:
+    except Exception as e:
         logger.error(f"🚨 예측 오류: {e}")
         return
 
@@ -127,6 +129,7 @@ async def process_one_kafka_message():
             ]
         )
         logger.info(f" 예측 결과 발행: {result_payload}")
+        
 @app.get("/")
 async def health_check():
     return {"status": "ok"}

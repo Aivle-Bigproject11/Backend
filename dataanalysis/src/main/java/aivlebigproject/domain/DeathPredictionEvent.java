@@ -11,4 +11,7 @@ public class DeathPredictionEvent extends AbstractEvent {
     private String date;
     private String region;
     private Long predictedDeaths;
+    private Double growthRate; // 📌 Double로 변경
+    private Double regionalPercentage; // 📌 Double로 변경
+    private Long previousYearDeaths;
 }

@@ -34,6 +34,9 @@ public class PolicyHandler {
             DeathPredictionId id = new DeathPredictionId(event.getDate(), event.getRegion());
             DeathPrediction prediction = deathPredictionRepository.findById(id).orElse(new DeathPrediction(event.getDate(), event.getRegion(), null));
             prediction.setDeaths(event.getPredictedDeaths());
+            prediction.setGrowthRate(event.getGrowthRate());
+            prediction.setRegionalPercentage(event.getRegionalPercentage());
+            prediction.setPreviousYearDeaths(event.getPreviousYearDeaths());
             deathPredictionRepository.save(prediction);
 
             log.info("저장 완료: {}", prediction);
