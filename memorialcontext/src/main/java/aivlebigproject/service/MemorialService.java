@@ -111,6 +111,7 @@ public class MemorialService {
         return MemorialDetail.builder()
                 .memorialId(memorial.getMemorialId())
                 .deceasedName(memorial.getName())
+                .profileImageUrl(memorial.getProfileImageUrl())
                 .deceasedAge(memorial.getAge())
                 .gender(memorial.getGender())
                 .birthDate(memorial.getBirthDate())
