@@ -207,12 +207,12 @@ public class MemorialService {
 
     private void validateMemorialAccess(UUID memorialId, TokenUserInfo userInfo) {
         // MANAGER는 모든 권한
-        if ("MANAGER".equals(userInfo.getRole())) {
+        if ("manager".equals(userInfo.getRole())) {
             return;
         }
 
         // FAMILY는 해당 추모관의 가족 구성원인지 확인
-        if ("FAMILY".equals(userInfo.getRole())) {
+        if ("family".equals(userInfo.getRole())) {
             boolean isFamilyMember = memorialRepository
                     .existsByIdAndFamilyListContaining(memorialId, userInfo.getUserId());
 
