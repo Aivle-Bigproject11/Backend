@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: usercontext
+
+jwt:
+  secret: ${JWT_SECRET:aivle-bigbig-project-super-secret-key-123456}
+  expiration: 3600000  # 1시간 (밀리초)
+  refresh-expiration: 604800000  # 7일 (밀리초)
 ---
 
 spring:
@@ -40,10 +45,6 @@ spring:
 #>>> EDA / Topic Name
           contentType: application/json
           
-jwt:
-  secret: ${JWT_SECRET:aivle-bigbig-project-super-secret-key-123456}
-  expiration: 3600000  # 1시간 (밀리초)
-  refresh-expiration: 604800000  # 7일 (밀리초)
 
 logging:
   level:
