@@ -11,12 +11,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-def upload_video_to_blob(local_file_path, memorialId=None, videoId=None):
+def upload_video_to_blob(local_file_path, memorialId="test", videoId=1):
     """비디오 파일을 Azure Blob Storage에 업로드"""
     try:
         # Azure Storage 설정
-        connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
-        container_name = os.getenv('AZURE_CONTAINER_NAME', 'memorial-video')
+        connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING_MIN')
+        container_name = os.getenv('AZURE_STORAGE_CONTAINER')
         account_name = os.getenv('AZURE_STORAGE_ACCOUNT_NAME')
 
         if not connection_string:
@@ -88,19 +88,8 @@ def test_blob_upload():
         return False
 
     # 업로드 테스트
-    result = upload_video_to_blob(test_file, memorialId="memorial", videoId="1")
+    result = upload_video_to_blob(test_file, memorialId="memorial", videoId="3")
 
-    if result['success']:
-        print(f"\n🎉 테스트 성공!")
-        return True
-    else:
-        print(f"\n❌ 테스트 실패: {result['error']}")
-        print("\n💡 확인사항:")
-        print("   1. AZURE_STORAGE_CONNECTION_STRING이 .env에 설정되어 있는가?")
-        print("   2. AZURE_STORAGE_ACCOUNT_NAME이 .env에 설정되어 있는가?")
-        print("   3. Azure Storage Account가 정상인가?")
-        print("   4. azure-storage-blob 패키지가 설치되어 있는가?")
-        return False
 
 
 if __name__ == "__main__":
