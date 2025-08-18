@@ -6,10 +6,10 @@ import os
 
 from moviepy import TextClip, AudioFileClip, ImageClip, CompositeVideoClip, ColorClip, VideoFileClip
 
-from app.azure_blob import upload_video_to_blob
-from app.config import TEST_MODE,  VIDEO_SIZE, FONT_PATH
-from app.scenario import generate_scenario
-from app.utils import create_directories
+from azure_blob import upload_video_to_blob
+from config import TEST_MODE,  VIDEO_SIZE, FONT_PATH
+from scenario import generate_scenario
+from utils import create_directories
 
 
 class MemorialVideoCreator:
@@ -58,29 +58,28 @@ class MemorialVideoCreator:
             return self._create_main_clip(scene, subtitle, duration)
 
     def _create_outro_clip(self, subtitle, duration):
-        """아웃트로 장면 생성"""
         outro_clip_path = os.path.join(self.outro_dir, "runway_result.mp4")
-        outro_clip = VideoFileClip(outro_clip_path)
+        oc = VideoFileClip(outro_clip_path)
 
-        # 아웃트로 비디오를 영상 크기에 맞춰 조정
-        outro_clip = outro_clip.resized(height=self.video_size[1]).with_duration(duration)
+        # 1) 안전 자르기(종료 시점 - 아주 작은 여유)
+        safe_end = min(duration, oc.duration - 0.02)
+        oc = oc.subclipped(0, max(0, safe_end))
 
-        # 자막 클립 생성
+        # 2) 남는 시간은 마지막 프레임 freeze
+        if safe_end < duration:
+            tail = oc.to_ImageClip().with_duration(duration - safe_end)
+            oc = CompositeVideoClip([oc.with_position(('center', 'center')),
+                                     tail.with_start(safe_end)], size=self.video_size)
+
+        oc = oc.resized(height=self.video_size[1]).with_duration(duration)
+
         subtitle_clip = self.create_subtitle_clip(subtitle, duration)
+        subtitle_bg = ColorClip(size=(self.video_size[0], 150), color=(0, 0, 0)) \
+            .with_opacity(0.6).with_duration(duration) \
+            .with_position((0, self.video_size[1] - 150))
 
-        # 자막 배경 생성 (전체 하단에 반투명 배경)
-        subtitle_bg = ColorClip(
-            size=(self.video_size[0], 150),
-            color=(0, 0, 0)
-        ).with_opacity(0.6).with_duration(duration).with_position((0, self.video_size[1] - 150))
-
-        scene_clip = CompositeVideoClip([
-            outro_clip.with_position(('center', 'center')),
-            subtitle_bg,
-            subtitle_clip
-        ], size=self.video_size).with_duration(duration)
-
-        return scene_clip
+        return CompositeVideoClip([oc.with_position(('center', 'center')), subtitle_bg, subtitle_clip],
+                                  size=self.video_size).with_duration(duration)
 
     def _create_main_clip(self, scene, subtitle, duration):
         """메인/인트로 장면 생성"""
@@ -130,7 +129,25 @@ class MemorialVideoCreator:
         """메인 비디오 생성 함수"""
         print("📝 시나리오 생성 중...")
         if TEST_MODE:
-            scenes = [{'scene_id': 1, 'scene_type': 'intro', 'subtitle': '이선균(1975.03.02 - 2023.12.27) \n항상 든든한 아버지로 기억하겠습니다.', 'duration': 6}, {'scene_id': 2, 'scene_type': 'main', 'subtitle': '그리움이 깊어가는 날,\n아버지의 미소가 그리워집니다.', 'duration': 7}, {'scene_id': 3, 'scene_type': 'main', 'subtitle': '당신의 품에서 느꼈던,\n안전과 사랑이 그리워요.', 'duration': 7}, {'scene_id': 4, 'scene_type': 'main', 'subtitle': '아버지와 나눈 소중한 이야기들,\n영원히 마음에 간직할게요.', 'duration': 6}, {'scene_id': 5, 'scene_type': 'main', 'subtitle': '어릴 적 손을 잡고 걸었던 길,\n그 기억이 아직도 생생합니다.', 'duration': 7}, {'scene_id': 6, 'scene_type': 'main', 'subtitle': '힘들었던 날, 당신의 한마디가\n위로가 되었죠.', 'duration': 7}, {'scene_id': 7, 'scene_type': 'main', 'subtitle': '아버지의 따뜻한 눈빛은\n늘 저를 지켜주셨습니다.', 'duration': 6}, {'scene_id': 8, 'scene_type': 'main', 'subtitle': '이 세상에서 제일 든든한\n후원자였던 당신을 잊지 않을게요.', 'duration': 7}, {'scene_id': 9, 'scene_type': 'main', 'subtitle': '당신과의 소중한 순간들이\n언제나 저를 감싸줍니다.', 'duration': 6}, {'scene_id': 10, 'scene_type': 'main', 'subtitle': '평생 제 곁을 지켜주신 아버지,\n사랑합니다.', 'duration': 7}, {'scene_id': 11, 'scene_type': 'main', 'subtitle': '매일 아버지를 생각하며,\n그리움이 커져만 갑니다.', 'duration': 7}, {'scene_id': 12, 'scene_type': 'main', 'subtitle': '당신의 웃음소리가\n가슴 깊이 스며듭니다.', 'duration': 6}, {'scene_id': 13, 'scene_type': 'main', 'subtitle': '건강하시던 모습이 그립고,\n늘 곁에 계셨으면 좋았을 텐데.', 'duration': 7}, {'scene_id': 14, 'scene_type': 'main', 'subtitle': '아버지의 사랑이 저를 키워주었어요.\n감사합니다.', 'duration': 6}, {'scene_id': 15, 'scene_type': 'main', 'subtitle': '당신과 함께한 모든 순간이\n제 삶의 축복이었습니다.', 'duration': 7}, {'scene_id': 16, 'scene_type': 'outro', 'subtitle': '이선균 아버지를 영원히 잊지 않겠습니다.\n사랑하는 가족 일동.', 'duration': 7}]
+            scenes = [
+                      {'scene_id': 1, 'scene_type': 'intro', 'subtitle': '송해 (1927.04.27 - 2022.06.08)\n국민의 MC, 영원한 목소리.', 'duration': 6},
+                      {'scene_id': 2, 'scene_type': 'main', 'subtitle': '언제나 유쾌한 웃음으로\n국민들에게 희망을 주셨습니다.', 'duration': 7},
+                      {'scene_id': 3, 'scene_type': 'main', 'subtitle': '전국 방방곡곡을 누비며\n서민과 함께 웃고 울던 길.', 'duration': 7},
+                      {'scene_id': 4, 'scene_type': 'main', 'subtitle': '무대 위에서 들려주신 목소리는\n세대를 아우르는 따뜻한 노래였습니다.', 'duration': 6},
+                      {'scene_id': 5, 'scene_type': 'main', 'subtitle': '누구보다도 친근하고 다정한\n국민의 MC로 기억합니다.', 'duration': 7},
+                      {'scene_id': 6, 'scene_type': 'main', 'subtitle': '재치 넘치는 입담과\n따뜻한 시선이 그립습니다.', 'duration': 7},
+                      {'scene_id': 7, 'scene_type': 'main', 'subtitle': '언제나 무대 아래 청중에게\n사랑과 용기를 주셨습니다.', 'duration': 6},
+                      {'scene_id': 8, 'scene_type': 'main', 'subtitle': '그 웃음소리는\n우리 마음속에 오래 남아 있습니다.', 'duration': 7},
+                      {'scene_id': 9, 'scene_type': 'main', 'subtitle': '한국 방송사의 산증인으로서\n문화의 한 시대를 빛내셨습니다.', 'duration': 6},
+                      {'scene_id': 10, 'scene_type': 'main', 'subtitle': '노래와 함께한 순간들이\n아직도 눈앞에 선합니다.', 'duration': 7},
+                      {'scene_id': 11, 'scene_type': 'main', 'subtitle': '서민과 함께 울고 웃던 모습,\n그 따뜻한 발걸음을 기억합니다.', 'duration': 7},
+                      {'scene_id': 12, 'scene_type': 'main', 'subtitle': '전국노래자랑의 무대 위에서\n언제나 청춘과 함께하셨습니다.', 'duration': 6},
+                      {'scene_id': 13, 'scene_type': 'main', 'subtitle': '당신이 남긴 유산은\n대한민국의 소중한 기억입니다.', 'duration': 7},
+                      {'scene_id': 14, 'scene_type': 'main', 'subtitle': '우리 모두의 삶을 노래해 주신\n그 따뜻한 마음에 감사합니다.', 'duration': 6},
+                      {'scene_id': 15, 'scene_type': 'main', 'subtitle': '영원히 국민과 함께한\nMC 송해 선생님을 추억합니다.', 'duration': 7},
+                      {'scene_id': 16, 'scene_type': 'outro', 'subtitle': '국민의 MC, 송해 선생님.\n사랑과 존경을 담아 영원히 기억하겠습니다.', 'duration': 7}
+                    ]
+
         else:
             scenes = generate_scenario(keywords, name, birth, death, photo_count+1)
 
@@ -157,7 +174,7 @@ class MemorialVideoCreator:
 
         print("🎭 장면 전환 효과 적용 중...")
         # 크로스페이드 효과와 함께 클립 연결
-        transition_duration = 1.0
+        transition_duration = 0
         fading_clips = []
         current_time = 0
 
@@ -203,12 +220,12 @@ class MemorialVideoCreator:
 if __name__ == "__main__":
     base_path = os.path.join("../temp", "test")
     keywords = "그리움, 아버지, 든든한 아버지"
-    name = "이선균"
+    name = "송해"
     birth = "1975-03-02"
     death = "2023-12-27"
     photo_count = 15
     creator = MemorialVideoCreator(base_path)
-    output_file = creator.create_video(keywords, name, birth, death, photo_count + 1, upload_to_blob=True)
+    output_file = creator.create_video(keywords, name, birth, death, photo_count + 1, upload_to_blob=False)
 
     if output_file:
         print(f"🎉 모든 작업이 완료되었습니다!")

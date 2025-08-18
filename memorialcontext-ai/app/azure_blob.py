@@ -16,7 +16,7 @@ def upload_video_to_blob(local_file_path, memorialId=None, videoId=None):
     try:
         # Azure Storage 설정
         connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
-        container_name = os.getenv('AZURE_CONTAINER_NAME', 'memorial-videos')
+        container_name = os.getenv('AZURE_CONTAINER_NAME')
         account_name = os.getenv('AZURE_STORAGE_ACCOUNT_NAME')
 
         if not connection_string:

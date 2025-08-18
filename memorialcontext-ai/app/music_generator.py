@@ -2,7 +2,7 @@ import os, time, requests
 from os.path import basename, join, abspath
 from dotenv import load_dotenv
 
-from app.config import SUNO_PROMPT
+from config import SUNO_PROMPT
 
 
 

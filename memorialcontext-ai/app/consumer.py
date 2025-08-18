@@ -9,17 +9,17 @@ from datetime import datetime
 
 from kafka import KafkaConsumer, KafkaProducer
 
-from app.config import TEST_MODE
-from app.image_converter import generate_image_to_video
-from app.music_generator import generate_music_file
-from app.schemas import VideoRequest
+from config import TEST_MODE
+from image_converter import generate_image_to_video
+from music_generator import generate_music_file
+from schemas import VideoRequest
 
 
 ################################
 import os
 
-from app.utils import download_url
-from app.video_creator import MemorialVideoCreator
+from utils import download_url
+from video_creator import MemorialVideoCreator
 
 
 ################################
@@ -105,11 +105,6 @@ def start_consumer():
                 else:
                     print(f"❌ 추모영상 실패", flush=True)
 
-
-
-
-
-        
         except Exception as e:
             print(f"❌ 이벤트 처리 중 최상위 오류 발생: {e}", flush=True)
 

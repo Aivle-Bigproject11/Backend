@@ -5,8 +5,8 @@ import runwayml
 from dotenv import load_dotenv
 from runwayml import RunwayML
 
-from app.config import RUNWAY_PROMPT
-from app.utils import resize_with_padding, download_url, download_video
+from config import RUNWAY_PROMPT
+from utils import resize_with_padding, download_url, download_video
 
 
 def generate_image_to_video(memorial_path):
