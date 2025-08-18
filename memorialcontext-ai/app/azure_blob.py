@@ -16,7 +16,7 @@ def upload_video_to_blob(local_file_path, memorialId=None, videoId=None):
     try:
         # Azure Storage 설정
         connection_string = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
-        container_name = os.getenv('AZURE_CONTAINER_NAME')
+        container_name = os.getenv('AZURE_CONTAINER_NAME', 'memorial-video')
         account_name = os.getenv('AZURE_STORAGE_ACCOUNT_NAME')
 
         if not connection_string:
@@ -80,7 +80,7 @@ def test_blob_upload():
     print("=" * 50)
 
     # 테스트 파일 경로
-    test_file = "temp/test/output/memorial_video.mp4"
+    test_file = "../temp/test/output/memorial_video.mp4"
 
     if not os.path.exists(test_file):
         print(f"❌ 테스트 파일이 없습니다: {test_file}")
