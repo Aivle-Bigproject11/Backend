@@ -21,7 +21,7 @@ spring:
         - id: funeralcontext
           uri: http://localhost:8083
           predicates:
-            - Path=/funeralInfos/**, /obituaries/**, /deathReports/**, /schedules/**, /customerReadmodels/**
+            - Path=/funeralInfos/**, /obituaries/**, /deathReports/**, /schedules/**, /customerReadModels/**
         - id: usercontext
           uri: http://localhost:8084
           predicates:
@@ -65,11 +65,11 @@ spring:
         - id: servicecontext
           uri: http://servicecontext:8080
           predicates:
-            - Path=/conversionServices/**, /recommendMessages/**, /customerInfos/**
+            - Path=/conversionServices/**, /recommendMessages/**, /customerInfos/**, /customer-infos/**
         - id: funeralcontext
           uri: http://funeralcontext:8080
           predicates:
-            - Path=/funeralInfos/**, /obituaries/**, /deathReports/**, /schedules/**, /customerReadmodels/**
+            - Path=/funeralInfos/**, /obituaries/**, /deathReports/**, /schedules/**, /customerReadModels/**
         - id: usercontext
           uri: http://usercontext:8080
           predicates:
@@ -77,7 +77,7 @@ spring:
         - id: memorialcontext
           uri: http://memorialcontext:8080
           predicates:
-            - Path=/memorials/**, /videos/**, /photos/**, /comments/**, /tributes/**, 
+            - Path=/memorials/**, /videos/**, /photos/**, /comments/**, /tributes/**, /kafka/**
         - id: dataanalysis
           uri: http://dataanalysis:8080
           predicates:

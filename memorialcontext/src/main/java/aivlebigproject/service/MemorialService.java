@@ -1,7 +1,10 @@
 package aivlebigproject.service;
 
 import aivlebigproject.dto.*;
+import aivlebigproject.event.listener.FamilyApproved;
 import aivlebigproject.event.listener.FuneralInfoRegistered;
+import aivlebigproject.exception.MemorialAccessDeniedException;
+import aivlebigproject.exception.MemorialNotFoundException;
 import aivlebigproject.model.Comment;
 import aivlebigproject.model.Memorial;
 import aivlebigproject.model.Photo;
@@ -18,8 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.EntityNotFoundException;
 import java.io.IOException;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,8 +47,18 @@ public class MemorialService {
         memorial.setCustomerId(funeralInfoRegistered.getCustomerId());
         memorial.setName(funeralInfoRegistered.getDeceasedName());
         memorial.setAge(funeralInfoRegistered.getDeceasedAge());
-        memorial.setBirthDate(funeralInfoRegistered.getDeceasedBirthOfDate());
-        memorial.setDeceasedDate(funeralInfoRegistered.getDeceasedDate());
+        memorial.setBirthDate(
+                funeralInfoRegistered.getDeceasedBirthOfDate()
+                        .toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate()
+        );
+        memorial.setDeceasedDate(
+                funeralInfoRegistered.getDeceasedDate()
+                        .toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDate()
+        );
         memorial.setGender(funeralInfoRegistered.getDeceasedGender());
 
         log.info("Memorial created: {}", memorial);
@@ -54,13 +67,13 @@ public class MemorialService {
     }
 
     @Transactional
-    public MemorialProfileResponse updateProfileImage(UUID memorialId, MultipartFile profileImage) throws IOException {
-        if (!memorialRepository.existsById(memorialId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 추모관을 찾을 수 없습니다.: " + memorialId);
-        }
+    public MemorialProfileResponse updateProfileImage(UUID memorialId, MultipartFile profileImage, TokenUserInfo tokenUserInfo) throws IOException {
+        validateMemorialAccess(memorialId, tokenUserInfo);
+
+        Memorial memorial = memorialRepository.findById(memorialId)
+                .orElseThrow(() -> new MemorialNotFoundException(memorialId.toString()));
 
         String url = azureBlobService.uploadProfileImage(profileImage, memorialId);
-        Memorial memorial = memorialRepository.findById(memorialId).orElse(null);
         memorial.updateProfileImage(url);
         memorialRepository.save(memorial);
 
@@ -71,12 +84,12 @@ public class MemorialService {
     }
 
     @Transactional
-    public MemorialProfileResponse deleteProfileImage(UUID memorialId) {
-        if (!memorialRepository.existsById(memorialId)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "해당 추모관을 찾을 수 없습니다.: " + memorialId);
-        }
+    public MemorialProfileResponse deleteProfileImage(UUID memorialId, TokenUserInfo tokenUserInfo) {
+        validateMemorialAccess(memorialId, tokenUserInfo);
 
-        Memorial memorial = memorialRepository.findById(memorialId).orElse(null);
+        Memorial memorial = memorialRepository.findById(memorialId)
+                .orElseThrow(() -> new MemorialNotFoundException(memorialId.toString()));
+
         memorial.setProfileImageUrl(null);
         memorialRepository.save(memorial);
 
@@ -100,6 +113,7 @@ public class MemorialService {
         return MemorialDetail.builder()
                 .memorialId(memorial.getMemorialId())
                 .deceasedName(memorial.getName())
+                .profileImageUrl(memorial.getProfileImageUrl())
                 .deceasedAge(memorial.getAge())
                 .gender(memorial.getGender())
                 .birthDate(memorial.getBirthDate())
@@ -113,9 +127,11 @@ public class MemorialService {
     }
 
     @Transactional
-    public TributeResponse createTribute(UUID memorialId, TributeGenerationRequest request) {
+    public TributeResponse createTribute(UUID memorialId, TributeGenerationRequest request, TokenUserInfo tokenUserInfo) {
+        validateMemorialAccess(memorialId, tokenUserInfo);
+
         Memorial memorial = memorialRepository.findById(memorialId)
-                .orElseThrow(() -> new EntityNotFoundException("추모관을 찾을 수 없습니다: " + memorialId));
+                .orElseThrow(() -> new MemorialNotFoundException(memorialId.toString()));
 
         String prompt = buildTributePrompt(memorial, request);
 
@@ -146,10 +162,12 @@ public class MemorialService {
     }
 
     @Transactional
-    public TributeResponse updateTribute(UUID memorialId, TributeUpdateRequest request) {
+    public TributeResponse updateTribute(UUID memorialId, TributeUpdateRequest request, TokenUserInfo tokenUserInfo) {
+
+        validateMemorialAccess(memorialId, tokenUserInfo);
 
         Memorial memorial = memorialRepository.findById(memorialId)
-                .orElseThrow(() -> new EntityNotFoundException("추모관을 찾을 수 없습니다: " + memorialId));
+                .orElseThrow(() -> new MemorialNotFoundException(memorialId.toString()));
 
         // 사용자 수정 내용 저장
         memorial.updateTribute(request.getTribute());
@@ -164,9 +182,11 @@ public class MemorialService {
     }
 
     @Transactional
-    public TributeResponse deleteTribute(UUID memorialId) {
+    public TributeResponse deleteTribute(UUID memorialId, TokenUserInfo tokenUserInfo) {
+        validateMemorialAccess(memorialId, tokenUserInfo);
+
         Memorial memorial = memorialRepository.findById(memorialId)
-                .orElseThrow(() -> new EntityNotFoundException("추모관을 찾을 수 없습니다: " + memorialId));
+                .orElseThrow(() -> new MemorialNotFoundException(memorialId.toString()));
         memorial.setTribute(null);
         memorial.setTributeGeneratedAt(null);
         memorialRepository.save(memorial);
@@ -176,5 +196,32 @@ public class MemorialService {
                 .tribute(memorial.getTribute())
                 .tributeGeneratedAt(memorial.getTributeGeneratedAt())
                 .build();
+    }
+
+    @Transactional
+    public void addFamily(FamilyApproved event){
+        Memorial memorial = memorialRepository.findById(event.getMemorialId())
+                .orElseThrow(() -> new MemorialNotFoundException(event.getMemorialId().toString()));
+        memorial.addFamily(event.getId());
+    }
+
+    private void validateMemorialAccess(UUID memorialId, TokenUserInfo userInfo) {
+        // MANAGER는 모든 권한
+        if ("MANAGER".equals(userInfo.getRole())) {
+            return;
+        }
+
+        // FAMILY는 해당 추모관의 가족 구성원인지 확인
+        if ("FAMILY".equals(userInfo.getRole())) {
+            boolean isFamilyMember = memorialRepository
+                    .existsByIdAndFamilyListContaining(memorialId, userInfo.getUserId());
+
+            if (!isFamilyMember) {
+                throw new MemorialAccessDeniedException(memorialId.toString(), userInfo.getUserId());
+            }
+            return;
+        }
+
+        throw new MemorialAccessDeniedException("Invalid role: " + userInfo.getRole());
     }
 }

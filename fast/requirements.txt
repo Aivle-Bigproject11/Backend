@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+aiokafka
+pydantic
+pandas
+scikit-learn

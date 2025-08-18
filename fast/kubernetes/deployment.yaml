@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fast
+  labels:
+    app: fast
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fast
+  template:
+    metadata:
+      labels:
+        app: fast
+    spec:
+      containers:
+        - name: fast
+          image: "a071098registry.azurecr.io/fast:v1"
+          ports:
+            - containerPort: 8000

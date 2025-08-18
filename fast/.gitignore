@@ -1,0 +1,7 @@
+# =====================================
+# aivlebigproject/fast/.gitignore
+# =====================================
+
+# Python Bytecode
+__pycache__/
+*.pyc

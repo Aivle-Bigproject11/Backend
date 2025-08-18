@@ -35,16 +35,8 @@ public class CustomerReadModelViewHandler {
             customerReadModel.setCustomerAddress(
                 customerRegistered.getAddress()
             );
-            customerReadModel.setCustomerPhone(customerRegistered.getPhone());
-            customerReadModel.setCustomerJob(customerRegistered.getJob());
-            customerReadModel.setCustomerHasChildren(
-                customerRegistered.getHasChildren()
-            );
-            customerReadModel.setCustomerIsMarried(
-                customerRegistered.getIsMarried()
-            );
             customerReadModel.setCustomerBirthOfDate(
-                customerRegistered.getBirthOfDate()
+                customerRegistered.getBirthDate()
             );
             // view 레파지 토리에 save
             customerReadModelRepository.save(customerReadModel);
@@ -70,22 +62,14 @@ public class CustomerReadModelViewHandler {
                 customerReadModel.setCustomerName(customerUpdated.getName());
                 customerReadModel.setCustomerRrn(customerUpdated.getRrn());
                 customerReadModel.setCustomerAge(customerUpdated.getAge());
-                customerReadModel.setCustomerBirthOfDate(
-                    customerUpdated.getBirthOfDate()
-                );
                 customerReadModel.setCustomerGender(
                     customerUpdated.getGender()
                 );
                 customerReadModel.setCustomerAddress(
                     customerUpdated.getAddress()
                 );
-                customerReadModel.setCustomerPhone(customerUpdated.getPhone());
-                customerReadModel.setCustomerJob(customerUpdated.getJob());
-                customerReadModel.setCustomerHasChildren(
-                    customerUpdated.getHasChildren()
-                );
-                customerReadModel.setCustomerIsMarried(
-                    customerUpdated.getIsMarried()
+                customerReadModel.setCustomerBirthOfDate(
+                    customerUpdated.getBirthDate()
                 );
                 // view 레파지 토리에 save
                 customerReadModelRepository.save(customerReadModel);

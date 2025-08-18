@@ -2,6 +2,7 @@ package aivlebigproject.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import javax.persistence.*;
@@ -53,7 +54,7 @@ public class Memorial {
     private LocalDateTime updatedAt;
 
     @ElementCollection
-    private List<Long> familyList;
+    private List<Long> familyList = new ArrayList<>();
 
     @PrePersist
     public void onPrePersist() {
@@ -71,10 +72,9 @@ public class Memorial {
         this.updatedAt = LocalDateTime.now();
     }
 
-//    @PreUpdate
-//    public static void addFamily(FamilyApproved familyApproved) {
-//
-//    }
+    public void addFamily(Long familyId) {
+        this.familyList.add(familyId);
+    }
 
 
 }

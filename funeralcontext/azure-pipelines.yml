@@ -1,0 +1,48 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: '968f50fd-71da-4ff7-9f5b-937d64b7c15d'
+  imageRepository: 'a071098registryazurecriofuneralcontextbuildbuildid'
+  containerRegistry: 'a071098registry.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/funeralcontext/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    # 👇 [추가] Docker 이미지를 만들기 전에, Maven으로 .jar 파일을 먼저 빌드하는 단계를 추가합니다.
+    - task: Maven@3
+      displayName: 'Build JAR with Maven'
+      inputs:
+        mavenPomFile: 'funeralcontext/pom.xml' # pom.xml 파일 경로
+        goals: 'package'
+        options: '-DskipTests' # 테스트는 건너뛰어 빌드 속도 향상
+        publishJUnitResults: false
+
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryService-connection)
+        tags: |
+          $(tag)

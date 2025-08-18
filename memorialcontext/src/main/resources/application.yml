@@ -4,11 +4,6 @@ server:
 spring:
   application:
     name: memorialcontext
-  datasource:
-    url: ${AWS_RDS_URL}
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${AWS_USERNAME}
-    password: ${AWS_PASSWORD}
   servlet:
     multipart:
       max-file-size: 10MB
@@ -28,6 +23,12 @@ openai:
     url: ${OPENAI_API_URL:https://api.openai.com/v1/chat/completions}
   model: ${OPENAI_MODEL:gpt-4o-mini}
 
+jwt:
+  secret: ${JWT_SECRET:aivle-bigbig-project-super-secret-key-123456}
+  expiration: 3600000  # 1시간 (밀리초)
+  refresh-expiration: 604800000  # 7일 (밀리초)
+
+
 ---
 
 spring:
@@ -41,7 +42,7 @@ spring:
         format_sql: true
         implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   cloud:
     stream:
       kafka:
@@ -90,7 +91,7 @@ spring:
         format_sql: true
         implicit_naming_strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyComponentPathImpl
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
   cloud:
     stream:
       kafka:

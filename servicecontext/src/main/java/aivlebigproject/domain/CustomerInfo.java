@@ -23,7 +23,6 @@ public class CustomerInfo {
         private String gender;
         private Boolean hasChildren;
         private Boolean isMarried;
-        @DateTimeFormat(pattern = "yyyy-MM-dd")
         private Date birthDate;
 
         @Convert(converter = StringListConverter.class)

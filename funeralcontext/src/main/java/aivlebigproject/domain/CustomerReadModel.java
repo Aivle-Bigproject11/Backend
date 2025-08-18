@@ -22,8 +22,4 @@ public class CustomerReadModel {
     private Date customerBirthOfDate;
     private String customerGender;
     private String customerAddress;
-    private String customerPhone;
-    private String customerJob;
-    private Boolean customerHasChildren;
-    private Boolean customerIsMarried;
 }

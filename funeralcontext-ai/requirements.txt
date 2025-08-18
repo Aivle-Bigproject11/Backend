@@ -1,6 +1,7 @@
 fastapi
 uvicorn
-kafka-python
+# kafka-python
+aiokafka
 pydantic
 pillow
 PyMuPDF
@@ -8,3 +9,4 @@ qrcode[pil]
 azure-storage-blob
 pandas
 openai
+img2pdf

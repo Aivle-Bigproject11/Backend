@@ -8,6 +8,7 @@ import os
 import base64
 from openai import OpenAI
 from PIL import Image, ImageDraw, ImageFont
+import img2pdf # [추가] PNG를 PDF로 변환하기 위한 라이브러리
 from datetime import datetime, timezone
 from app.schemas import ScheduleDataCreated
 from .azure_uploader import upload_to_blob # [주석] Azure 업로드 함수를 import 합니다.
@@ -287,18 +288,28 @@ def create_schedule_document(event_data: ScheduleDataCreated, blob_service_clien
         footer_text = f"장례 문의 : {event_data.directorName or ''} ({event_data.directorPhone or ''})"
         draw.text((120, image.height - 100), footer_text, font=font_footer, fill=text_color, anchor="lt")
         
-        # --- 3. 텍스트가 추가된 최종 이미지를 Azure Blob에 업로드 ---
+        # --- [수정 시작] PNG 생성 후 PDF로 변환하여 업로드 ---
+        
+        # 3-1. 텍스트가 추가된 최종 이미지를 PNG 형식의 바이트 데이터로 변환
         final_img_byte_arr = io.BytesIO()
         image.save(final_img_byte_arr, format='PNG')
-        final_file_data = final_img_byte_arr.getvalue()
+        png_bytes = final_img_byte_arr.getvalue()
+
+        # 3-2. [추가] PNG 바이트 데이터를 PDF 바이트 데이터로 변환
+        pdf_bytes = img2pdf.convert(png_bytes)
         
+        # 3-3. [수정] Azure Blob에 PDF 데이터를 업로드
         doc_id = event_data.scheduleId
         time_stamp = datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')
-        final_blob_name = f"schedules/schedule_{doc_id}_{time_stamp}.png"
-        final_file_url = upload_to_blob(blob_service_client, container_name, final_blob_name, final_file_data)
+        # [수정] 파일 확장자를 .pdf로 변경
+        final_blob_name = f"schedules/schedule_{doc_id}_{time_stamp}.pdf"
+        # [수정] 업로드할 데이터를 png_bytes 대신 pdf_bytes로 변경
+        final_file_url = upload_to_blob(blob_service_client, container_name, final_blob_name, pdf_bytes)
+        
+        # --- [수정 완료] ---
 
         if final_file_url:
-            # --- 4. 4개의 최종 결과값을 담은 딕셔너리 반환 ---
+            # --- 4. 최종 결과값을 담은 딕셔너리 반환 ---
             return {
                 "scheduleDallePrompt": prompt_text,
                 "scheduleDalleTemplateImageUrl": template_image_url,
