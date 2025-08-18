@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 public class FamilyController {
 
   @Autowired
+  private JwtUtil jwtUtil; 
+
+  @Autowired
   FamilyRepository familyRepository;
 
   @Autowired
@@ -51,7 +54,7 @@ public class FamilyController {
 
     if (familyOptional.isPresent()) {
       Family family = familyOptional.get();
-      String token = JwtUtil.generateToken(family.getLoginId());
+      String token = jwtUtil.generateToken(family.getId(),"family");
 
       FamilyLoginResponseDto responseDto = new FamilyLoginResponseDto();
       responseDto.setId(family.getId());

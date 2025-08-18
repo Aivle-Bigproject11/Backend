@@ -1,51 +1,71 @@
 package aivlebigproject.domain;
 
+import aivlebigproject.dto.TokenUserInfo;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
 @Component
 public class JwtUtil {
-    private static final long EXPIRATION_MILLIS = 1000L * 60 * 60;
 
-    private static final String SECRET = "aivle-bigbig-project-super-secret-key-123456";
+    @Value("${jwt.secret}")
+    private String secret;
 
-    private static final Key key = Keys.hmacShaKeyFor(SECRET.getBytes(StandardCharsets.UTF_8));
-    public static String generateToken(String loginId) {
+    @Value("${jwt.expiration:86400000}")
+    private long expirationMillis;
+
+    private Key signingKey;
+
+    @PostConstruct
+    private void init() {
+        this.signingKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+    }
+
+    public String generateToken(Long id, String role) {
         Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + EXPIRATION_MILLIS);
+        Date expiryDate = new Date(now.getTime() + expirationMillis);
 
         return Jwts.builder()
-                .setSubject(loginId)
+                .setSubject(id.toString())
+                .claim("role", role)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .signWith(key, SignatureAlgorithm.HS256)
+                .signWith(signingKey, SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    public static String getLoginIdFromToken(String token) {
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-        return claims.getSubject();
+    public TokenUserInfo getUserInfoFromToken(String token) {
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(signingKey)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            Long userId = Long.parseLong(claims.getSubject());
+            String role = claims.get("role", String.class);
+
+            return new TokenUserInfo(userId, role);
+        } catch (JwtException | IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid JWT token", e);
+        }
     }
 
-    /** 토큰 유효성 검사 */
-    public static boolean validateToken(String token) {
+    public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token);
+                    .setSigningKey(signingKey)
+                    .build()
+                    .parseClaimsJws(token);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
             return false;

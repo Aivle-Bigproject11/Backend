@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 @Transactional
 public class ManagerController {
 
+  @Autowired
+  private JwtUtil jwtUtil; 
+
   @Autowired ManagerRepository managerRepository;
 
   @Autowired ManagerService managerService;
@@ -37,7 +40,7 @@ public class ManagerController {
 
     if (managerOptional.isPresent()) {
       Manager manager = managerOptional.get();
-      String token = JwtUtil.generateToken(manager.getLoginId());
+      String token = jwtUtil.generateToken(manager.getId(),"manager");
 
       ManagerLoginResponseDto responseDto = new ManagerLoginResponseDto();
       responseDto.setId(manager.getId());
