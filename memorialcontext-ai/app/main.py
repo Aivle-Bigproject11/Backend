@@ -6,7 +6,7 @@
 import threading
 import uvicorn
 from fastapi import FastAPI
-from consumer import start_consumer # consumer.py에서 함수를 가져옵니다.
+from app.consumer import start_consumer # consumer.py에서 함수를 가져옵니다.
 
 print("✅ main.py 파일 로드 완료", flush=True)
 

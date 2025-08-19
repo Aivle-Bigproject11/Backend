@@ -9,17 +9,17 @@ from datetime import datetime
 
 from kafka import KafkaConsumer, KafkaProducer
 
-from config import TEST_MODE
-from image_converter import generate_image_to_video
-from music_generator import generate_music_file
-from schemas import VideoRequest
+from app.config import TEST_MODE
+from app.image_converter import generate_image_to_video
+from app.music_generator import generate_music_file
+from app.schemas import VideoRequest
 
 
 ################################
 import os
 
-from utils import download_url
-from video_creator import MemorialVideoCreator
+from app.utils import download_url
+from app.video_creator import MemorialVideoCreator
 
 
 ################################
