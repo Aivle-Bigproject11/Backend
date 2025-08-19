@@ -57,8 +57,9 @@ Focus only on subtle facial and body motion while keeping the original photo int
 """
 
 SUNO_PROMPT = """
-Create a deeply emotional and touching instrumental soundtrack for a memorial tribute video.
-The music should reflect the themes of '{keywords}', evoking feelings of love, longing, and remembrance.
-Use soft piano, strings, and ambient textures. No vocals or lyrics.
-The piece should be slow-paced, calm, and respectful, perfect for honoring someone's memory
+Make the person in this photo appear peaceful, as if they are gently concluding their life journey.
+As the motion settles, let the person subtly move backwards, as if slowly fading into the distance.
+Their form should gradually become softer and merge into stillness, symbolizing rest and farewell.
+Do not move the background or the camera.
+Keep all movements minimal and natural, focusing on serenity and acceptance.
 """

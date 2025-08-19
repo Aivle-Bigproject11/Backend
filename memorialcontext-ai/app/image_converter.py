@@ -21,7 +21,7 @@ def generate_image_to_video(memorial_path):
     resized.save(outro_image_resized)
 
     client = RunwayML(
-        api_key=os.environ.get("RUNWAYML_API_SECRET"),  # This is the default and can be omitted
+        api_key=os.environ.get("RUNWAYML_API_SECRET"),
     )
 
     with open(outro_image_resized, "rb") as f:
@@ -54,5 +54,5 @@ def generate_image_to_video(memorial_path):
 
 
 if __name__ == "__main__":
-    memorial_path = os.path.join('./temp', 'test')
+    memorial_path = os.path.join('../temp', 'test')
     generate_image_to_video(memorial_path)
