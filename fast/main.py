@@ -37,13 +37,9 @@ async def lifespan(app: FastAPI):
         model_file = 'regional_models.joblib'
         data_file = './지역_월별_사망자수_데이터_최종.csv'
 
-        if os.path.exists(model_file):
-            app_state.ai_models = joblib.load(model_file)
-            logger.info("✅ AI 모델 로드 완료")
-        else:
-            # rf_model.py의 train_and_save_models 함수를 호출합니다.
-            app_state.ai_models = train_and_save_models(data_file, model_file)
-            logger.info("✅ AI 모델 학습 및 저장 완료")
+
+        app_state.ai_models = train_and_save_models(data_file, model_file)
+        logger.info("✅ AI 모델 학습 및 저장 완료")
 
         asyncio.create_task(kafka_consumer_loop())
         yield
