@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-사망자 수 예측 모델 - 최적화 버전 (FastAPI 연동용)
+사망자 수 예측 모델 - 최적화 버전 (FastAPI 연동용) / 2026 년까지 예측
 """
 
 import json
@@ -140,11 +140,17 @@ def train_and_save_models(data_file_path, model_file_path):
     extended_df = add_predictions_to_training_data(original_df, predictions_2024)
     model_2025 = train_prediction_model(extended_df)
     
+    # 2026년 예측을 위한 모델 학습
+    predictions_2025 = make_full_predictions(model_2025, extended_df, 2025)
+    extended_df_2026 = add_predictions_to_training_data(extended_df, predictions_2025)
+    model_2026 = train_prediction_model(extended_df_2026)
+    
     # 모델 및 데이터를 딕셔너리로 묶어 joblib 파일로 저장
     ai_models = {
         'model_2024': model_2024,
         'model_2025': model_2025,
-        'training_data': extended_df,
+        'model_2026': model_2026,
+        'training_data': extended_df_2026,
     }
     joblib.dump(ai_models, model_file_path)
     print(f"✓ AI 모델 및 데이터가 '{model_file_path}'에 저장되었습니다.")
@@ -211,9 +217,11 @@ def make_predictions(ai_models, training_data, year, months, region):
         model = ai_models['model_2024']
     elif year == 2025:
         model = ai_models['model_2025']
+    elif year == 2026:
+        model = ai_models['model_2026']
     else:
-        # 2024년 또는 2025년이 아닌 경우 처리
-        print(f"⚠ 경고: 예측 가능한 년도가 아닙니다: {year}. 2024년 또는 2025년을 요청하세요.")
+        # 2024년, 2025년 또는 2026년이 아닌 경우 처리
+        print(f"⚠ 경고: 예측 가능한 년도가 아닙니다: {year}. 2024년, 2025년 또는 2026년을 요청하세요.")
         return []
 
     # 전체 예측을 수행
