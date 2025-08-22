@@ -16,22 +16,28 @@ spec:
     spec:
       containers:
         - name: usercontext
-          image: "username/usercontext:latest"
+          image: "a071098registry.azurecr.io/usercontext:v1"
           ports:
-            - containerPort: 8080
+            - containerPort: 8000
+          # [추가] secret.yaml에 정의된 값들을 환경 변수로 주입합니다.
+          envFrom:
+            - secretRef:
+                name: api-keys
+            - configMapRef:
+                name: my-configs
           readinessProbe:
             httpGet:
               path: '/actuator/health'
               port: 8080
-            initialDelaySeconds: 15
+            initialDelaySeconds: 60
             timeoutSeconds: 2
-            periodSeconds: 5
-            failureThreshold: 10
+            periodSeconds: 10
+            failureThreshold: 30
           livenessProbe:
             httpGet:
               path: '/actuator/health'
               port: 8080
-            initialDelaySeconds: 15
+            initialDelaySeconds: 60
             timeoutSeconds: 2
-            periodSeconds: 5
-            failureThreshold: 5
+            periodSeconds: 10
+            failureThreshold: 30

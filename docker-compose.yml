@@ -110,7 +110,9 @@ services:
       my-kafka:
         condition: service_healthy # kafka 서비스가 healthy 상태가 될 때까지 기다림
     environment:
-      - SPRING_PROFILES_ACTIVE=docker   
+      - SPRING_PROFILES_ACTIVE=docker
+    env_file: # <-- env : OpenAI API, Azureblob, AzuremySQL, 영상-음악API
+      - .env  
     volumes:
       - ./usercontext:/usr/src
       - ./maven-repo:/root/.m2
@@ -140,7 +142,9 @@ services:
       my-kafka:
         condition: service_healthy # kafka 서비스가 healthy 상태가 될 때까지 기다림
     environment:
-      - SPRING_PROFILES_ACTIVE=docker   
+      - SPRING_PROFILES_ACTIVE=docker
+    env_file: # <-- env : OpenAI API, Azureblob, AzuremySQL, 영상-음악API
+      - .env  
     volumes:
       - ./dataanalysis:/usr/src
       - ./maven-repo:/root/.m2

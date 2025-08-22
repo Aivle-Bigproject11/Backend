@@ -1,0 +1,24 @@
+# ========================================
+# FILENAME: aivlebigproject/kubernetes/configmap.yaml
+# ========================================
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: my-configs
+data:
+  # AzureMySQL DB
+  AZURE_MYSQL_DB_URL: a071098-db-server.mysql.database.azure.com
+  AZURE_MYSQL_DB_USERNAME: a071098admin
+  AZURE_MYSQL_DB_NAME_USERCONTEXT: usercontextdb
+  AZURE_MYSQL_DB_NAME_SERVICECONTEXT: servicecontextdb
+  AZURE_MYSQL_DB_NAME_FUNERALCONTEXT: funeralcontextdb
+  AZURE_MYSQL_DB_NAME_MEMORIALCONTEXT: memorialcontextdb
+  AZURE_MYSQL_DB_NAME_DATAANALYSIS: dataanalysisdb
+
+  # Java AzureBlob, OpenaiAPI
+  AZURE_STORAGE_ACCOUNT_NAME: aivles
+  AZURE_STORAGE_CONTAINER: memorial-content
+  AZURE_STORAGE_ENDPOINT: https://aivles.blob.core.windows.net/
+  OPENAI_API_URL: https://api.openai.com/v1/chat/completions
+  OPENAI_MODEL: gpt-4o-mini

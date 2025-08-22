@@ -18,4 +18,9 @@ spec:
         - name: fast
           image: "a071098registry.azurecr.io/fast:v1"
           ports:
-            - containerPort: 8000
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: api-keys
+            - configMapRef:
+                name: my-configs

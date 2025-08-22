@@ -15,6 +15,9 @@ maven-repo-memorial/
 **/_remote.repositories
 *.sha1
 
+# Azure kubernetes Deploy
+get_helm.sh
+
 # Log file
 *.log
 

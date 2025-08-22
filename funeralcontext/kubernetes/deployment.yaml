@@ -23,19 +23,21 @@ spec:
           envFrom:
             - secretRef:
                 name: api-keys
+            - configMapRef:
+                name: my-configs
           readinessProbe:
             httpGet:
               path: '/actuator/health'
               port: 8080
-            initialDelaySeconds: 15
+            initialDelaySeconds: 60
             timeoutSeconds: 2
-            periodSeconds: 5
-            failureThreshold: 10
+            periodSeconds: 10
+            failureThreshold: 30
           livenessProbe:
             httpGet:
               path: '/actuator/health'
               port: 8080
-            initialDelaySeconds: 15
+            initialDelaySeconds: 60
             timeoutSeconds: 2
-            periodSeconds: 5
-            failureThreshold: 5
+            periodSeconds: 10
+            failureThreshold: 30

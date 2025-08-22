@@ -1,0 +1,29 @@
+# ========================================
+# FILENAME: aivlebigproject/kubernetes/kustomization.yaml
+# ========================================
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# 이 세트에 포함될 설정 파일 목록
+resources:
+  - kubernetes/secret.yaml
+  - kubernetes/configmap.yaml
+  - gateway/kubernetes/deployment.yaml
+  - gateway/kubernetes/service.yaml
+  - funeralcontext/kubernetes/deployment.yaml
+  - funeralcontext/kubernetes/service.yaml
+  - funeralcontext-ai/kubernetes/deployment.yaml
+  - funeralcontext-ai/kubernetes/service.yaml
+  - memorialcontext/kubernetes/deployment.yaml
+  - memorialcontext/kubernetes/service.yaml
+  - memorialcontext-ai/kubernetes/deployment.yaml
+  - memorialcontext-ai/kubernetes/service.yaml
+  - dataanalysis/kubernetes/deployment.yaml
+  - dataanalysis/kubernetes/service.yaml
+  - fast/kubernetes/deployment.yaml
+  - fast/kubernetes/service.yaml
+  - usercontext/kubernetes/deployment.yaml
+  - usercontext/kubernetes/service.yaml
+  - servicecontext/kubernetes/deployment.yaml
+  - servicecontext/kubernetes/service.yaml

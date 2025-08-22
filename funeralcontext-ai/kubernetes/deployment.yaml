@@ -23,3 +23,5 @@ spec:
           envFrom:
             - secretRef:
                 name: api-keys
+            - configMapRef:
+                name: my-configs
