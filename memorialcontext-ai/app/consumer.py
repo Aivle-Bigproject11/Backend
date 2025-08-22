@@ -68,9 +68,9 @@ def start_consumer():
 
                 # base_path는 현재 기준
                 if TEST_MODE:
-                    base_path = os.path.join("../temp/test")
+                    base_path = os.path.join("temp/test")
                 else:
-                    base_path = os.path.join("../temp", memorial_id)
+                    base_path = os.path.join("temp", memorial_id)
                 os.makedirs(base_path, exist_ok=True)
 
                 # 이미지 다운로드(테스트모드가 아니라면)

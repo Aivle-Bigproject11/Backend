@@ -9,3 +9,4 @@ moviepy
 pillow
 dotenv
 runwayml
+ffmpeg

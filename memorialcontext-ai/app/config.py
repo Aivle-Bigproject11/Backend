@@ -9,7 +9,7 @@ TEST_OUTRO_VIDEO = "runway_result.mp4"  # 테스트용 아웃트로 영상 파�
 
 # 비디오 설정
 VIDEO_SIZE = (1280, 720)
-FONT_PATH = "../resources/fonts/ChosunNm.ttf"
+FONT_PATH = "resources/fonts/ChosunNm.ttf"
 
 # GPT 시나리오 생성 프롬프트 (효과 제거됨)
 SCENARIO_PROMPT = """
