@@ -1,6 +1,7 @@
 import os, time, requests
 from os.path import basename, join, abspath
 from dotenv import load_dotenv
+from openai import OpenAI
 
 from app.config import SUNO_PROMPT
 
@@ -24,12 +25,16 @@ def check_task_status(task_id, api_key):
         print("Generation complete!")
         resp = result.get('data', {}).get('response', {})
         audio_data = resp.get('sunoData') or resp.get('data') or []
+        url = None
         # 디버그 출력 (존재하는 URL 키 우선순위대로)
         for i, audio in enumerate(audio_data):
-            url = (
-                audio.get('audioUrl')
-            )
-            print(f"Track {i + 1}: {url}")
+            candidate = audio.get('audioUrl')
+            print(f"Track {i + 1}: {candidate}")
+            if candidate:
+                url = candidate  # 마지막 유효 URL을 사용 (또는 첫 번째를 쓰고 싶으면 break)
+        if not url:
+            print("No audioUrl found in response payload.")
+            return None
         return url
 
     print(f"Generation failed: {status}")
@@ -46,11 +51,36 @@ def generate_music_file(base_path: str, keywords: str, poll=30, timeout=600) -> 
     os.makedirs(music_dir, exist_ok=True)
 
     headers = {"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"}
+
+    openai_client = OpenAI()
     prompt = SUNO_PROMPT.format(
-            keywords=keywords
-        )
+        keywords=keywords
+    )
+
+    response = openai_client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "You are a music prompt optimizer for Suno AI.\n"
+                    "Your job:\n"
+                    "1. Translate all keywords into natural English.\n"
+                    "2. Remove or replace sensitive words (e.g., 'miso').\n"
+                    "3. Ensure the entire prompt is in English only.\n"
+                    "4. Keep the length under 400 characters.\n"
+                    "5. Return ONLY the final safe prompt string (no JSON, no explanation)."
+                )
+            },
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.7,
+        max_tokens=500
+    )
+    optimized_prompt = response.choices[0].message.content.strip()
+    print(f"        Optimized prompt: {optimized_prompt}")
     payload = {
-        "prompt": prompt,
+        "prompt": optimized_prompt,
         "customMode": False,
         "instrumental": True,
         "model": "V3_5",
@@ -61,9 +91,9 @@ def generate_music_file(base_path: str, keywords: str, poll=30, timeout=600) -> 
     resp = requests.post(f"{API_BASE}/generate", headers=headers, json=payload, timeout=30)
     j = resp.json()
     task_id = (j.get("data") or {}).get("taskId")
-    print("taskId: " + task_id)
     if not task_id:
         raise RuntimeError(f"Generate 실패: status={resp.status_code}, body={j}")
+    print(f"taskId: {task_id}")
 
     # 2) 폴링
     audio_url = None

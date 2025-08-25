@@ -3,7 +3,7 @@
 # ============================================================================
 
 # 테스트 모드 설정 (True: 미리 만든 파일 사용, False: API 사용)
-TEST_MODE = True
+TEST_MODE = False
 TEST_MUSIC_FILE = "test_music.wav"  # 테스트용 음악 파일명
 TEST_OUTRO_VIDEO = "runway_result.mp4"  # 테스트용 아웃트로 영상 파일명
 
@@ -25,11 +25,11 @@ Input:
 **Goal**: The total number of scenes (including intro and outro) MUST be exactly {photo_count}, and the combined duration should be between **120 to 180 seconds**.
 
 Structure:
-1. Intro scene (5–7 sec): Show name, birth-death years, and a warm tribute line in Korean.
+1. Intro scene (8~10 sec): Show name, birth-death years, and a warm tribute line in Korean.
 2. Main scenes: Create exactly ({photo_count} - 2) scenes. Each scene corresponds to one photo:
    - Write a 1–2 line emotional Korean subtitle (e.g., longing, warmth, gratitude)
-   - Set a suitable duration (typically 6–8 sec per photo)
-3. Outro scene (5–10 sec): Final farewell message. Optionally end with "사랑하는 가족 일동".
+   - Set a suitable duration (typically 8~10 sec per photo)
+3. Outro scene (10 sec): Final farewell message.
 
 Each scene should include:
 - scene_id (integer)
@@ -49,17 +49,27 @@ Output only the JSON array without any markdown formatting.
 
 # RunwayML 프롬프트
 RUNWAY_PROMPT = """
-Make the person in this photo subtly move in a natural and lifelike way. 
-They may blink, slightly smile, or breathe softly. 
-Do not move the camera or the background. 
-No stylization, no panning or zooming. 
-Focus only on subtle facial and body motion while keeping the original photo intact.
+Make the person in this photo appear peaceful, as if they are gently concluding their life journey. 
+As the motion settles, let the person subtly move backwards, as if slowly fading into the distance. 
+Their form should gradually become softer and merge into stillness, symbolizing rest and farewell. 
+Do not move the background or the camera. 
+Keep all movements minimal and natural, focusing on serenity and acceptance.
 """
 
 SUNO_PROMPT = """
-Make the person in this photo appear peaceful, as if they are gently concluding their life journey.
-As the motion settles, let the person subtly move backwards, as if slowly fading into the distance.
-Their form should gradually become softer and merge into stillness, symbolizing rest and farewell.
-Do not move the background or the camera.
-Keep all movements minimal and natural, focusing on serenity and acceptance.
+You are a music prompt optimizer for Suno AI.
+
+Given a base template:
+    Create an emotional instrumental memorial tribute music.
+    Themes: {keywords}.
+    Slow tempo, cinematic, peaceful atmosphere.
+    Instrumental only, no vocals.
+    Around 3–4 minutes, evolving motifs, gentle ending.
+
+Tasks:
+1. Translate any non-English (Korean, etc.) keywords into natural English.
+2. Replace sensitive words (e.g., "miso") with safe synonyms like "smile".
+3. Ensure the entire prompt is written only in English.
+4. If the prompt exceeds 400 characters, shorten and summarize it while keeping the emotional and memorial theme intact.
+5. Return only the final safe prompt string, nothing else.
 """

@@ -33,15 +33,17 @@ def encode_image_as_data_uri(path):
 
 def download_url(url, memorial_id, subdir, new_ext=".jpeg"):
     """URL에서 원본 파일명 그대로 가져오되, 확장자만 변경하여 저장"""
-    # URL에서 파일명 추출
+    # URL에서 파일명 추출 (URL 인코딩된 "%2F" 포함 마지막 파일명만 추출)
     original_filename = os.path.basename(urlparse(url).path)
+    # URL 인코딩된 "%2F" 제거 후 마지막 파일명만 추출
+    if "%2F" in original_filename:
+        original_filename = original_filename.split("%2F")[-1]
     base_name, _ = os.path.splitext(original_filename)  # 확장자 제거
-
     # 새 확장자 적용
     filename = base_name + new_ext
 
     # 저장 디렉토리 생성
-    save_dir = os.path.join("./temp", memorial_id, subdir)
+    save_dir = os.path.join("temp", memorial_id, subdir)
     os.makedirs(save_dir, exist_ok=True)
 
     # 다운로드 & 저장
@@ -81,7 +83,7 @@ def create_directories(*directories):
 if __name__ == "__main__":
     memorial_id = "test"
     outro_image = "https://aivles.blob.core.windows.net/memorial-content/0208b132-4020-400a-a78c-6d27c946933e/tribute-video/outro/outro.jpg"
-    base_path = os.path.join("./temp/test")
+    base_path = os.path.join("temp/test")
 
     photo_urls = [
         "https://aivles.blob.core.windows.net/memorial-content/0208b132-4020-400a-a78c-6d27c946933e/tribute-video/images/1.jpg",

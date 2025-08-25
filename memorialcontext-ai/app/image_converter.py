@@ -37,7 +37,7 @@ def generate_image_to_video(memorial_path):
             prompt_image=data_uri,
             prompt_text=RUNWAY_PROMPT,
             ratio='1280:720',
-            duration=5,
+            duration=10,
         ).wait_for_task_output()
 
         print('Task complete:', task)

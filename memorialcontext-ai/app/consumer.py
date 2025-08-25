@@ -75,7 +75,7 @@ def start_consumer():
 
                 # 이미지 다운로드(테스트모드가 아니라면)
                 if not TEST_MODE:
-                    for photo_url in enumerate(photo_urls):
+                    for photo_url in photo_urls:
                         download_url(photo_url, memorial_id, "images")
                     download_url(outro_url, memorial_id, "outro")
 
