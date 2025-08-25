@@ -5,7 +5,7 @@
 import os
 
 from moviepy import TextClip, AudioFileClip, ImageClip, CompositeVideoClip, ColorClip, VideoFileClip
-
+from moviepy import afx
 from app.azure_blob import upload_video_to_blob
 from app.config import TEST_MODE,  VIDEO_SIZE, FONT_PATH
 from app.scenario import generate_scenario
@@ -121,8 +121,12 @@ class MemorialVideoCreator:
     def _load_background_music(self, total_duration):
         """배경 음악 로드"""
         music_path = os.path.join(self.music_dir, "memorial_music.mp3")
+        audio = AudioFileClip(music_path)
 
-        return AudioFileClip(music_path).with_duration(total_duration)
+        if audio.duration + 0.05 < total_duration:
+            audio =  audio.with_effects([afx.AudioLoop(duration=total_duration)])
+
+        return audio
 
 
     def create_video(self, keywords, name, birth, death, photo_count,upload_to_blob=True):
