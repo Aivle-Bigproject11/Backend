@@ -133,24 +133,7 @@ class MemorialVideoCreator:
         """메인 비디오 생성 함수"""
         print("📝 시나리오 생성 중...")
         if TEST_MODE:
-            scenes = [
-                      {'scene_id': 1, 'scene_type': 'intro', 'subtitle': '송해 (1927.04.27 - 2022.06.08)\n국민의 MC, 영원한 목소리.', 'duration': 6},
-                      {'scene_id': 2, 'scene_type': 'main', 'subtitle': '언제나 유쾌한 웃음으로\n국민들에게 희망을 주셨습니다.', 'duration': 7},
-                      {'scene_id': 3, 'scene_type': 'main', 'subtitle': '전국 방방곡곡을 누비며\n서민과 함께 웃고 울던 길.', 'duration': 7},
-                      {'scene_id': 4, 'scene_type': 'main', 'subtitle': '무대 위에서 들려주신 목소리는\n세대를 아우르는 따뜻한 노래였습니다.', 'duration': 6},
-                      {'scene_id': 5, 'scene_type': 'main', 'subtitle': '누구보다도 친근하고 다정한\n국민의 MC로 기억합니다.', 'duration': 7},
-                      {'scene_id': 6, 'scene_type': 'main', 'subtitle': '재치 넘치는 입담과\n따뜻한 시선이 그립습니다.', 'duration': 7},
-                      {'scene_id': 7, 'scene_type': 'main', 'subtitle': '언제나 무대 아래 청중에게\n사랑과 용기를 주셨습니다.', 'duration': 6},
-                      {'scene_id': 8, 'scene_type': 'main', 'subtitle': '그 웃음소리는\n우리 마음속에 오래 남아 있습니다.', 'duration': 7},
-                      {'scene_id': 9, 'scene_type': 'main', 'subtitle': '한국 방송사의 산증인으로서\n문화의 한 시대를 빛내셨습니다.', 'duration': 6},
-                      {'scene_id': 10, 'scene_type': 'main', 'subtitle': '노래와 함께한 순간들이\n아직도 눈앞에 선합니다.', 'duration': 7},
-                      {'scene_id': 11, 'scene_type': 'main', 'subtitle': '서민과 함께 울고 웃던 모습,\n그 따뜻한 발걸음을 기억합니다.', 'duration': 7},
-                      {'scene_id': 12, 'scene_type': 'main', 'subtitle': '전국노래자랑의 무대 위에서\n언제나 청춘과 함께하셨습니다.', 'duration': 6},
-                      {'scene_id': 13, 'scene_type': 'main', 'subtitle': '당신이 남긴 유산은\n대한민국의 소중한 기억입니다.', 'duration': 7},
-                      {'scene_id': 14, 'scene_type': 'main', 'subtitle': '우리 모두의 삶을 노래해 주신\n그 따뜻한 마음에 감사합니다.', 'duration': 6},
-                      {'scene_id': 15, 'scene_type': 'main', 'subtitle': '영원히 국민과 함께한\nMC 송해 선생님을 추억합니다.', 'duration': 7},
-                      {'scene_id': 16, 'scene_type': 'outro', 'subtitle': '국민의 MC, 송해 선생님.\n사랑과 존경을 담아 영원히 기억하겠습니다.', 'duration': 7}
-                    ]
+            scenes = [{'scene_id': 1, 'scene_type': 'intro', 'subtitle': '김철수 (1949-01-01) - 당신의 따뜻한 미소를 기억합니다.', 'duration': 10}, {'scene_id': 2, 'scene_type': 'main', 'subtitle': '진중한 목소리로 가족을 이끌던 아버지.', 'duration': 10}, {'scene_id': 3, 'scene_type': 'main', 'subtitle': '성실하게 살아온 발자취는 영원히 기억될 것입니다.', 'duration': 10}, {'scene_id': 4, 'scene_type': 'main', 'subtitle': '가족사랑으로 가득했던 따뜻한 하루하루.', 'duration': 10}, {'scene_id': 5, 'scene_type': 'main', 'subtitle': '그의 진정한 어른으로서의 삶을 배웁니다.', 'duration': 10}, {'scene_id': 6, 'scene_type': 'main', 'subtitle': '부드러운 미소, 힘겨운 순간에 위로가 되었습니다.', 'duration': 10}, {'scene_id': 7, 'scene_type': 'main', 'subtitle': '가족과의 소중한 추억이 영원히 함께합니다.', 'duration': 10}, {'scene_id': 8, 'scene_type': 'main', 'subtitle': '언제나 당신의 곁에 있었던 사랑이 느껴집니다.', 'duration': 10}, {'scene_id': 9, 'scene_type': 'main', 'subtitle': '신뢰와 안전을 주었던 그 존재가 그립습니다.', 'duration': 10}, {'scene_id': 10, 'scene_type': 'main', 'subtitle': '가족을 위해 희생하신 아버지의 마음을 기억합니다.', 'duration': 10}, {'scene_id': 11, 'scene_type': 'main', 'subtitle': '진실한 대화로 모두를 하나로 묶어주셨습니다.', 'duration': 10}, {'scene_id': 12, 'scene_type': 'main', 'subtitle': '그곳에서 평안하길, 당신의 사랑이 그립습니다.', 'duration': 10}, {'scene_id': 13, 'scene_type': 'main', 'subtitle': '가장 소중한 가르침을 주신 아버지께 감사드립니다.', 'duration': 10}, {'scene_id': 14, 'scene_type': 'main', 'subtitle': '그의 이야기는 언제까지나 우리의 마음속에 살아있습니다.', 'duration': 10}, {'scene_id': 15, 'scene_type': 'outro', 'subtitle': '안녕히 가세요, 사랑하는 아버지. 영원히 기억하겠습니다.', 'duration': 10}]
 
         else:
             scenes = generate_scenario(keywords, name, birth, death, photo_count+1)
@@ -224,10 +207,10 @@ class MemorialVideoCreator:
 if __name__ == "__main__":
     base_path = os.path.join("../temp", "test")
     keywords = "그리움, 아버지, 든든한 아버지"
-    name = "송해"
-    birth = "1975-03-02"
-    death = "2023-12-27"
-    photo_count = 15
+    name = "김철수"
+    birth = "1949-01-01"
+    death = "2024-07-25"
+    photo_count = 14
     creator = MemorialVideoCreator(base_path)
     output_file = creator.create_video(keywords, name, birth, death, photo_count + 1, upload_to_blob=False)
 

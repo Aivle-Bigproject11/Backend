@@ -49,11 +49,12 @@ Output only the JSON array without any markdown formatting.
 
 # RunwayML 프롬프트
 RUNWAY_PROMPT = """
-Make the person in this photo appear peaceful, as if they are gently concluding their life journey. 
-As the motion settles, let the person subtly move backwards, as if slowly fading into the distance. 
-Their form should gradually become softer and merge into stillness, symbolizing rest and farewell. 
-Do not move the background or the camera. 
-Keep all movements minimal and natural, focusing on serenity and acceptance.
+In this 10-second outro, let the person appear deeply peaceful, gently concluding their life journey.  
+They blink softly once, as if taking a final calm breath, while a faint tender smile emerges on their face.  
+Their chest and shoulders show the slightest hint of gentle breathing, evoking serenity and acceptance.  
+With quiet grace, they slowly raise one hand for a final subtle wave—small and heartfelt, like a last farewell to loved ones.  
+Do not move the background or the camera.  
+As the gesture ends, their form softly fades into warm light and stillness, symbolizing eternal rest, gratitude, and a timeless goodbye.
 """
 
 SUNO_PROMPT = """

@@ -13,7 +13,7 @@ class VideoRequest(BaseModel):
     memorialId: Optional[str] = None
     name: Optional[str] = None
     birthDate: Optional[str] = None
-    deathDate: Optional[str] = None
+    deceasedDate: Optional[str] = None
     keywords: Optional[str] = None
     photoCount: Optional[str] = None
     imageUrls: Optional[list] = None

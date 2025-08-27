@@ -59,7 +59,7 @@ def start_consumer():
                 memorial_id = event_data.memorialId
                 name = event_data.name
                 birth = event_data.birthDate
-                death = event_data.deathDate
+                death = event_data.deceasedDate
                 keywords = event_data.keywords
                 photo_urls = event_data.imageUrls
                 outro_url = event_data.outroImageUrl
